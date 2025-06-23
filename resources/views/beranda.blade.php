@@ -259,7 +259,7 @@
                                  @endauth
 
                                  <h1>
-                                    <span style="color: #9E2A2B">SELAMAT DATANG</span>
+                                    <span style="color: #9E2A2B">ImunoLearn</span>
                                     <br>
                                  </h1>
                                  <h3>
