@@ -281,6 +281,7 @@ class UserController extends Controller
 
     // Daftar aktivitas yang tersedia - PERBAIKAN: nama harus sama dengan yang disimpan
     $daftarAktivitas = [
+        'stimulus-1' => 'Stimulus 1',
         'identifikasi-masalah-1' => 'Identifikasi Masalah 1',
         'pengumpulan-data-1' => 'Pengumpulan Data 1',
         'pengolahan-data-1' => 'Pengolahan Data 1',
@@ -288,6 +289,7 @@ class UserController extends Controller
         'kesimpulan-1' => 'Kesimpulan-1',
     
         // Aktivitas Set 2
+        'stimulus-2' => 'Stimulus 2',
         'identifikasi-masalah-2' => 'Identifikasi Masalah 2',
         'pengumpulan-data-2' => 'Pengumpulan Data 2',
         'pengolahan-data-2' => 'Pengolahan Data 2',
@@ -295,6 +297,7 @@ class UserController extends Controller
         'kesimpulan-2' => 'Kesimpulan-2',
         
         // Aktivitas Set 3
+        'stimulus-3' => 'Stimulus 3',
         'identifikasi-masalah-3' => 'Identifikasi Masalah 3',
         'pengumpulan-data-3' => 'Pengumpulan Data 3',
         'pengolahan-data-3' => 'Pengolahan Data 3',
@@ -305,7 +308,7 @@ class UserController extends Controller
         'kuis-1' => 'Kuis 1',
         'kuis-2' => 'Kuis 2',
         'kuis-3' => 'Kuis 3',
-        'evaluasi' => 'Evaluasi Akhir',
+        'evaluasi' => 'Evaluasi',
     ];
 
     // Query siswa
@@ -573,6 +576,7 @@ class UserController extends Controller
     {
         return [
             // Aktivitas Set 1
+            'stimulus-1' => 'Stimulus 1',
             'identifikasi-masalah-1' => 'Identifikasi Masalah 1',
             'pengumpulan-data-1' => 'Pengumpulan Data 1',
             'pengolahan-data-1' => 'Pengolahan Data 1',
@@ -581,6 +585,7 @@ class UserController extends Controller
             'kuis-1' => 'Kuis 1',
         
             // Aktivitas Set 2
+            'stimulus-2' => 'Stimulus 2',
             'identifikasi-masalah-2' => 'Identifikasi Masalah 2',
             'pengumpulan-data-2' => 'Pengumpulan Data 2',
             'pengolahan-data-2' => 'Pengolahan Data 2',
@@ -589,6 +594,7 @@ class UserController extends Controller
             'kuis-2' => 'Kuis 2',
             
             // Aktivitas Set 3
+            'stimulus-3' => 'Stimulus 3',
             'identifikasi-masalah-3' => 'Identifikasi Masalah 3',
             'pengumpulan-data-3' => 'Pengumpulan Data 3',
             'pengolahan-data-3' => 'Pengolahan Data 3',

@@ -8,36 +8,41 @@
 <h2 class="card-title mb-4" style="color: #9E2A2B">Pengumpulan Data</h2>
 
 <div class="container mt-5">
-    <h4 class="card-title mb-4" style="color: #540B0E">Instruksi</h4>
-    <p class="materi">
-        Setelah kamu mengamati video tadi dan mengerjakan tugas sebelumnya, selanjutnya kerjakan tugas berikut dengan cermat. 
-        Klasifikasikan komponen sistem pertahanan tubuh ke dalam kategori yang tepat dengan cara drag and drop!
-    </p>
+    <h4 class="card-title mb-4" style="color: #540B0E">Petunjuk Pengerjaan</h4>
+    <div class="alert alert-info">
+        <ol class="mb-0">
+            <li>Isilah kolom kosong pada Tabel Klasifikasi Pertahanan Tubuh di bawah ini dengan cara menarik opsi jawaban dan meletakannya pada kolom yang tepat!</li>
+            <li>Perhatikan opsi jawaban yang berisi berbagai macam sistem pertahanan pada tubuh, kemudian letakkan sesuai dengan kolom klasifikasi sistem pertahanan tubuh yang tepat.</li>
+        </ol>
+    </div>
 
     <!-- Container untuk pilihan komponen -->
     <div class="card mb-4" style="background-color: #f8f9fa;">
         <div class="card-body">
-            <h5 class="card-title" style="color: #540B0E">Pilihan Komponen:</h5>
+            <h5 class="card-title" style="color: #540B0E">Opsi Jawaban:</h5>
             <div id="komponen-list" class="d-flex flex-wrap gap-2">
-                <div class="drag-item" data-id="inflamasi">Inflamasi</div>
-                <div class="drag-item" data-id="air-mata">Air Mata</div>
-                <div class="drag-item" data-id="asam-lambung">Sekresi Asam Lambung</div>
-                <div class="drag-item" data-id="sel-b">Limfosit Sel B</div>
-                <div class="drag-item" data-id="sel-t">Limfosit Sel T</div>
-                <div class="drag-item" data-id="antibodi">Antibodi</div>
+                <div class="drag-item" data-id="jaringan-epitel">Jaringan epitel pada saluran pernafasan, pencernaan</div>
+                <div class="drag-item" data-id="respon-imun">Respon imun terjadi karena tubuh mendeteksi antigen</div>
+                <div class="drag-item" data-id="lisozim">Sekresi lisozim pada komposisi air mata, air liur, keringat</div>
+                <div class="drag-item" data-id="lendir">Sekresi lendir di saluran pernapasan untuk menangkap debu dan patogen</div>
+                <div class="drag-item" data-id="hcl">Sekresi Hidrogen Klorida (HCl) di lambung</div>
+                <div class="drag-item" data-id="antibodi">Antibodi terbentuk oleh leukosit untuk melawan antigen yang dikenali</div>
             </div>
         </div>
     </div>
 
     <!-- Tabel untuk klasifikasi -->
+    <h5 class="mb-3" style="color: #540B0E">Tabel Klasifikasi Pertahanan Tubuh</h5>
     <div class="row">
         <div class="col-md-6">
             <div class="card">
                 <div class="card-header" style="background-color: #9E2A2B; color: white;">
-                    <h5 class="mb-0">Pertahanan Non-Spesifik</h5>
+                    <h5 class="mb-0">Pertahanan Nonspesifik</h5>
                 </div>
                 <div class="card-body">
-                    <div id="nonspesifik" class="drop-target"></div>
+                    <div id="nonspesifik" class="drop-target">
+                        <p class="text-muted text-center">Letakkan komponen pertahanan nonspesifik di sini</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -47,7 +52,9 @@
                     <h5 class="mb-0">Pertahanan Spesifik</h5>
                 </div>
                 <div class="card-body">
-                    <div id="spesifik" class="drop-target"></div>
+                    <div id="spesifik" class="drop-target">
+                        <p class="text-muted text-center">Letakkan komponen pertahanan spesifik di sini</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -65,25 +72,36 @@
         <h5 id="result-title"></h5>
         <div id="result-details"></div>
     </div>
+
+    <!-- Tombol Selanjutnya -->
+    <div id="tombolSelanjutnya" style="display: none; text-align: center; margin-top: 20px;">
+        <a href="{{ route('pengolahan-data-1') }}" class="btn-selanjutnya">
+            Selanjutnya
+        </a>
+    </div>
 </div>
 
 <style>
     .drag-item {
         display: inline-block;
-        padding: 10px 20px;
+        padding: 12px 16px;
         margin: 5px;
         background-color: #e9ecef;
         border: 2px solid #dee2e6;
-        border-radius: 5px;
+        border-radius: 8px;
         cursor: move;
         font-weight: 500;
         transition: all 0.3s ease;
+        font-size: 14px;
+        max-width: 300px;
+        text-align: center;
+        line-height: 1.4;
     }
 
     .drag-item:hover {
         background-color: #dee2e6;
         transform: translateY(-2px);
-        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.15);
     }
 
     .drag-item.dragging {
@@ -91,10 +109,10 @@
     }
 
     .drop-target {
-        min-height: 150px;
+        min-height: 200px;
         border: 2px dashed #dee2e6;
-        border-radius: 5px;
-        padding: 15px;
+        border-radius: 8px;
+        padding: 20px;
         background-color: #f8f9fa;
         transition: all 0.3s ease;
     }
@@ -102,25 +120,40 @@
     .drop-target.drag-over {
         background-color: #e9ecef;
         border-color: #6c757d;
+        border-style: solid;
     }
 
     .drop-target .drag-item {
-        margin: 5px;
+        margin: 8px 4px;
         background-color: white;
+        display: block;
+        max-width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .drop-target .text-muted {
+        display: none;
+    }
+
+    .drop-target:empty .text-muted {
+        display: block;
     }
 
     .correct-item {
         background-color: #d4edda !important;
         border-color: #28a745 !important;
+        color: #155724;
     }
 
     .incorrect-item {
         background-color: #f8d7da !important;
         border-color: #dc3545 !important;
+        color: #721c24;
     }
 
     .card {
         box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        border-radius: 8px;
     }
 
     .alert-success {
@@ -139,6 +172,40 @@
         background-color: #fff3cd;
         border-color: #ffeeba;
         color: #856404;
+    }
+
+    .alert-info {
+        background-color: #d1ecf1;
+        border-color: #bee5eb;
+        color: #0c5460;
+    }
+
+    .btn-selanjutnya {
+        display: inline-block;
+        background-color: #540B0E;
+        color: white;
+        padding: 12px 30px;
+        text-decoration: none;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: bold;
+        transition: all 0.3s ease;
+        border: none;
+        cursor: pointer;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .btn-selanjutnya:hover {
+        background-color: #9E2A2B;
+        text-decoration: none;
+        color: white;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    }
+
+    .btn-selanjutnya:focus {
+        outline: 2px solid #FFF3B0;
+        outline-offset: 2px;
     }
 </style>
 
@@ -162,6 +229,12 @@
         animation: 150,
         onAdd: function(evt) {
             evt.to.classList.remove('drag-over');
+            // Sembunyikan teks placeholder
+            updatePlaceholder(evt.to);
+        },
+        onRemove: function(evt) {
+            // Update placeholder jika kosong
+            updatePlaceholder(evt.from);
         }
     });
 
@@ -170,8 +243,26 @@
         animation: 150,
         onAdd: function(evt) {
             evt.to.classList.remove('drag-over');
+            // Sembunyikan teks placeholder
+            updatePlaceholder(evt.to);
+        },
+        onRemove: function(evt) {
+            // Update placeholder jika kosong
+            updatePlaceholder(evt.from);
         }
     });
+
+    // Fungsi untuk update placeholder
+    function updatePlaceholder(target) {
+        const placeholder = target.querySelector('.text-muted');
+        const items = target.querySelectorAll('.drag-item');
+        
+        if (items.length === 0) {
+            if (placeholder) placeholder.style.display = 'block';
+        } else {
+            if (placeholder) placeholder.style.display = 'none';
+        }
+    }
 
     // Tambahkan efek visual saat drag over
     [nonspesifikTarget, spesifikTarget].forEach(target => {
@@ -189,12 +280,17 @@
         });
     });
 
+    // Fungsi untuk menampilkan tombol selanjutnya
+    function showNextButton() {
+        document.getElementById('tombolSelanjutnya').style.display = 'block';
+    }
+
     // Fungsi untuk memeriksa jawaban
     function checkAnswers() {
-        // Kunci jawaban
+        // Kunci jawaban berdasarkan materi yang diberikan
         const answerKey = {
-            nonspesifik: ['inflamasi', 'air-mata', 'asam-lambung'],
-            spesifik: ['sel-b', 'sel-t', 'antibodi']
+            nonspesifik: ['jaringan-epitel', 'lisozim', 'lendir', 'hcl'],
+            spesifik: ['respon-imun', 'antibodi']
         };
 
         // Reset warna item
@@ -255,8 +351,11 @@
         
         if (correctCount === 6 && incorrectCount === 0) {
             resultMessage.className = 'alert alert-success';
-            resultTitle.innerHTML = '<i class="fas fa-trophy"></i> Jawaban benar!';
-            resultDetails.innerHTML = 'Kerja Bagus! Progres Anda sedang disimpan...';
+            resultTitle.innerHTML = '<i class="fas fa-trophy"></i> Selamat! Jawaban Anda benar semua!';
+            resultDetails.innerHTML = 'Kerja Bagus! Anda telah berhasil mengklasifikasikan semua komponen sistem pertahanan tubuh dengan tepat.';
+            
+            // Tampilkan tombol selanjutnya
+            showNextButton();
             
             // Simpan progres ke database
             simpanProgres(correctCount, totalItems, detailJawaban);
@@ -265,19 +364,25 @@
             resultMessage.className = 'alert alert-warning';
             resultTitle.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Belum Lengkap';
             resultDetails.innerHTML = `
-                <p><strong>Jawaban benar:</strong> ${correctCount}</p>
+                <p><strong>Jawaban benar:</strong> ${correctCount} dari ${totalItems}</p>
                 <p><strong>Jawaban salah:</strong> ${incorrectCount}</p>
                 <p><strong>Belum dijawab:</strong> ${unansweredItems}</p>
                 <p class="mb-0"><em>Silakan lengkapi semua jawaban terlebih dahulu!</em></p>
             `;
+            
+            // Sembunyikan tombol selanjutnya
+            document.getElementById('tombolSelanjutnya').style.display = 'none';
         } else {
             resultMessage.className = 'alert alert-danger';
             resultTitle.innerHTML = '<i class="fas fa-times-circle"></i> Masih ada yang keliru';
             resultDetails.innerHTML = `
-                <p><strong>Jawaban benar:</strong> ${correctCount}</p>
+                <p><strong>Jawaban benar:</strong> ${correctCount} dari ${totalItems}</p>
                 <p><strong>Jawaban salah:</strong> ${incorrectCount}</p>
                 <p class="mb-0"><em>Periksa kembali jawaban yang berwarna merah dan coba lagi!</em></p>
             `;
+            
+            // Sembunyikan tombol selanjutnya
+            document.getElementById('tombolSelanjutnya').style.display = 'none';
             
             // Tetap simpan progres meskipun belum selesai
             simpanProgres(correctCount, totalItems, detailJawaban);
@@ -299,7 +404,7 @@
         // Data yang akan dikirim
         const data = {
             nama_aktivitas: 'pengumpulan-data-1',
-            judul_aktivitas: 'Pengumpulan Data 1',
+            judul_aktivitas: 'Pengumpulan Data 1 - Klasifikasi Sistem Pertahanan Tubuh',
             skor: skor,
             total_soal: totalSoal,
             detail_jawaban: detailJawaban
@@ -317,11 +422,8 @@
             success: function(response) {
                 console.log('Progres berhasil disimpan:', response);
                 
-                // Update pesan hasil
-                const resultDetails = document.getElementById('result-details');
+                // Update pesan hasil jika sempurna
                 if (skor === totalSoal) {
-                    resultDetails.innerHTML = '';
-                    
                     // Tampilkan notifikasi sukses
                     if (typeof Swal !== 'undefined') {
                         Swal.fire({

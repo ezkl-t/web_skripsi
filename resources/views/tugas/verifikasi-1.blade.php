@@ -1,16 +1,14 @@
 @extends('layouts.app')
 
-@section('title', 'Pengolahan Data')
+@section('title', 'Verifikasi')
 @section('pageTitle', 'Sistem Pertahanan Tubuh')
 
 @section('content')
-<!DOCTYPE html>
-<html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>Sistem Pertahanan Tubuh - Tugas Siswa</title>
     <style>
         :root {
             --primary: #335C67;
@@ -24,7 +22,6 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
             color: #333;
-            /* max-width: 800px; */
             margin: 0 auto;
             padding: 20px;
             background-color: #f9f9f9;
@@ -39,7 +36,7 @@
         }
         
         .task-title {
-            color: var(--primary);
+            color: var(--accent);
             margin-bottom: 20px;
             font-size: 1.8rem;
             border-bottom: 2px solid var(--light);
@@ -55,31 +52,91 @@
             font-size: 1rem;
         }
         
-        .question-group {
+        .question-container {
+            background-color: #f8f9fa;
+            border: 2px solid #dee2e6;
+            border-radius: 8px;
+            padding: 20px;
             margin-bottom: 25px;
         }
         
-        .question-text {
+        .question-number {
+            color: var(--dark);
+            font-weight: bold;
+            font-size: 1.1rem;
             margin-bottom: 10px;
-            display: block;
-            font-size: 1.05rem;
         }
         
-        .answer-input {
-            border: 2px solid #ddd;
-            border-radius: 4px;
-            padding: 8px 12px;
+        .question-text {
             font-size: 1rem;
-            transition: all 0.3s;
-            margin: 5px 0;
-            width: 100%;
-            max-width: 400px;
+            margin-bottom: 15px;
+            line-height: 1.6;
         }
         
-        .answer-input:focus {
+        .option-container {
+            margin: 10px 0;
+        }
+        
+        .option-item {
+            display: flex;
+            align-items: flex-start;
+            padding: 12px;
+            margin: 8px 0;
+            border: 2px solid #dee2e6;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background-color: white;
+        }
+        
+        .option-item:hover {
             border-color: var(--secondary);
-            outline: none;
-            box-shadow: 0 0 0 3px rgba(224, 159, 62, 0.2);
+            background-color: rgba(224, 159, 62, 0.1);
+        }
+        
+        .option-letter {
+            font-weight: bold;
+            margin-right: 10px;
+            min-width: 20px;
+            color: var(--dark);
+        }
+        
+        .option-text {
+            flex: 1;
+            line-height: 1.5;
+        }
+        
+        .option-item.selected {
+            border-color: var(--accent);
+            background-color: rgba(158, 42, 43, 0.1);
+        }
+        
+        .option-item.correct {
+            border-color: #28a745;
+            background-color: #d4edda;
+            color: #155724;
+        }
+        
+        .option-item.incorrect {
+            border-color: #dc3545;
+            background-color: #f8d7da;
+            color: #721c24;
+            text-decoration: line-through;
+            opacity: 0.7;
+        }
+        
+        .option-item.correct::after {
+            content: ' ✓';
+            color: #28a745;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+        
+        .option-item.incorrect::after {
+            content: ' ✗';
+            color: #dc3545;
+            font-weight: bold;
+            margin-left: 10px;
         }
         
         .submit-btn {
@@ -88,27 +145,44 @@
             border: none;
             padding: 12px 25px;
             font-size: 1rem;
-            border-radius: 4px;
+            border-radius: 6px;
             cursor: pointer;
-            transition: background-color 0.3s;
+            transition: all 0.3s ease;
             margin-top: 15px;
         }
         
         .submit-btn:hover {
             background-color: var(--dark);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
         }
         
-        .inline-input {
+        .btn-selanjutnya {
             display: inline-block;
-            width: auto;
-            min-width: 150px;
-            margin: 0 5px;
+            background-color: var(--dark);
+            color: white;
+            padding: 12px 30px;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
         
-        /* Styles untuk hasil */
+        .btn-selanjutnya:hover {
+            background-color: var(--accent);
+            text-decoration: none;
+            color: white;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+        
         .result-message {
-            padding: 15px;
-            border-radius: 6px;
+            padding: 20px;
+            border-radius: 8px;
             margin-top: 20px;
             display: none;
         }
@@ -131,222 +205,322 @@
             color: #856404;
         }
         
-        .correct-answer {
-            border-color: #28a745 !important;
-            background-color: #d4edda !important;
-        }
-        
-        .incorrect-answer {
-            border-color: #dc3545 !important;
-            background-color: #f8d7da !important;
-        }
-        
-        .answer-feedback {
-            font-size: 0.85rem;
-            margin-top: 5px;
+        .question-status {
+            font-size: 0.9rem;
+            margin-top: 10px;
+            padding: 8px;
+            border-radius: 4px;
             display: none;
         }
         
-        .answer-feedback.correct {
+        .question-status.correct {
+            background-color: #d4edda;
             color: #155724;
+            border: 1px solid #c3e6cb;
         }
         
-        .answer-feedback.incorrect {
+        .question-status.incorrect {
+            background-color: #f8d7da;
             color: #721c24;
+            border: 1px solid #f5c6cb;
         }
         
-        @media (max-width: 600px) {
-            .inline-input {
-                display: block;
-                width: 100%;
-                margin: 10px 0;
+        @media (max-width: 768px) {
+            .task-container {
+                padding: 15px;
+            }
+            
+            .option-item {
+                padding: 10px;
+            }
+            
+            .option-text {
+                font-size: 0.95rem;
             }
         }
     </style>
 </head>
+
 <body>
     <div class="task-container">
         <h1 class="task-title">Verifikasi</h1>
         
         <div class="task-instruction">
-            Isilah kolom yang kosong pada teks berikut ini berdasarkan informasi yang telah kamu dapat dari menonton video dan melaksanakan kegiatan lainnya.
+            <strong>Petunjuk Pengerjaan:</strong><br>
+            Pilih dari beberapa opsi jawaban yang tepat setelah kamu membaca materi dan mengerjakan tugas sebelumnya. Klik pada pilihan yang menurutmu benar untuk setiap pertanyaan.
         </div>
         
-        <div class="question-group">
-            <label class="question-text">Sebuah luka irisan tak lama memerah dan bengkak yang diakibatkan oleh tubuh mengeluarkan</label>
-            <input type="text" class="answer-input" id="isian-1" name="isian-1" placeholder="Isi jawaban...">.
-            <div class="answer-feedback" id="feedback-1"></div>
-            
-            <p style="margin-top: 15px;">Tak lama kemudian, luka tersebut mulai bernanah karena sel-sel darah putih melakukan
-            <input type="text" class="answer-input inline-input" id="isian-2" name="isian-2" placeholder="Isi jawaban...">
-            terhadap mikroba yang menginfeksi tubuh.</p>
-            <div class="answer-feedback" id="feedback-2"></div>
-            
-            <p style="margin-top: 15px;">Beberapa waktu kemudian, mikroba yang sama kembali dan tubuh terpapar patogen yang sama namun tidak menunjukkan gejala infeksi dikarenakan imunitas adaptif yang memproduksi
-            <input type="text" class="answer-input inline-input" id="isian-3" name="isian-3" placeholder="Isi jawaban...">.
-            </p>
-            <div class="answer-feedback" id="feedback-3"></div>
+        <!-- Pertanyaan 1 -->
+        <div class="question-container">
+            <div class="question-number">1.</div>
+            <div class="question-text">
+                Tujuan tubuh memerlukan sistem pengenalan antigen-antibodi dalam pertahanan internal.
+            </div>
+            <div class="option-container">
+                <div class="option-item" data-question="1" data-option="a">
+                    <span class="option-letter">a.</span>
+                    <span class="option-text">Karena pertahanan eksternal seperti kulit dan sekresi kimia tidak selalu dapat mencegah semua patogen masuk ke dalam tubuh, sehingga diperlukan mekanisme pertahanan lanjutan yang dapat mengenali dan merespon patogen spesifik yang berhasil menembus pertahanan pertama</span>
+                </div>
+                <div class="option-item" data-question="1" data-option="b">
+                    <span class="option-letter">b.</span>
+                    <span class="option-text">Karena sistem antigen-antibodi hanya berfungsi untuk membedakan golongan darah saat transfusi dan tidak memiliki peran lain dalam melawan infeksi</span>
+                </div>
+                <div class="option-item" data-question="1" data-option="c">
+                    <span class="option-letter">c.</span>
+                    <span class="option-text">Karena antibodi dapat menggantikan fungsi sel darah putih dalam melakukan fagositosis terhadap semua jenis mikroorganisme tanpa perlu mengenali jenisnya</span>
+                </div>
+                <div class="option-item" data-question="1" data-option="d">
+                    <span class="option-letter">d.</span>
+                    <span class="option-text">Karena pertahanan eksternal hanya efektif melawan virus, sedangkan bakteri dan jamur harus dilawan dengan antibodi yang diproduksi secara terus-menerus</span>
+                </div>
+                <div class="option-item" data-question="1" data-option="e">
+                    <span class="option-letter">e.</span>
+                    <span class="option-text">Karena sistem antigen-antibodi bekerja lebih cepat daripada pertahanan eksternal dalam mencegah patogen masuk ke dalam sel-sel tubuh</span>
+                </div>
+            </div>
+            <div class="question-status" id="status-1"></div>
         </div>
         
-        <button type="submit" class="submit-btn" onclick="checkAnswers()">Cek Jawaban</button>
+        <!-- Pertanyaan 2 -->
+        <div class="question-container">
+            <div class="question-number">2.</div>
+            <div class="question-text">
+                Cara kerja antibodi paling tepat dalam sistem pertahanan internal tubuh.
+            </div>
+            <div class="option-container">
+                <div class="option-item" data-question="2" data-option="a">
+                    <span class="option-letter">a.</span>
+                    <span class="option-text">Antibodi hanya bekerja dengan satu cara yaitu langsung menghancurkan patogen dengan melepaskan enzim pencernaan seperti yang dilakukan oleh sel fagosit</span>
+                </div>
+                <div class="option-item" data-question="2" data-option="b">
+                    <span class="option-letter">b.</span>
+                    <span class="option-text">Antibodi bekerja melalui berbagai mekanisme seperti menetralisir toksin, menghambat pergerakan bakteri, memfasilitasi fagositosis, dan menyebabkan penggumpalan patogen untuk mencegah penyebarannya</span>
+                </div>
+                <div class="option-item" data-question="2" data-option="c">
+                    <span class="option-letter">c.</span>
+                    <span class="option-text">Antibodi selalu diproduksi dalam jumlah yang sama untuk semua jenis antigen dan tidak memiliki variasi struktur situs pengikatan</span>
+                </div>
+                <div class="option-item" data-question="2" data-option="d">
+                    <span class="option-letter">d.</span>
+                    <span class="option-text">Antibodi hanya efektif melawan patogen yang berada di luar sel dan tidak dapat mengenali sel tubuh yang telah terinfeksi virus</span>
+                </div>
+                <div class="option-item" data-question="2" data-option="e">
+                    <span class="option-letter">e.</span>
+                    <span class="option-text">Antibodi bekerja secara independen tanpa memerlukan bantuan komponen sistem imun lainnya seperti sel fagosit atau sel T</span>
+                </div>
+            </div>
+            <div class="question-status" id="status-2"></div>
+        </div>
+        
+        <!-- Pertanyaan 3 -->
+        <div class="question-container">
+            <div class="question-number">3.</div>
+            <div class="question-text">
+                Fungsi utama sel memori dalam sistem imun.
+            </div>
+            <div class="option-container">
+                <div class="option-item" data-question="3" data-option="a">
+                    <span class="option-letter">a.</span>
+                    <span class="option-text">Memproduksi hormon pertumbuhan</span>
+                </div>
+                <div class="option-item" data-question="3" data-option="b">
+                    <span class="option-letter">b.</span>
+                    <span class="option-text">Mengatur tekanan darah</span>
+                </div>
+                <div class="option-item" data-question="3" data-option="c">
+                    <span class="option-letter">c.</span>
+                    <span class="option-text">Memberikan respons yang lebih cepat pada infeksi kedua dari patogen yang sama</span>
+                </div>
+                <div class="option-item" data-question="3" data-option="d">
+                    <span class="option-letter">d.</span>
+                    <span class="option-text">Mencerna makanan dalam usus</span>
+                </div>
+                <div class="option-item" data-question="3" data-option="e">
+                    <span class="option-letter">e.</span>
+                    <span class="option-text">Mengangkut oksigen ke seluruh tubuh</span>
+                </div>
+            </div>
+            <div class="question-status" id="status-3"></div>
+        </div>
+        
+        <div style="text-align: center;">
+            <button type="submit" class="submit-btn" onclick="checkAnswers()">
+                <i class="fas fa-check-circle"></i> Cek Jawaban
+            </button>
+        </div>
         
         <!-- Area untuk menampilkan hasil -->
         <div id="result-message" class="result-message">
             <h4 id="result-title"></h4>
             <div id="result-details"></div>
         </div>
+
+        <!-- Tombol Selanjutnya -->
+        <div id="tombolSelanjutnya" style="display: none; text-align: center; margin-top: 20px;">
+            <a href="{{ route('kesimpulan-1') }}" class="btn-selanjutnya">
+                <i class="fas fa-arrow-right"></i> Selanjutnya
+            </a>
+        </div>
     </div>
 
-    <!-- jQuery (pastikan sudah di-load di layout) -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    
     <script>
+        // Variabel global untuk menyimpan jawaban user
+        let userAnswers = {};
+        
         // Kunci jawaban
         const answerKey = {
-            'isian-1': 'nanah',
-            'isian-2': 'fagositosis',
-            'isian-3': 'antibodi'
+            1: 'a',
+            2: 'b', 
+            3: 'c'
         };
-        
-        // Fungsi untuk normalize jawaban (lowercase dan trim)
-        function normalizeAnswer(answer) {
-            return answer.toLowerCase().trim();
-        }
-        
-        // Fungsi untuk memeriksa jawaban
+
+        $(document).ready(function() {
+            // Setup CSRF token
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            // Event handler untuk pilihan
+            $('.option-item').click(function() {
+                const question = $(this).data('question');
+                const option = $(this).data('option');
+                
+                // Reset semua pilihan untuk pertanyaan ini
+                $(`.option-item[data-question="${question}"]`).removeClass('selected');
+                
+                // Tandai pilihan yang dipilih
+                $(this).addClass('selected');
+                
+                // Simpan jawaban user
+                userAnswers[question] = option;
+                
+                console.log('User answers:', userAnswers);
+            });
+        });
+
         function checkAnswers() {
+            const totalQuestions = 3;
             let correctCount = 0;
-            let incorrectCount = 0;
-            let totalQuestions = 3;
             let detailJawaban = {};
-            
-            // Reset styles
-            document.querySelectorAll('.answer-input').forEach(input => {
-                input.classList.remove('correct-answer', 'incorrect-answer');
-            });
-            document.querySelectorAll('.answer-feedback').forEach(feedback => {
-                feedback.style.display = 'none';
-            });
-            
-            // Periksa setiap jawaban
+
+            // Reset semua styling
+            $('.option-item').removeClass('correct incorrect');
+            $('.question-status').hide();
+
+            // Periksa setiap pertanyaan
             for (let i = 1; i <= totalQuestions; i++) {
-                const inputId = `isian-${i}`;
-                const input = document.getElementById(inputId);
-                const userAnswer = normalizeAnswer(input.value);
-                const correctAnswer = answerKey[inputId];
-                const feedback = document.getElementById(`feedback-${i}`);
+                const userAnswer = userAnswers[i];
+                const correctAnswer = answerKey[i];
+                const questionContainer = $(`.option-item[data-question="${i}"]`);
+                const statusElement = $(`#status-${i}`);
                 
-                detailJawaban[inputId] = {
-                    jawaban_user: input.value,
-                    jawaban_benar: correctAnswer,
-                    status: userAnswer === correctAnswer ? 'benar' : 'salah'
+                detailJawaban[i] = {
+                    user_answer: userAnswer || '',
+                    correct_answer: correctAnswer,
+                    is_correct: userAnswer === correctAnswer
                 };
-                
+
                 if (userAnswer === correctAnswer) {
                     correctCount++;
-                    input.classList.add('correct-answer');
-                    feedback.textContent = '✓ Benar!';
-                    feedback.className = 'answer-feedback correct';
-                } else if (userAnswer === '') {
-                    input.classList.add('incorrect-answer');
-                    feedback.textContent = '✗ Jawaban tidak boleh kosong';
-                    feedback.className = 'answer-feedback incorrect';
+                    // Tandai jawaban benar
+                    $(`.option-item[data-question="${i}"][data-option="${correctAnswer}"]`).addClass('correct');
+                    
+                    statusElement.removeClass('incorrect').addClass('correct question-status');
+                    statusElement.text('✓ Jawaban benar!');
+                    statusElement.show();
                 } else {
-                    incorrectCount++;
-                    input.classList.add('incorrect-answer');
-                    feedback.textContent = `✗ Salah. Jawaban yang benar: ${correctAnswer}`;
-                    feedback.className = 'answer-feedback incorrect';
+                    // Tandai jawaban yang dipilih user sebagai salah (jika ada)
+                    if (userAnswer) {
+                        $(`.option-item[data-question="${i}"][data-option="${userAnswer}"]`).addClass('incorrect');
+                    }
+                    
+                    // Tandai jawaban yang benar
+                    $(`.option-item[data-question="${i}"][data-option="${correctAnswer}"]`).addClass('correct');
+                    
+                    statusElement.removeClass('correct').addClass('incorrect question-status');
+                    if (!userAnswer) {
+                        statusElement.text('✗ Belum dijawab. Jawaban yang benar: ' + correctAnswer.toUpperCase());
+                    } else {
+                        statusElement.text('✗ Salah. Jawaban yang benar: ' + correctAnswer.toUpperCase());
+                    }
+                    statusElement.show();
                 }
-                feedback.style.display = 'block';
             }
-            
+
             // Tampilkan hasil
-            const resultMessage = document.getElementById('result-message');
-            const resultTitle = document.getElementById('result-title');
-            const resultDetails = document.getElementById('result-details');
+            const resultMessage = $('#result-message');
+            const resultTitle = $('#result-title');
+            const resultDetails = $('#result-details');
             
-            resultMessage.style.display = 'block';
+            resultMessage.show();
+
+            const answeredCount = Object.keys(userAnswers).length;
+            const unansweredCount = totalQuestions - answeredCount;
             
             if (correctCount === totalQuestions) {
-                resultMessage.className = 'result-message success';
-                resultTitle.innerHTML = '<i class="fas fa-trophy"></i> Jawaban Benar';
-                resultDetails.innerHTML = `
-                    <p>Jawaban Benar.</p>
-                    
-                `;
+                resultMessage.removeClass('error warning').addClass('success');
+                resultTitle.html('<i class="fas fa-trophy"></i> Selamat! Jawaban Anda benar semua!');
+                resultDetails.html('Kerja Bagus! Anda telah berhasil menjawab semua pertanyaan dengan tepat.');
                 
-                // Simpan progres
-                simpanProgres(correctCount, totalQuestions, detailJawaban);
+                // Tampilkan tombol selanjutnya
+                $('#tombolSelanjutnya').show();
                 
-            } else if (correctCount + incorrectCount < totalQuestions) {
-                resultMessage.className = 'result-message warning';
-                resultTitle.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Belum Lengkap';
-                resultDetails.innerHTML = `
-                    <p><strong>Jawaban benar:</strong> ${correctCount}</p>
-                    <p><strong>Jawaban salah:</strong> ${incorrectCount}</p>
-                    <p><strong>Belum dijawab:</strong> ${totalQuestions - correctCount - incorrectCount}</p>
-                    <p class="mb-0"><em>Silakan lengkapi semua jawaban terlebih dahulu!</em></p>
-                `;
+            } else if (unansweredCount > 0) {
+                resultMessage.removeClass('success error').addClass('warning');
+                resultTitle.html('<i class="fas fa-exclamation-triangle"></i> Belum Lengkap');
+                resultDetails.html(`
+                    <p><strong>Jawaban benar:</strong> ${correctCount} dari ${totalQuestions}</p>
+                    <p><strong>Belum dijawab:</strong> ${unansweredCount}</p>
+                    <p class="mb-0"><em>Silakan jawab semua pertanyaan terlebih dahulu!</em></p>
+                `);
+                
+                $('#tombolSelanjutnya').hide();
             } else {
-                resultMessage.className = 'result-message error';
-                resultTitle.innerHTML = '<i class="fas fa-times-circle"></i> Coba Lagi';
-                resultDetails.innerHTML = `
-                    <p><strong>Jawaban benar:</strong> ${correctCount}</p>
-                    <p><strong>Jawaban salah:</strong> ${incorrectCount}</p>
-                    <p class="mb-0"><em>Perhatikan kembali jawaban yang salah dan coba lagi!</em></p>
-                `;
+                resultMessage.removeClass('success warning').addClass('error');
+                resultTitle.html('<i class="fas fa-times-circle"></i> Masih ada yang keliru');
+                resultDetails.html(`
+                    <p><strong>Jawaban benar:</strong> ${correctCount} dari ${totalQuestions}</p>
+                    <p><strong>Jawaban salah:</strong> ${totalQuestions - correctCount}</p>
+                    <p class="mb-0"><em>Perhatikan jawaban yang benar dan coba lagi!</em></p>
+                `);
                 
-                // Tetap simpan progres meskipun belum sempurna
-                simpanProgres(correctCount, totalQuestions, detailJawaban);
+                $('#tombolSelanjutnya').hide();
             }
-            
+
             // Scroll ke hasil
-            resultMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            resultMessage[0].scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+            // Simpan progres
+            simpanProgres(correctCount, totalQuestions, detailJawaban);
         }
-        
-        // Fungsi untuk menyimpan progres
+
         function simpanProgres(skor, totalSoal, detailJawaban) {
-            console.log('Memulai simpan progres Verifikasi 1...');
-            console.log('Data yang akan dikirim:', {
-                skor: skor,
-                totalSoal: totalSoal,
-                detailJawaban: detailJawaban
-            });
-            
-            // Data yang akan dikirim
             const data = {
                 nama_aktivitas: 'verifikasi-1',
-                judul_aktivitas: 'Verifikasi 1',
+                judul_aktivitas: 'Verifikasi 1 - Pilihan Ganda Sistem Pertahanan Tubuh',
                 skor: skor,
                 total_soal: totalSoal,
                 detail_jawaban: detailJawaban
             };
-            
-            // Kirim data via AJAX
+
             $.ajax({
                 url: '/api/progres/simpan',
                 method: 'POST',
                 data: JSON.stringify(data),
                 contentType: 'application/json',
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
                 success: function(response) {
                     console.log('Progres berhasil disimpan:', response);
                     
-                    // Update pesan hasil
-                    const resultDetails = document.getElementById('result-details');
                     if (skor === totalSoal) {
-                        resultDetails.innerHTML = `
-                            <p>Jawabanmu Benar.</p>
-                        `;
-                        
-                        // Tampilkan notifikasi sukses jika tersedia
+                        // Tampilkan notifikasi sukses jika sempurna
                         if (typeof Swal !== 'undefined') {
                             Swal.fire({
                                 icon: 'success',
-                                title: '',
-                                text: 'Semua Benar!',
+                                title: 'Selamat!',
+                                text: 'Anda telah menyelesaikan verifikasi dengan sempurna!',
                                 showConfirmButton: false,
                                 timer: 3000
                             });
@@ -355,39 +529,14 @@
                 },
                 error: function(xhr, status, error) {
                     console.error('Error menyimpan progres:', error);
-                    console.error('Response:', xhr.responseText);
                     
                     // Tampilkan pesan error
-                    const resultDetails = document.getElementById('result-details');
-                    resultDetails.innerHTML += '<br><small class="text-danger">Progres gagal disimpan, tetapi jawaban kamu tetap tercatat.</small>';
+                    const resultDetails = $('#result-details');
+                    resultDetails.append('<br><small class="text-warning">Progres gagal disimpan, tetapi jawaban Anda tetap tercatat.</small>');
                 }
             });
         }
-        
-        // Event listeners
-        document.addEventListener('DOMContentLoaded', function() {
-            const inputs = document.querySelectorAll('.answer-input');
-            
-            // Hapus class saat user mulai mengetik lagi
-            inputs.forEach(input => {
-                input.addEventListener('input', function() {
-                    this.classList.remove('correct-answer', 'incorrect-answer');
-                    const feedbackId = 'feedback-' + this.id.split('-')[1];
-                    const feedback = document.getElementById(feedbackId);
-                    if (feedback) {
-                        feedback.style.display = 'none';
-                    }
-                });
-                
-                // Enter key untuk submit
-                input.addEventListener('keypress', function(e) {
-                    if (e.key === 'Enter') {
-                        checkAnswers();
-                    }
-                });
-            });
-        });
     </script>
 </body>
-</html>
+
 @endsection
