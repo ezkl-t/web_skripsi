@@ -219,7 +219,7 @@
         <th>Keterangan</th>
     </tr>
     <tr>
-        <td>1. Apa saja komponen yang termasuk pertahanan non spesifik dan spesifik tubuh?</td>
+        <td>1. Apa saja komponen sistem pertahanan tubuh eksternal dan internal?</td>
         <td><input type="radio" id="radio1_termasuk" name="radio1" value="termasuk" onchange="checkAnswer(1, 'termasuk')"></td>
         <td><input type="radio" id="radio1_tidak_termasuk" name="radio1" value="tidak_termasuk" onchange="checkAnswer(1, 'tidak_termasuk')"></td>
         <td id="keterangan1"></td>

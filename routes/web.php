@@ -101,6 +101,7 @@ Route::middleware(['student'])->group(function () {
     Route::get('tugas/verifikasi-1', [TugasController::class, 'showTugas1_4'])->name('verifikasi-1');
     Route::get('tugas/kesimpulan-1', [TugasController::class, 'showTugas1_5'])->name('kesimpulan-1');
 
+    Route::get('tugas/stimulus-2', [TugasController::class, 'showTugas2_0'])->name('stimulus-2');
     Route::get('tugas/identifikasi-masalah-2', [TugasController::class, 'showTugas2'])->name('identifikasi-masalah-2');
     Route::get('tugas/pengumpulan-data-2', [TugasController::class, 'showTugas2_2'])->name('pengumpulan-data-2');
     Route::get('tugas/pengolahan-data-2', [TugasController::class, 'showTugas2_3'])->name('pengolahan-data-2');

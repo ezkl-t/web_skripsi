@@ -14,6 +14,11 @@
                     <i class="bi bi-arrow-right me-2"></i>
                     <span class="nav-item-text">TP</span>
                 </a>  --}}
+                {{-- <a href="#" class="list-group-item list-group-item-action nav-item content-link" 
+                   data-content="">
+                    <i class="bi bi-arrow-right me-2"></i>
+                    <span class="nav-item-text">Tujuan Pembelajaran</span>
+                </a> --}}
                 <a href="{{ route('stimulus-1') }}" class="list-group-item list-group-item-action nav-item " 
                    data-content="stimulus-1">
                     <i class="bi bi-arrow-right me-2"></i>
@@ -71,7 +76,7 @@
                     <i class="bi bi-arrow-right me-2"></i>
                     <span class="nav-item-text">TP</span>
                 </a> --}}
-                <a href="#" class="list-group-item list-group-item-action nav-item content-link" 
+                <a href="{{ route('stimulus-2') }}" class="list-group-item list-group-item-action nav-item " 
                    data-content="stimulus-2">
                     <i class="bi bi-arrow-right me-2"></i>
                     <span class="nav-item-text">Stimulus</span>

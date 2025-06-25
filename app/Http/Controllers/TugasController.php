@@ -49,6 +49,10 @@ class TugasController extends Controller
         return view('tugas/kesimpulan-1');
     }
 
+    public function showTugas2_0(){
+        return view('tugas/stimulus-2');
+    }
+    
     public function showTugas2() {
         return view('tugas/identifikasi-masalah-2');
     }
