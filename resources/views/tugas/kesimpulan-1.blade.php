@@ -280,7 +280,7 @@
                     id="kesimpulan" 
                     name="kesimpulan" 
                     class="textarea-kesimpulan" 
-                    placeholder="Berdasarkan materi yang telah saya pelajari tentang sistem pertahanan tubuh, saya dapat menyimpulkan bahwa..."
+                    placeholder="Berdasarkan materi yang telah saya pelajari tentang Sistem Pertahanan Eksternal dan Internal, saya dapat menyimpulkan bahwa..."
                     maxlength="1000"
                     required
                 ></textarea>
