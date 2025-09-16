@@ -1,101 +1,408 @@
 @extends('layouts.app')
 
-@section('title', 'Pengolahan Data')
+@section('title', 'Pengolahan Data 2')
 @section('pageTitle', 'Sistem Pertahanan Tubuh')
 
 @section('content')
-<!DOCTYPE html>
-<html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tugas Siswa</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>Tugas Sistem Pertahanan Tubuh</title>
     <style>
-        .table th, .table td {
-            vertical-align: middle;
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 20px;
         }
-        .materi {
-            font-size: 1.1em;
-            color: #555;
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
-        #explanation {
-            display: none;
+        h2 {
+            color: #9E2A2B;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        .petunjuk {
+            background-color: #f8f9fa;
+            border-left: 4px solid #540B0E;
+            padding: 15px;
+            margin-bottom: 25px;
+        }
+        .petunjuk h4 {
+            color: #540B0E;
+            margin-top: 0;
+        }
+        .soal {
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        .opsi-jawaban {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 10px;
+            margin: 15px 0;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+        }
+        .opsi-item {
+            padding: 5px 10px;
+            background-color: #e9ecef;
+            border-radius: 4px;
+            text-align: center;
+        }
+        input[type="text"] {
+            width: 150px;
+            display: inline-block;
+            padding: 5px 10px;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            margin: 0 5px;
+        }
+        .btn-cek {
+            background-color: #540B0E;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
             margin-top: 20px;
+            display: block;
+            margin: 30px auto;
+        }
+        .btn-cek:hover {
+            background-color: #9E2A2B;
+        }
+        .btn-selanjutnya {
+            display: inline-block;
+            background-color: #540B0E;
+            color: white;
+            padding: 12px 30px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+            border: none;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        .btn-selanjutnya:hover {
+            background-color: #9E2A2B;
+            text-decoration: none;
+            color: white;
+        }
+        .feedback {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        .benar {
+            color: green;
+        }
+        .salah {
+            color: red;
+        }
+        #kelanjutan {
+            display: none;
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #e8f5e9;
+            border-radius: 5px;
+            text-align: center;
+        }
+        .jawaban-container {
+            margin-bottom: 15px;
         }
     </style>
 </head>
 <body>
-    <div class="container mt-5">
-        <h2 class="card-title mb-4" style="color: #9E2A2B">Pengolahan Data</h2>
-        <p class="materi">Setelah kamu mengerjakan tugas dan mencermati materi sebelumnya, selanjutnya kerjakan tugas berikut dengan teliti. Sampaikan apa yang kamu ketahui tentang Sistem Komplemen!</p>
-        
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th>Kategori</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Komponen Sistem Komplemen</td>
-                    <td>
-                        <input type="text" class="form-control" id="input-0" placeholder="Ketik jawaban">
-                    </td>
-                </tr>
-                <tr>
-                    <td>Fungsi Sistem Komplemen</td>
-                    <td>
-                        <input type="text" class="form-control" id="input-1" placeholder="Ketik jawaban">
-                    </td>
-                </tr>
-                <tr>
-                    <td>Aktivasi Sistem Komplemen</td>
-                    <td>
-                        <input type="text" class="form-control" id="input-2" placeholder="Ketik jawaban">
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        
-        <button id="submitBtn" class="btn btn-success">Submit</button>
-        
-        <div id="explanation" class="mt-4">
-            <h4 class="text-success">Jawaban Anda:</h4>
-            <p id="explanationText"></p>
-        </div>
+
+<div class="container">
+    <h2>Latihan Isian - Sistem Pertahanan Tubuh</h2>
+
+    <div class="petunjuk">
+        <h4>Petunjuk Pengerjaan</h4>
+        <p>a. Lengkapi kalimat berikut dengan jawaban yang sesuai!</p>
+        <p>b. Perhatikan opsi jawaban untuk membantumu menentukan jawaban yang benar.</p>
     </div>
 
-    <!-- Bootstrap JS and dependencies -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            $('#submitBtn').click(function() {
-                // Mengumpulkan jawaban dari text box
-                var jawaban = [
-                    $('#input-0').val(),
-                    $('#input-1').val(),
-                    $('#input-2').val(),
-                    $('#input-3').val(),
-                    $('#input-4').val()
-                ];
+    <form id="latihanForm">
+        <!-- Soal 1 -->
+        <div class="soal">
+            <p>1. Mekanisme fagositosis dimulai ketika neutrofil 
+                <input type="text" id="jawaban1" name="jawaban1" autocomplete="off"> 
+                pada patogen, kemudian membran sel membentuk kantung 
+                <input type="text" id="jawaban2" name="jawaban2" autocomplete="off"> 
+                yang membawa patogen masuk ke dalam sel.
+            </p>
+            <div class="feedback" id="feedback1"></div>
+        </div>
 
-                // Contoh penjelasan yang akan ditampilkan
-                var explanation = `
-                    <strong>Komponen Sistem Komplemen:</strong> ${jawaban[0] || "Belum diisi"}<br>
-                    <strong>Fungsi Sistem Komplemen:</strong> ${jawaban[1] || "Belum diisi"}<br>
-                    <strong>Aktivasi Sistem Komplemen:</strong> ${jawaban[2] || "Belum diisi"}<br>
-                    
-                `;
+        <!-- Soal 2 -->
+        <div class="soal">
+            <p>2. Perbedaan utama antara fagosit dan limfosit adalah fagosit memberikan respon 
+                <input type="text" id="jawaban3" name="jawaban3" autocomplete="off">, 
+                sedangkan limfosit memberikan respon 
+                <input type="text" id="jawaban4" name="jawaban4" autocomplete="off"> 
+                terhadap patogen.
+            </p>
+            <div class="feedback" id="feedback2"></div>
+        </div>
+
+        <!-- Soal 3 -->
+        <div class="soal">
+            <p>3. Limfosit B menghasilkan 
+                <input type="text" id="jawaban5" name="jawaban5" autocomplete="off"> 
+                yang beredar di cairan tubuh sehingga disebut respon imun 
+                <input type="text" id="jawaban6" name="jawaban6" autocomplete="off">, 
+                sedangkan limfosit T memiliki 
+                <input type="text" id="jawaban7" name="jawaban7" autocomplete="off"> 
+                di permukaan sel sehingga disebut respon imun 
+                <input type="text" id="jawaban8" name="jawaban8" autocomplete="off">.
+            </p>
+            <div class="feedback" id="feedback3"></div>
+        </div>
+
+        <!-- Soal 4 -->
+        <div class="soal">
+            <p>4. Makrofag berperan sebagai 
+                <input type="text" id="jawaban9" name="jawaban9" autocomplete="off"> 
+                karena menampilkan sampel antigen di permukaan membran sel untuk dikenali oleh 
+                <input type="text" id="jawaban10" name="jawaban10" autocomplete="off">.
+            </p>
+            <div class="feedback" id="feedback4"></div>
+        </div>
+
+        <!-- Soal 5 -->
+        <div class="soal">
+            <p>5. Respon imun sekunder lebih cepat dibandingkan respon primer karena adanya 
+                <input type="text" id="jawaban11" name="jawaban11" autocomplete="off"> 
+                yang dapat langsung mengenali antigen yang pernah menginfeksi sebelumnya.
+            </p>
+            <div class="feedback" id="feedback5"></div>
+        </div>
+
+        <!-- Opsi Jawaban -->
+        <div class="opsi-jawaban">
+            <div class="opsi-item">menempel</div>
+            <div class="opsi-item">fagosom</div>
+            <div class="opsi-item">nonspesifik</div>
+            <div class="opsi-item">spesifik</div>
+            <div class="opsi-item">antibodi</div>
+            <div class="opsi-item">humoral</div>
+            <div class="opsi-item">reseptor sel T</div>
+            <div class="opsi-item">seluler</div>
+            <div class="opsi-item">sel penyaji antigen (APC)</div>
+            <div class="opsi-item">limfosit</div>
+            <div class="opsi-item">sel memori</div>
+        </div>
+
+        <button type="button" class="btn-cek" onclick="cekJawaban()">Cek Jawaban</button>
+    </form>
+
+    <div id="kelanjutan">
+        <div style="background-color: #d4edda; border: 1px solid #c3e6cb; border-radius: 5px; padding: 15px; margin: 20px 0;">
+            <h4 style="color: #155724; margin-top: 0;">🎉 Selamat!</h4>
+            <p style="color: #155724; margin-bottom: 0;">Anda telah berhasil menjawab semua pertanyaan dengan benar. Kini Anda dapat melanjutkan ke tahap pembelajaran selanjutnya.</p>
+        </div>
+        
+        <button class="btn-selanjutnya" id="btnSelanjutnya" onclick="lanjutKeVerifikasi2()">
+            Selanjutnya
+        </button>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    // Setup CSRF token
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+    // Jawaban yang benar
+    const correctAnswers = {
+        1: "menempel",
+        2: "fagosom",
+        3: "nonspesifik",
+        4: "spesifik",
+        5: "antibodi",
+        6: "humoral",
+        7: "reseptor sel T",
+        8: "seluler",
+        9: "sel penyaji antigen (APC)",
+        10: "limfosit",
+        11: "sel memori"
+    };
+
+    // Status jawaban benar
+    const correctStatus = {
+        1: false,
+        2: false,
+        3: false,
+        4: false,
+        5: false,
+        6: false,
+        7: false,
+        8: false,
+        9: false,
+        10: false,
+        11: false
+    };
+
+    // Fungsi untuk memeriksa jawaban
+    function cekJawaban() {
+        let allCorrect = true;
+        
+        // Periksa setiap jawaban
+        for (let i = 1; i <= 11; i++) {
+            const userAnswer = document.getElementById(`jawaban${i}`).value.trim().toLowerCase();
+            const correctAnswer = correctAnswers[i].toLowerCase();
+            const feedbackElement = document.getElementById(`feedback${Math.ceil(i/2)}`);
+            
+            if (userAnswer === correctAnswer) {
+                correctStatus[i] = true;
+                if (feedbackElement) {
+                    feedbackElement.innerHTML = `<span class="benar">Jawaban benar!</span>`;
+                }
+            } else {
+                correctStatus[i] = false;
+                allCorrect = false;
+                if (feedbackElement) {
+                    feedbackElement.innerHTML = `<span class="salah">Jawaban salah. Coba lagi!</span>`;
+                }
+            }
+        }
+        
+        // Jika semua jawaban benar, tampilkan tombol selanjutnya
+        if (allCorrect) {
+            document.getElementById('kelanjutan').style.display = 'block';
+        } else {
+            document.getElementById('kelanjutan').style.display = 'none';
+        }
+    }
+
+    // Fungsi untuk melanjutkan ke halaman verifikasi-2
+    function lanjutKeVerifikasi2() {
+        // Hitung skor
+        const correctCount = Object.values(correctStatus).filter(val => val).length;
+        const totalQuestions = Object.keys(correctAnswers).length;
+        
+        // Buat detail jawaban
+        const detailJawaban = {};
+        for (let i = 1; i <= totalQuestions; i++) {
+            const userAnswer = document.getElementById(`jawaban${i}`).value.trim();
+            detailJawaban[i] = {
+                user_answer: userAnswer,
+                correct_answer: correctAnswers[i],
+                is_correct: correctStatus[i]
+            };
+        }
+
+        // Disable tombol untuk prevent double click
+        document.getElementById('btnSelanjutnya').disabled = true;
+        document.getElementById('btnSelanjutnya').textContent = 'Menyimpan...';
+        
+        // Simpan progres
+        simpanProgres(correctCount, totalQuestions, detailJawaban);
+    }
+
+    // Fungsi untuk menyimpan progres
+    function simpanProgres(skor, totalSoal, detailJawaban) {
+        console.log('Memulai simpan progres...');
+        console.log('Data yang akan dikirim:', {
+            skor: skor,
+            totalSoal: totalSoal,
+            detailJawaban: detailJawaban
+        });
+
+        // Data yang akan dikirim
+        const data = {
+            nama_aktivitas: 'pengolahan-data-2',
+            judul_aktivitas: 'Pengolahan Data 2 - Latihan Isian Sistem Pertahanan Tubuh',
+            skor: skor,
+            total_soal: totalSoal,
+            detail_jawaban: detailJawaban
+        };
+
+        // Kirim data via AJAX
+        $.ajax({
+            url: '/api/progres/simpan',
+            method: 'POST',
+            data: JSON.stringify(data),
+            contentType: 'application/json',
+            success: function(response) {
+                console.log('Progres berhasil disimpan:', response);
                 
-                $('#explanationText').html(explanation);
-                $('#explanation').show();
+                // Update pesan hasil jika sempurna
+                if (skor === totalSoal) {
+                    // Tampilkan notifikasi sukses
+                    if (typeof Swal !== 'undefined') {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Selamat!',
+                            text: 'Anda telah menyelesaikan aktivitas ini dengan sempurna!',
+                            showConfirmButton: false,
+                            timer: 3000
+                        });
+                    }
+                    
+                    // Redirect setelah delay
+                    setTimeout(function() {
+                        window.location.href = "{{ route('verifikasi-2') }}";
+                    }, 3000);
+                } else {
+                    // Reset tombol jika ada error
+                    document.getElementById('btnSelanjutnya').disabled = false;
+                    document.getElementById('btnSelanjutnya').textContent = 'Selanjutnya';
+                    alert('Ada kesalahan dalam menyimpan progres.');
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error('Error menyimpan progres:', error);
+                console.error('Response:', xhr.responseText);
+                
+                // Reset tombol
+                document.getElementById('btnSelanjutnya').disabled = false;
+                document.getElementById('btnSelanjutnya').textContent = 'Selanjutnya';
+                
+                // Tampilkan pesan error yang user-friendly
+                alert('Progres gagal disimpan. Silakan coba lagi atau lanjutkan ke aktivitas berikutnya.');
+                
+                // Optional: tetap lanjut ke halaman berikutnya
+                if (confirm('Apakah Anda ingin tetap melanjutkan ke aktivitas berikutnya?')) {
+                    window.location.href = "{{ route('verifikasi-2') }}";
+                }
+            }
+        });
+    }
+
+    // Event listener untuk input fields (agar bisa submit dengan Enter)
+    document.addEventListener('DOMContentLoaded', function() {
+        const inputs = document.querySelectorAll('input[type="text"]');
+        inputs.forEach(input => {
+            input.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    cekJawaban();
+                }
             });
         });
-    </script>
+    });
+</script>
+
 </body>
-</html>
+
 @endsection

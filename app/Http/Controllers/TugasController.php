@@ -82,12 +82,16 @@ class TugasController extends Controller
     public function showTugas3_3(){
         return view('tugas/pengumpulan-data-3');
     }
-
+    
     public function showTugas3_4(){
-        return view('tugas/verifikasi-3');
+        return view('tugas/pengolahan-data-3');
     }
 
     public function showTugas3_5(){
+        return view('tugas/verifikasi-3');
+    }
+
+    public function showTugas3_6(){
         return view('tugas/kesimpulan-3');
     }
 }
