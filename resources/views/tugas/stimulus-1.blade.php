@@ -178,15 +178,16 @@
     <div class="stimulus-container">
         <h1 class="stimulus-title">Stimulus</h1>
         
-        <div class="reading-time">
+        {{-- <div class="reading-time">
             <i class="fas fa-clock"></i> Estimasi waktu baca: 3-5 menit
-        </div>
+        </div> --}}
 
         <div class="intro-questions">
             Apakah kamu tahu bahwa tubuh kita dilengkapi berbagai sistem pertahanan yang melindungi diri dari serangan penyakit? Bagaimana tubuh kita bisa melindungi diri dari patogen penyebab penyakit? Apa saja yang ada pada sistem pertahanan tubuh kita?
         </div>
 
         <img src="../img/MEKANISME-SISTEM-PERTAHANAN-TUBUH.png" class="gambar-materi" alt="Mekanisme Sistem Pertahanan Tubuh">
+        <div class="sketchfab-embed-wrapper"> <iframe title="Lymphocyte White Blood Cell" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share src="https://sketchfab.com/models/81ea244439d542cda524761e64917f49/embed"> </iframe> </div>
 
         <div class="function-list">
             <div class="function-title">Fungsi sistem pertahanan tubuh sebagai berikut:</div>

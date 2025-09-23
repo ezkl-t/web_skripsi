@@ -80,12 +80,12 @@ Route::middleware(['student'])->group(function () {
     Route::get('/kuis/kuis1', [KuisController::class, 'index'])->name('kuis.index');
     Route::post('/kuis/submit', [KuisController::class, 'submitKuis'])->name('kuis.submit');
     
-    Route::get('/kuis2', [KuisController::class, 'showKuis2'])->name('kuis2.index');
+    Route::get('/kuis/kuis2', [KuisController::class, 'showKuis2'])->name('kuis2.index');
     Route::post('/kuis2/submit', function(Request $request) {
         return app(KuisController::class)->submitKuis($request, 'kuis2');
     })->name('kuis2.submit');
 
-    Route::get('/kuis3', [KuisController::class, 'showKuis3'])->name('kuis3.index');
+    Route::get('/kuis/kuis3', [KuisController::class, 'showKuis3'])->name('kuis3.index');
     Route::post('/kuis3/submit', function(Request $request) {
         return app(KuisController::class)->submitKuis($request, 'kuis3');
     })->name('kuis3.submit');
@@ -111,7 +111,8 @@ Route::middleware(['student'])->group(function () {
     Route::get('tugas/stimulus-3', [TugasController::class, 'showTugas3_1'])->name('stimulus-3');
     Route::get('tugas/identifikasi-masalah-3', [TugasController::class, 'showTugas3_2'])->name('identifikasi-masalah-3');
     Route::get('tugas/pengumpulan-data-3', [TugasController::class, 'showTugas3_3'])->name('pengumpulan-data-3');
-    Route::get('tugas/verifikasi-3', [TugasController::class, 'showTugas3_4'])->name('verifikasi-3');
+    Route::get('tugas/pengolahan-data-3', [TugasController::class, 'showTugas3_4'])->name('pengolahan-data-3');
+    Route::get('tugas/verifikasi-3', [TugasController::class, 'showTugas3_5'])->name('verifikasi-3');
     Route::get('tugas/kesimpulan-3', [TugasController::class, 'showTugas3_5'])->name('kesimpulan-3');
     
     // API untuk menyimpan progres (dipanggil via AJAX dari halaman siswa)

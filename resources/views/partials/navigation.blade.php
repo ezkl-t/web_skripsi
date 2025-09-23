@@ -148,7 +148,7 @@
                     <i class="bi bi-arrow-right me-2"></i>
                     <span class="nav-item-text">Pengumpulan Data</span>
                 </a>
-                <a href="#" class="list-group-item list-group-item-action nav-item content-link" 
+                <a href="{{ route('pengolahan-data-3') }}" class="list-group-item list-group-item-action nav-item" 
                    data-content="pengolahan-data-3">
                     <i class="bi bi-arrow-right me-2"></i>
                     <span class="nav-item-text">Pengolahan Data</span>

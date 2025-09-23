@@ -28,7 +28,6 @@
         }
         h2 {
             color: #9E2A2B;
-            text-align: center;
             margin-bottom: 25px;
         }
         .petunjuk {
@@ -68,6 +67,17 @@
             border: 1px solid #ced4da;
             border-radius: 4px;
             margin: 0 5px;
+            transition: all 0.3s ease;
+        }
+        input.benar {
+            background-color: #d4edda;
+            border-color: #c3e6cb;
+            color: #155724;
+        }
+        input.salah {
+            background-color: #f8d7da;
+            border-color: #f5c6cb;
+            color: #721c24;
         }
         .btn-cek {
             background-color: #540B0E;
@@ -103,14 +113,18 @@
             text-decoration: none;
             color: white;
         }
+        .btn-selanjutnya:disabled {
+            background-color: #6c757d;
+            cursor: not-allowed;
+        }
         .feedback {
             margin-top: 10px;
             font-weight: bold;
         }
-        .benar {
+        .benar-text {
             color: green;
         }
-        .salah {
+        .salah-text {
             color: red;
         }
         #kelanjutan {
@@ -121,6 +135,14 @@
             border-radius: 5px;
             text-align: center;
         }
+        .hasil-pengecekan {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+            text-align: center;
+            font-weight: bold;
+        }
         .jawaban-container {
             margin-bottom: 15px;
         }
@@ -129,7 +151,7 @@
 <body>
 
 <div class="container">
-    <h2>Latihan Isian - Sistem Pertahanan Tubuh</h2>
+    <h2>Pengolahan Data</h2>
 
     <div class="petunjuk">
         <h4>Petunjuk Pengerjaan</h4>
@@ -203,13 +225,20 @@
             <div class="opsi-item">humoral</div>
             <div class="opsi-item">reseptor sel T</div>
             <div class="opsi-item">seluler</div>
-            <div class="opsi-item">sel penyaji antigen (APC)</div>
+            <div class="opsi-item">sel penyaji antigen</div>
             <div class="opsi-item">limfosit</div>
             <div class="opsi-item">sel memori</div>
         </div>
 
         <button type="button" class="btn-cek" onclick="cekJawaban()">Cek Jawaban</button>
     </form>
+
+    <!-- Hasil Pengecekan -->
+    <div id="hasilPengecekan" class="hasil-pengecekan" style="display: none;">
+        <p>Hasil Pengecekan:</p>
+        <p>Jumlah Jawaban Benar: <span id="jumlahBenar">0</span></p>
+        <p>Jumlah Jawaban Salah: <span id="jumlahSalah">0</span></p>
+    </div>
 
     <div id="kelanjutan">
         <div style="background-color: #d4edda; border: 1px solid #c3e6cb; border-radius: 5px; padding: 15px; margin: 20px 0;">
@@ -242,7 +271,7 @@
         6: "humoral",
         7: "reseptor sel T",
         8: "seluler",
-        9: "sel penyaji antigen (APC)",
+        9: "sel penyaji antigen",
         10: "limfosit",
         11: "sel memori"
     };
@@ -265,26 +294,44 @@
     // Fungsi untuk memeriksa jawaban
     function cekJawaban() {
         let allCorrect = true;
+        let jumlahBenar = 0;
+        let jumlahSalah = 0;
+        
+        // Reset semua kelas input
+        for (let i = 1; i <= 11; i++) {
+            const inputElement = document.getElementById(`jawaban${i}`);
+            inputElement.classList.remove('benar', 'salah');
+        }
         
         // Periksa setiap jawaban
         for (let i = 1; i <= 11; i++) {
             const userAnswer = document.getElementById(`jawaban${i}`).value.trim().toLowerCase();
             const correctAnswer = correctAnswers[i].toLowerCase();
+            const inputElement = document.getElementById(`jawaban${i}`);
             const feedbackElement = document.getElementById(`feedback${Math.ceil(i/2)}`);
             
             if (userAnswer === correctAnswer) {
                 correctStatus[i] = true;
+                jumlahBenar++;
+                inputElement.classList.add('benar');
                 if (feedbackElement) {
-                    feedbackElement.innerHTML = `<span class="benar">Jawaban benar!</span>`;
+                    feedbackElement.innerHTML = `<span class="benar-text">Jawaban benar!</span>`;
                 }
             } else {
                 correctStatus[i] = false;
+                jumlahSalah++;
                 allCorrect = false;
+                inputElement.classList.add('salah');
                 if (feedbackElement) {
-                    feedbackElement.innerHTML = `<span class="salah">Jawaban salah. Coba lagi!</span>`;
+                    feedbackElement.innerHTML = `<span class="salah-text">Jawaban salah. Coba lagi!</span>`;
                 }
             }
         }
+        
+        // Tampilkan hasil pengecekan
+        document.getElementById('hasilPengecekan').style.display = 'block';
+        document.getElementById('jumlahBenar').textContent = jumlahBenar;
+        document.getElementById('jumlahSalah').textContent = jumlahSalah;
         
         // Jika semua jawaban benar, tampilkan tombol selanjutnya
         if (allCorrect) {
@@ -320,74 +367,100 @@
     }
 
     // Fungsi untuk menyimpan progres
-    function simpanProgres(skor, totalSoal, detailJawaban) {
-        console.log('Memulai simpan progres...');
-        console.log('Data yang akan dikirim:', {
-            skor: skor,
-            totalSoal: totalSoal,
-            detailJawaban: detailJawaban
-        });
+function simpanProgres(skor, totalSoal, detailJawaban) {
+    console.log('Memulai simpan progres...');
+    console.log('Data yang akan dikirim:', {
+        skor: skor,
+        totalSoal: totalSoal,
+        detailJawaban: detailJawaban
+    });
 
-        // Data yang akan dikirim
-        const data = {
-            nama_aktivitas: 'pengolahan-data-2',
-            judul_aktivitas: 'Pengolahan Data 2 - Latihan Isian Sistem Pertahanan Tubuh',
-            skor: skor,
-            total_soal: totalSoal,
-            detail_jawaban: detailJawaban
-        };
+    // Data yang akan dikirim
+    const data = {
+        nama_aktivitas: 'pengolahan-data-2',
+        judul_aktivitas: 'Pengolahan Data 2 - Latihan Isian Sistem Pertahanan Tubuh',
+        skor: skor,
+        total_soal: totalSoal,
+        detail_jawaban: detailJawaban
+    };
 
-        // Kirim data via AJAX
-        $.ajax({
-            url: '/api/progres/simpan',
-            method: 'POST',
-            data: JSON.stringify(data),
-            contentType: 'application/json',
-            success: function(response) {
-                console.log('Progres berhasil disimpan:', response);
-                
-                // Update pesan hasil jika sempurna
-                if (skor === totalSoal) {
-                    // Tampilkan notifikasi sukses
-                    if (typeof Swal !== 'undefined') {
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'Selamat!',
-                            text: 'Anda telah menyelesaikan aktivitas ini dengan sempurna!',
-                            showConfirmButton: false,
-                            timer: 3000
-                        });
-                    }
-                    
-                    // Redirect setelah delay
-                    setTimeout(function() {
+    // Disable tombol untuk prevent double click
+    document.getElementById('btnSelanjutnya').disabled = true;
+    document.getElementById('btnSelanjutnya').textContent = 'Menyimpan...';
+    
+    // Kirim data via AJAX
+    $.ajax({
+        url: '/api/progres/simpan',
+        method: 'POST',
+        data: JSON.stringify(data),
+        contentType: 'application/json',
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        success: function(response) {
+            console.log('Progres berhasil disimpan:', response);
+            
+            // Tampilkan notifikasi sukses
+            if (typeof Swal !== 'undefined') {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Berhasil!',
+                    text: 'Progres telah disimpan. Mengarahkan ke halaman berikutnya...',
+                    showConfirmButton: false,
+                    timer: 2000
+                });
+            }
+            
+            // Redirect setelah delay
+            setTimeout(function() {
+                window.location.href = "{{ route('verifikasi-2') }}";
+            }, 2000);
+        },
+        error: function(xhr, status, error) {
+            console.error('Error menyimpan progres:', error);
+            console.error('Status:', status);
+            console.error('Response:', xhr.responseText);
+            
+            // Reset tombol
+            document.getElementById('btnSelanjutnya').disabled = false;
+            document.getElementById('btnSelanjutnya').textContent = 'Selanjutnya';
+            
+            // Tampilkan pesan error yang lebih informatif
+            let errorMessage = 'Progres gagal disimpan. ';
+            
+            if (xhr.status === 0) {
+                errorMessage += 'Tidak dapat terhubung ke server. Periksa koneksi internet Anda.';
+            } else if (xhr.status === 404) {
+                errorMessage += 'Endpoint API tidak ditemukan.';
+            } else if (xhr.status === 500) {
+                errorMessage += 'Terjadi kesalahan server. Silakan coba lagi nanti.';
+            } else {
+                errorMessage += 'Silakan coba lagi atau hubungi administrator.';
+            }
+            
+            // Tampilkan notifikasi error yang lebih baik
+            if (typeof Swal !== 'undefined') {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Gagal Menyimpan',
+                    html: errorMessage + '<br><br>Apakah Anda ingin tetap melanjutkan ke aktivitas berikutnya?',
+                    showCancelButton: true,
+                    confirmButtonText: 'Ya, Lanjutkan',
+                    cancelButtonText: 'Coba Lagi',
+                    reverseButtons: true
+                }).then((result) => {
+                    if (result.isConfirmed) {
                         window.location.href = "{{ route('verifikasi-2') }}";
-                    }, 3000);
-                } else {
-                    // Reset tombol jika ada error
-                    document.getElementById('btnSelanjutnya').disabled = false;
-                    document.getElementById('btnSelanjutnya').textContent = 'Selanjutnya';
-                    alert('Ada kesalahan dalam menyimpan progres.');
-                }
-            },
-            error: function(xhr, status, error) {
-                console.error('Error menyimpan progres:', error);
-                console.error('Response:', xhr.responseText);
-                
-                // Reset tombol
-                document.getElementById('btnSelanjutnya').disabled = false;
-                document.getElementById('btnSelanjutnya').textContent = 'Selanjutnya';
-                
-                // Tampilkan pesan error yang user-friendly
-                alert('Progres gagal disimpan. Silakan coba lagi atau lanjutkan ke aktivitas berikutnya.');
-                
-                // Optional: tetap lanjut ke halaman berikutnya
-                if (confirm('Apakah Anda ingin tetap melanjutkan ke aktivitas berikutnya?')) {
+                    }
+                });
+            } else {
+                if (confirm(errorMessage + '\n\nApakah Anda ingin tetap melanjutkan ke aktivitas berikutnya?')) {
                     window.location.href = "{{ route('verifikasi-2') }}";
                 }
             }
-        });
-    }
+        }
+    });
+}
 
     // Event listener untuk input fields (agar bisa submit dengan Enter)
     document.addEventListener('DOMContentLoaded', function() {

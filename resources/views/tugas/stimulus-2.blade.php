@@ -220,6 +220,7 @@
         </div>
 
         <img src="../img/leukosit.jpg" class="gambar-materi" alt="Leukosit (Sel Darah Putih)">
+        <div class="sketchfab-embed-wrapper"> <iframe title="White Blood Cells" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share src="https://sketchfab.com/models/4b0561323abb4a71af3b61e8b4951ca3/embed"> </iframe> </div>
         <div class="image-caption">Gambar 2.1 Leukosit (Sel Darah Putih)</div>
 
         <div class="stimulus-content">

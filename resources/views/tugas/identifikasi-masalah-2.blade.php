@@ -62,8 +62,21 @@
             display: block;
             margin-left: auto;
             margin-right: auto;
+            justify-content: center;
             width: 50%;
             margin-bottom: 20px;
+            max-width: 500px;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            margin: 20px auto;
+        }
+        .image-caption {
+            text-align: center;
+            font-style: italic;
+            color: #666;
+            margin-top: 10px;
+            font-size: 0.95rem;
         }
         .materi {
             text-align: justify; 
@@ -131,70 +144,87 @@
             cursor: not-allowed;
             opacity: 0.6;
         }
+        
+        #tombolSelanjutnya {
+            display: none;
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        .image-placeholder {
+            background-color: #f0f0f0;
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 15px 0;
+            border: 1px dashed #ccc;
+        }
     </style>
 </head>
 <body>
 
-<h2 class="card-title" style="color: #9E2A2B" mb-4">Identifikasi Masalah 2</h2>
+<h2 class="card-title" style="color: #9E2A2B" mb-4">Identifikasi Masalah 2 - Komponen Sistem Pertahanan Tubuh</h2>
 
 <!-- Materi Pembelajaran dari Dokumen -->
 <div class="materi" style="background-color: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); margin-bottom: 30px;">
     
     <div class="materi-section">
-        <h4>1. Sistem Kekebalan Bawaan dan Adaptif</h4>
-        <p>Sistem kekebalan tubuh manusia terdiri dari dua komponen utama: sistem kekebalan bawaan (innate) dan sistem kekebalan adaptif. Sistem kekebalan bawaan memberikan respons cepat dan non-spesifik terhadap patogen, sementara sistem kekebalan adaptif memberikan respons yang lebih lambat tetapi spesifik terhadap patogen tertentu.</p>
+        <h4>1. Fagosit</h4>
+        <p>Fagosit, yang secara harfiah berarti "sel pemakan," merupakan jenis sel yang berperan penting dalam pertahanan tubuh dengan cara menghancurkan patogen yang masuk. Fagosit berkembang dari sumsum tulang dan beredar dalam darah serta cairan limfa menuju seluruh tubuh. Sel-sel fagosit yang paling umum adalah neutrofil dan makrofag.</p>
 
-        <h5>• Sistem Kekebalan Bawaan</h5>
-        <p>Merupakan pertahanan pertama tubuh terhadap patogen. Termasuk dalam sistem ini adalah:</p>
-        <ul>
-            <li>Penghalang fisik seperti kulit dan selaput lendir</li>
-            <li>Sel-sel fagosit seperti neutrofil dan makrofag</li>
-            <li>Protein antimikroba dan sistem komplemen</li>
-            <li>Respons peradangan</li>
-        </ul>
+        <h5>• Neutrofil</h5>
+        <p>Neutrofil merupakan jenis fagosit yang paling banyak ditemukan, mencapai 60% komposisi leukosit dalam darah. Sel ini memiliki kemampuan unik untuk berpindah tempat ke seluruh bagian tubuh melalui pembuluh darah dan bahkan dapat meninggalkan pembuluh darah dengan cara menyusup melalui dinding kapiler untuk berpatroli di jaringan ikat, kemampuan yang disebut diapedesis.</p>
+        <p>Mekanisme fagositosis dimulai ketika neutrofil menempel pada patogen, kemudian membran permukaan sel neutrofil membentuk kantung vesikula yang membawa patogen masuk ke dalam sel secara endositosis yang disebut fagosom. Selanjutnya, enzim pencernaan disekresikan oleh Badan Golgi ke dalam lisosom yang kemudian bergabung dengan fagosom membentuk struktur vakuola fagositik untuk menghancurkan patogen.</p>
+        <p>Meskipun dihasilkan dalam jumlah yang banyak, neutrofil memiliki masa hidup yang singkat dan akan mati setelah melawan patogen. Neutrofil yang telah mati biasanya dikumpulkan pada lokasi infeksi untuk membentuk nanah.</p>
+        
+        <!-- Placeholder untuk gambar neutrofil -->
+        <div class="gambar-materi">
+            <img src="../img/neutrofil.png" width="30%">
+            <div class="image-caption">Gambar 2.2 Neutrofil</div>
+        </div>
 
-        <h5>• Sistem Kekebalan Adaptif</h5>
-        <p>Merupakan pertahanan spesifik yang berkembang setelah paparan terhadap patogen tertentu. Sistem ini melibatkan:</p>
-        <ul>
-            <li>Limfosit B yang memproduksi antibodi</li>
-            <li>Limfosit T yang membantu dalam respons imun dan membunuh sel yang terinfeksi</li>
-            <li>Memori imunologis yang memberikan perlindungan jangka panjang</li>
-        </ul>
-
-        <div class="highlight-box">
-            <p><strong>Kesimpulan:</strong> Sistem kekebalan bawaan dan adaptif bekerja bersama-sama untuk melindungi tubuh dari infeksi. Sistem bawaan memberikan respons cepat tetapi non-spesifik, sementara sistem adaptif memberikan respons yang lambat tetapi spesifik dan memiliki memori.</p>
+        <h5>• Makrofag</h5>
+        <p>Makrofag memiliki ukuran lebih besar dibanding neutrofil dan masa hidup yang lebih panjang. Berbeda dengan neutrofil yang beredar di pembuluh darah, makrofag lebih sering menetap pada organ-organ tertentu seperti paru-paru, hati, limpa, ginjal, dan nodus limfa.</p>
+        <p>Makrofag berkembang dari monosit yang beredar dalam darah dan menjadi makrofag ketika meninggalkan darah dan menetap dalam organ. Fungsi makrofag berbeda dengan neutrofil karena tidak menghancurkan patogen sepenuhnya, melainkan memecahnya menjadi partikel kecil yang dijadikan sampel antigen. Kemampuan menampilkan antigen di bagian permukaan sel ini menjadikan makrofag disebut sebagai sel penyaji antigen atau Antigen-Presenting Cells.</p>
+        
+        <!-- Placeholder untuk gambar makrofag -->
+        <div class="gambar-materi">
+            <img src="../img/makrofag_vektor.png" width="30%">
+            <div class="image-caption">Gambar 2.2 Makrofag</div>
         </div>
     </div>
 
     <div class="materi-section">
-        <h4>2. Respons Imun terhadap Infeksi</h4>
-        <p>Ketika patogen memasuki tubuh, sistem kekebalan akan merespons melalui serangkaian mekanisme pertahanan. Respons ini dapat dibagi menjadi beberapa tahap:</p>
+        <h4>2. Limfosit dan Respon Imun Spesifik</h4>
+        <p>Limfosit merupakan tipe sel darah putih kedua yang berperan penting dalam sistem pertahanan tubuh, khususnya dalam respon imun spesifik adaptif. Terdapat dua jenis limfosit yang keduanya telah dibentuk sejak sebelum kelahiran di dalam sumsum tulang janin.</p>
+        <p>Limfosit B tetap berada dalam sumsum tulang hingga cukup matang kemudian menyebar ke seluruh tubuh terutama di nodus limfa dan limpa, sedangkan limfosit T meninggalkan sumsum tulang dan berkumpul serta menjadi matang di timus, sebuah kelenjar yang terdapat di rongga dada tepat di bawah tulang dada dengan ukuran yang menjadi dua kali lebih besar antara kelahiran dan masa pubertas namun mengalami reduksi setelah pubertas.</p>
+        
+        <!-- Placeholder untuk gambar limfosit -->
+        <div class="gambar-materi">
+            <img src="../img/limfosit.png" width="30%">
+            <div class="image-caption">Gambar 2.3 Limfosit</div>
+        </div>
 
-        <h5>• Pengenalan Patogen</h5>
-        <p>Sel-sel sistem kekebalan bawaan mengenali pola molekuler yang terkait dengan patogen (PAMPs) melalui reseptor pengenalan pola (PRRs).</p>
+        <h5>• Limfosit B (sel B) dan respon imun spesifik humoral</h5>
+        <p>Limfosit B berperan dalam respons imun humoral dengan menghasilkan antibodi. Ketika limfosit B teraktivasi oleh antigen, mereka membentuk klon yang terdiri dari sel plasma yang memproduksi antibodi untuk melawan patogen. Selain itu, sel B juga membentuk sel memori yang akan mengingat antigen tersebut untuk melawan infeksi di masa depan. Proses ini dikenal sebagai respon imun spesifik humoral.</p>
 
-        <h5>• Aktivasi Respons Imun</h5>
-        <p>Setelah patogen dikenali, sistem kekebalan akan diaktifkan untuk menghilangkan patogen. Ini termasuk produksi sitokin, aktivasi sel fagosit, dan peningkatan permeabilitas pembuluh darah.</p>
-
-        <h5>• Eliminasi Patogen</h5>
-        <p>Patogen dieliminasi melalui fagositosis, sistem komplemen, dan mekanisme lainnya.</p>
-
-        <h5>• Resolusi dan Memori</h5>
-        <p>Setelah patogen dieliminasi, respons imun akan mereda, dan memori imunologis akan terbentuk untuk memberikan perlindungan jangka panjang.</p>
+        <h5>• Limfosit T (sel T) dan respon imun spesifik seluler</h5>
+        <p>Limfosit T berperan dalam respons imun seluler, di mana mereka mengenali dan menghancurkan sel tubuh yang terinfeksi. Limfosit T dapat dibagi menjadi dua jenis: sel T pembantu yang mengaktifkan limfosit B dan makrofag, serta sel T sitotoksik yang membunuh sel yang terinfeksi. Sel T juga membentuk sel memori yang berfungsi jika patogen yang sama masuk ke dalam tubuh di masa mendatang.</p>
     </div>
 </div>
 
-<p style="text-align: center;">Setelah membaca materi di atas, perhatikan video berikut ini untuk membantu pemahamanmu terhadap materi Sistem Pertahanan Tubuh</p>
+<p style="text-align: center;">Setelah membaca materi di atas, perhatikan video berikut ini untuk membantu pemahamanmu terhadap materi Komponen Sistem Pertahanan Tubuh</p>
 <div align="center">
 <video width="560" controls>
     <source src="{{ asset('vid/vid-2-komponen-pertahanan.mp4') }}" type="video/mp4">
-    Terjadi masalah dalam menampilan video
+    Terjadi masalah dalam menampilkan video
 </video>
 </div>
 
 <div style="background-color: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); margin: 30px 0;">
     <h4 style="color: #540B0E; margin-bottom: 15px;">Aktivitas:</h4>
-    <p class="materi">Dari materi sebelumnya, identifikasi masalah yang relevan terkait pembahasan Sistem Kekebalan Bawaan dan Adaptif. Tentukan apakah identifikasi masalah termasuk atau tidak dalam materi yang diberikan dengan memilih di kolom:</p>
+    <p class="materi">Dari materi sebelumnya, identifikasi masalah yang relevan terkait pembahasan Komponen Sistem Pertahanan. Tentukan apakah identifikasi masalah termasuk atau tidak dalam materi yang diberikan dengan memilih di kolom:</p>
 
     <table>
         <tr>
@@ -204,28 +234,34 @@
             <th>Keterangan</th>
         </tr>
         <tr>
-            <td>1. Apa perbedaan utama antara sistem kekebalan bawaan dan adaptif?</td>
+            <td>1. Bagaimana tubuh merespon infeksi patogen?</td>
             <td><input type="radio" id="radio1_termasuk" name="radio1" value="termasuk" onchange="checkAnswer(1, 'termasuk')"></td>
             <td><input type="radio" id="radio1_tidak_termasuk" name="radio1" value="tidak_termasuk" onchange="checkAnswer(1, 'tidak_termasuk')"></td>
             <td id="keterangan1"></td>
         </tr>
         <tr>
-            <td>2. Bagaimana sel B dan sel T berperan dalam respons imun adaptif?</td>
+            <td>2. Apa perbedaan antara fagosit dan limfosit dalam sistem pertahanan tubuh terhadap infeksi patogen?</td>
             <td><input type="radio" id="radio2_termasuk" name="radio2" value="termasuk" onchange="checkAnswer(2, 'termasuk')"></td>
             <td><input type="radio" id="radio2_tidak_termasuk" name="radio2" value="tidak_termasuk" onchange="checkAnswer(2, 'tidak_termasuk')"></td>
             <td id="keterangan2"></td>
         </tr>
         <tr>
-            <td>3. Mengapa respons imun adaptif membutuhkan waktu lebih lama untuk diaktifkan dibandingkan respons imun bawaan?</td>
+            <td>3. Bagaimana limfosit B dan limfosit T berperan dalam respon imun tubuh terhadap infeksi?</td>
             <td><input type="radio" id="radio3_termasuk" name="radio3" value="termasuk" onchange="checkAnswer(3, 'termasuk')"></td>
             <td><input type="radio" id="radio3_tidak_termasuk" name="radio3" value="tidak_termasuk" onchange="checkAnswer(3, 'tidak_termasuk')"></td>
             <td id="keterangan3"></td>
         </tr>
         <tr>
-            <td>4. Apakah vaksinasi termasuk dalam mekanisme sistem kekebalan bawaan atau adaptif?</td>
+            <td>4. Bagaimana cara mempercepat kerja mekanisme sistem pertahanan tubuh?</td>
             <td><input type="radio" id="radio4_termasuk" name="radio4" value="termasuk" onchange="checkAnswer(4, 'termasuk')"></td>
             <td><input type="radio" id="radio4_tidak_termasuk" name="radio4" value="tidak_termasuk" onchange="checkAnswer(4, 'tidak_termasuk')"></td>
             <td id="keterangan4"></td>
+        </tr>
+        <tr>
+            <td>5. Apa yang menyebabkan kekurangan sel darah putih?</td>
+            <td><input type="radio" id="radio5_termasuk" name="radio5" value="termasuk" onchange="checkAnswer(5, 'termasuk')"></td>
+            <td><input type="radio" id="radio5_tidak_termasuk" name="radio5" value="tidak_termasuk" onchange="checkAnswer(5, 'tidak_termasuk')"></td>
+            <td id="keterangan5"></td>
         </tr>
     </table>
 </div>
@@ -238,8 +274,8 @@
 </div>
 
 <!-- Tombol Selanjutnya -->
-<div id="tombolSelanjutnya" style="display: none; text-align: center; margin-top: 20px;">
-    <button class="btn-selanjutnya" id="btnSelanjutnya" onclick="lanjutKeAktivitasBerikutnya()">
+<div id="tombolSelanjutnya" style="text-align: center; margin-top: 20px;">
+    <button class="btn-selanjutnya" id="btnSelanjutnya" onclick="lanjutKePengumpulanData2()">
         Selanjutnya
     </button>
 </div>
@@ -258,7 +294,8 @@
         1: 'termasuk',
         2: 'termasuk',
         3: 'termasuk',
-        4: 'termasuk',
+        4: 'tidak_termasuk',
+        5: 'tidak_termasuk'
     };
 
     // Menyimpan status jawaban benar
@@ -266,7 +303,8 @@
         1: false,
         2: false,
         3: false,
-        4: false
+        4: false,
+        5: false
     };
 
     // Menyimpan detail jawaban user
@@ -307,7 +345,7 @@
         document.getElementById('tombolSelanjutnya').style.display = 'block';
     }
 
-    function lanjutKeAktivitasBerikutnya() {
+    function lanjutKePengumpulanData2() {
         // Hitung skor
         const correctCount = Object.values(correctAnswered).filter(val => val).length;
         const totalQuestions = Object.keys(correctAnswers).length;
@@ -341,7 +379,7 @@
         // Data yang akan dikirim
         const data = {
             nama_aktivitas: 'identifikasi-masalah-2',
-            judul_aktivitas: 'Identifikasi Masalah 2 - Sistem Kekebalan Bawaan dan Adaptif',
+            judul_aktivitas: 'Identifikasi Masalah 2 - Komponen Sistem Pertahanan Tubuh',
             skor: skor,
             total_soal: totalSoal,
             detail_jawaban: detailJawaban
@@ -401,6 +439,11 @@
             }
         });
     }
+
+    // Sembunyikan tombol selanjutnya saat halaman dimuat
+    document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('tombolSelanjutnya').style.display = 'none';
+    });
 </script>
 
 </body>
