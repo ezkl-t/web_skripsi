@@ -7,40 +7,53 @@ use App\Models\Jawaban;
 use App\Models\HasilKuis;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Carbon\Carbon;
 
 class KuisController extends Controller
 {
     /**
-     * Tampilkan halaman kuis 1
+     * Tampilkan halaman kuis berdasarkan tipe
      */
-    public function index(Request $request)
+    private function showKuisPage($kuisType, $viewName)
     {
         try {
-            // Ambil soal khusus untuk kuis 1
-            $soal = Soal::with('jawaban')->where('kuis_type', 'kuis1')->get();
+            $soal = Soal::with('jawaban')->where('kuis_type', $kuisType)->get();
             
             if ($soal->isEmpty()) {
                 return redirect()->back()->with('error', 'Belum ada soal yang tersedia untuk kuis ini.');
             }
 
-            // Cek apakah user sudah pernah mengerjakan kuis ini
-            $hasilSebelumnya = null;
-            if (Auth::check()) {
-                $hasilSebelumnya = HasilKuis::getLatestResult(Auth::id(), 'kuis1');
-            }
+            $hasilSebelumnya = Auth::check() ? HasilKuis::getLatestResult(Auth::id(), $kuisType) : null;
 
-            // Jika ada request POST (submit kuis)
-            if ($request->isMethod('post')) {
-                return $this->submitKuis($request, 'kuis1');
-            }
+            // Format data soal untuk JavaScript
+            $soalFormatted = $soal->map(function($item) {
+                return [
+                    'id' => $item->id,
+                    'question' => $item->pertanyaan, // Ganti 'pertanyaan' menjadi 'question'
+                    'options' => $item->jawaban->map(function($jawaban) {
+                        return [
+                            'option' => $jawaban->pilihan, // Ganti 'pilihan' menjadi 'option'
+                            'text' => $jawaban->teks_jawaban // Ganti 'teks_jawaban' menjadi 'text'
+                        ];
+                    })
+                ];
+            });
 
-            return view('kuis.kuis1', compact('soal', 'hasilSebelumnya'));
+            return view($viewName, compact('soal', 'hasilSebelumnya', 'soalFormatted'));
 
         } catch (\Exception $e) {
+            Log::error("Error loading kuis {$kuisType}: " . $e->getMessage());
             return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
         }
+    }
+
+    /**
+     * Tampilkan halaman kuis 1
+     */
+    public function index(Request $request)
+    {
+        return $this->showKuisPage('kuis1', 'kuis.kuis1');
     }
 
     /**
@@ -48,30 +61,7 @@ class KuisController extends Controller
      */
     public function showKuis2(Request $request)
     {
-        try {
-            // Ambil soal khusus untuk kuis 2
-            $soal = Soal::with('jawaban')->where('kuis_type', 'kuis2')->get();
-            
-            if ($soal->isEmpty()) {
-                return redirect()->back()->with('error', 'Belum ada soal yang tersedia untuk kuis ini.');
-            }
-
-            // Cek apakah user sudah pernah mengerjakan kuis ini
-            $hasilSebelumnya = null;
-            if (Auth::check()) {
-                $hasilSebelumnya = HasilKuis::getLatestResult(Auth::id(), 'kuis2');
-            }
-
-            // Jika ada request POST (submit kuis)
-            if ($request->isMethod('post')) {
-                return $this->submitKuis($request, 'kuis2');
-            }
-
-            return view('kuis.kuis2', compact('soal', 'hasilSebelumnya'));
-
-        } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
-        }
+        return $this->showKuisPage('kuis2', 'kuis.kuis2');
     }
 
     /**
@@ -79,187 +69,245 @@ class KuisController extends Controller
      */
     public function showKuis3(Request $request)
     {
-        try {
-            // Ambil soal khusus untuk kuis 3
-            $soal = Soal::with('jawaban')->where('kuis_type', 'kuis3')->get();
-            
-            if ($soal->isEmpty()) {
-                return redirect()->back()->with('error', 'Belum ada soal yang tersedia untuk kuis ini.');
-            }
-
-            // Cek apakah user sudah pernah mengerjakan kuis ini
-            $hasilSebelumnya = null;
-            if (Auth::check()) {
-                $hasilSebelumnya = HasilKuis::getLatestResult(Auth::id(), 'kuis3');
-            }
-
-            // Jika ada request POST (submit kuis)
-            if ($request->isMethod('post')) {
-                return $this->submitKuis($request, 'kuis3');
-            }
-
-            return view('kuis.kuis3', compact('soal', 'hasilSebelumnya'));
-
-        } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
-        }
+        return $this->showKuisPage('kuis3', 'kuis.kuis3');
     }
 
     /**
      * Proses submit kuis (universal untuk semua kuis)
      */
-    public function submitKuis(Request $request, $kuisType = 'kuis1')
+    public function submitKuis(Request $request)
     {
         try {
-            // Validasi user harus login dan ada di database
             if (!Auth::check()) {
-                return redirect()->route('login')->with('error', 'Silakan login terlebih dahulu untuk mengerjakan kuis.');
+                return $this->handleErrorResponse($request, 'Silakan login terlebih dahulu untuk mengerjakan kuis.');
             }
 
             $user = Auth::user();
             
-            // Double check apakah user masih ada di database
             if (!$user || !$user->exists) {
                 Auth::logout();
-                return redirect()->route('login')->with('error', 'Session Anda tidak valid. Silakan login kembali.');
+                return $this->handleErrorResponse($request, 'Session Anda tidak valid. Silakan login kembali.');
             }
 
-            // Debug info (comment out setelah testing)
-            \Log::info('User submit kuis:', [
-                'user_id' => $user->id,
-                'user_name' => $user->name,
-                'kuis_type' => $kuisType,
-                'auth_id' => Auth::id()
-            ]);
+            // Tentukan kuisType dari route atau input
+            $kuisType = $this->determineKuisType($request);
 
             // Validasi input
-            $request->validate([
-                'jawaban' => 'required|array',
-                'waktu_mulai' => 'required|integer',
-            ], [
-                'jawaban.required' => 'Anda harus menjawab semua soal.',
-                'jawaban.array' => 'Format jawaban tidak valid.',
-                'waktu_mulai.required' => 'Waktu mulai tidak valid.',
-            ]);
+            $this->validateKuisSubmission($request);
 
-            // Ambil soal berdasarkan tipe kuis
-            $soal = Soal::with(['jawaban', 'jawabanBenar'])->where('kuis_type', $kuisType)->get();
+            // Proses jawaban
+            $result = $this->processKuisAnswers($request, $kuisType, $user);
             
-            if ($soal->isEmpty()) {
-                return redirect()->back()->with('error', 'Tidak ada soal yang tersedia.');
+            if (!$result['success']) {
+                return $this->handleErrorResponse($request, $result['message']);
             }
 
-            $totalSoal = $soal->count();
-            $jawabanUser = $request->input('jawaban');
-            $waktuMulai = $request->input('waktu_mulai');
-            
-            // Hitung waktu pengerjaan
-            $waktuSelesai = time();
-            $waktuPengerjaan = $waktuSelesai - $waktuMulai;
+            // Simpan hasil kuis
+            $hasilKuis = $this->saveKuisResult($result, $user, $kuisType);
 
-            $jawabanBenar = 0;
-            $detailJawaban = [];
-
-            // Periksa setiap jawaban
-            foreach ($soal as $index => $s) {
-                $soalId = $s->id;
-                $jawabanUserPilihan = $jawabanUser[$soalId] ?? null;
-                
-                if ($jawabanUserPilihan) {
-                    // Cari jawaban yang dipilih user
-                    $jawabanDipilih = $s->jawaban->where('pilihan', $jawabanUserPilihan)->first();
-                    $jawabanBenarSoal = $s->jawabanBenar;
-                    
-                    $isBenar = $jawabanDipilih && $jawabanBenarSoal && 
-                              $jawabanDipilih->pilihan === $jawabanBenarSoal->pilihan;
-                    
-                    if ($isBenar) {
-                        $jawabanBenar++;
-                    }
-
-                    // Simpan detail jawaban
-                    $detailJawaban[] = [
-                        'soal_id' => $soalId,
-                        'pertanyaan' => $s->pertanyaan,
-                        'jawaban_user' => $jawabanUserPilihan,
-                        'jawaban_benar' => $jawabanBenarSoal ? $jawabanBenarSoal->pilihan : null,
-                        'is_benar' => $isBenar,
-                        'teks_jawaban_user' => $jawabanDipilih ? $jawabanDipilih->teks_jawaban : null,
-                        'teks_jawaban_benar' => $jawabanBenarSoal ? $jawabanBenarSoal->teks_jawaban : null,
-                    ];
-                }
-            }
-
-            $jawabanSalah = $totalSoal - $jawabanBenar;
-            $nilai = $totalSoal > 0 ? ($jawabanBenar / $totalSoal) * 100 : 0;
-
-            // Konversi kuisType ke nama yang sesuai untuk database
-            $namaKuis = match($kuisType) {
-                'kuis1' => 'Kuis 1',
-                'kuis2' => 'Kuis 2', 
-                'kuis3' => 'Kuis 3',
-                default => ucfirst($kuisType)
-            };
-
-            // Simpan hasil ke database dengan user_id yang valid
-            $hasilKuis = HasilKuis::create([
-                'user_id' => $user->id,
-                'nama_kuis' => $namaKuis,
-                'total_soal' => $totalSoal,
-                'jawaban_benar' => $jawabanBenar,
-                'jawaban_salah' => $jawabanSalah,
-                'nilai' => $nilai,
-                'detail_jawaban' => $detailJawaban,
-                'waktu_pengerjaan' => $waktuPengerjaan,
-                'tanggal_kuis' => \Carbon\Carbon::now(),
-            ]);
-
-            // Return JSON response untuk popup
-            if ($request->ajax()) {
-                return response()->json([
-                    'success' => true,
-                    'data' => [
-                        'nama' => $user->name,
-                        'nisn' => $user->nisn,
-                        'kelas' => $user->kelas,
-                        'nilai' => number_format($nilai, 1),
-                        'grade' => $hasilKuis->grade,
-                        'status' => $hasilKuis->status,
-                        'jawaban_benar' => $jawabanBenar,
-                        'total_soal' => $totalSoal,
-                        'waktu_pengerjaan' => $hasilKuis->formatted_waktu,
-                        'tanggal_kuis' => $hasilKuis->tanggal_kuis->format('d M Y, H:i'),
-                        'hasil_id' => $hasilKuis->id
-                    ]
-                ]);
-            }
-
-            return redirect()->route('kuis.hasil', ['id' => $hasilKuis->id])
-                           ->with('success', 'Kuis berhasil diselesaikan!');
+            return $this->handleSuccessResponse($request, $hasilKuis, $result);
 
         } catch (\Illuminate\Validation\ValidationException $e) {
-            if ($request->ajax()) {
-                return response()->json(['success' => false, 'errors' => $e->errors()], 422);
-            }
-            return redirect()->back()
-                           ->withErrors($e->errors())
-                           ->withInput()
-                           ->with('error', 'Data yang dimasukkan tidak valid.');
+            return $this->handleValidationError($request, $e);
         } catch (\Exception $e) {
-            \Log::error('Error submit kuis:', [
+            Log::error('Error submit kuis:', [
                 'error' => $e->getMessage(),
                 'user_id' => Auth::id(),
-                'kuis_type' => $kuisType
+                'kuis_type' => $kuisType ?? 'unknown'
             ]);
             
-            if ($request->ajax()) {
-                return response()->json(['success' => false, 'message' => 'Terjadi kesalahan sistem'], 500);
-            }
-            
-            return redirect()->back()
-                           ->with('error', 'Terjadi kesalahan sistem: ' . $e->getMessage())
-                           ->withInput();
+            return $this->handleErrorResponse($request, 'Terjadi kesalahan sistem: ' . $e->getMessage());
         }
+    }
+
+    /**
+     * Tentukan tipe kuis dari request
+     */
+    private function determineKuisType(Request $request)
+    {
+        // Cek dari input form
+        $kuisType = $request->input('nama_kuis', 'kuis1');
+        
+        // Jika dari form masih default, cek dari route
+        if ($kuisType === 'kuis1') {
+            $currentRoute = $request->route();
+            if ($currentRoute) {
+                $routeName = $currentRoute->getName();
+                if (str_contains($routeName, 'kuis2')) return 'kuis2';
+                if (str_contains($routeName, 'kuis3')) return 'kuis3';
+            }
+        }
+        
+        return $kuisType;
+    }
+
+    /**
+     * Validasi submission kuis
+     */
+    private function validateKuisSubmission(Request $request)
+    {
+        $request->validate([
+            'jawaban' => 'required|array|min:1',
+            'waktu_mulai' => 'required|integer',
+        ], [
+            'jawaban.required' => 'Anda harus menjawab semua soal.',
+            'jawaban.array' => 'Format jawaban tidak valid.',
+            'jawaban.min' => 'Anda harus menjawab minimal 1 soal.',
+            'waktu_mulai.required' => 'Waktu mulai tidak valid.',
+        ]);
+    }
+
+    /**
+     * Proses jawaban kuis
+     */
+    private function processKuisAnswers(Request $request, $kuisType, $user)
+    {
+        $soal = Soal::with(['jawaban', 'jawabanBenar'])->where('kuis_type', $kuisType)->get();
+        
+        if ($soal->isEmpty()) {
+            return ['success' => false, 'message' => 'Tidak ada soal yang tersedia.'];
+        }
+
+        $totalSoal = $soal->count();
+        $jawabanUser = $request->input('jawaban', []);
+        $waktuMulai = $request->input('waktu_mulai');
+        
+        $waktuSelesai = time();
+        $waktuPengerjaan = $waktuSelesai - $waktuMulai;
+
+        $jawabanBenar = 0;
+        $detailJawaban = [];
+
+        foreach ($soal as $s) {
+            $soalId = $s->id;
+            $jawabanUserPilihan = $jawabanUser[$soalId] ?? null;
+            
+            if ($jawabanUserPilihan) {
+                $jawabanDipilih = $s->jawaban->where('pilihan', $jawabanUserPilihan)->first();
+                $jawabanBenarSoal = $s->jawabanBenar;
+                
+                $isBenar = $jawabanDipilih && $jawabanBenarSoal && 
+                          $jawabanDipilih->pilihan === $jawabanBenarSoal->pilihan;
+                
+                if ($isBenar) {
+                    $jawabanBenar++;
+                }
+
+                $detailJawaban[] = [
+                    'soal_id' => $soalId,
+                    'pertanyaan' => $s->pertanyaan,
+                    'jawaban_user' => $jawabanUserPilihan,
+                    'jawaban_benar' => $jawabanBenarSoal ? $jawabanBenarSoal->pilihan : null,
+                    'is_benar' => $isBenar,
+                    'teks_jawaban_user' => $jawabanDipilih ? $jawabanDipilih->teks_jawaban : null,
+                    'teks_jawaban_benar' => $jawabanBenarSoal ? $jawabanBenarSoal->teks_jawaban : null,
+                ];
+            }
+        }
+
+        $jawabanSalah = $totalSoal - $jawabanBenar;
+        $nilai = $totalSoal > 0 ? ($jawabanBenar / $totalSoal) * 100 : 0;
+
+        return [
+            'success' => true,
+            'total_soal' => $totalSoal,
+            'jawaban_benar' => $jawabanBenar,
+            'jawaban_salah' => $jawabanSalah,
+            'nilai' => $nilai,
+            'detail_jawaban' => $detailJawaban,
+            'waktu_pengerjaan' => $waktuPengerjaan
+        ];
+    }
+
+    private function getSubmitUrl()
+{
+    // Logika untuk menentukan URL submit berdasarkan quizId
+    return match($this->quizId) {
+        'kuis1' => route('kuis1.submit'),
+        'kuis2' => route('kuis2.submit'),
+        'kuis3' => route('kuis3.submit'),
+        default => route('kuis.submit')
+    };
+}
+
+    /**
+     * Simpan hasil kuis ke database
+     */
+    private function saveKuisResult($result, $user, $kuisType)
+    {
+        $namaKuis = match($kuisType) {
+            'kuis1' => 'Kuis 1',
+            'kuis2' => 'Kuis 2', 
+            'kuis3' => 'Kuis 3',
+            default => ucfirst($kuisType)
+        };
+
+        return HasilKuis::create([
+            'user_id' => $user->id,
+            'nama_kuis' => $namaKuis,
+            'total_soal' => $result['total_soal'],
+            'jawaban_benar' => $result['jawaban_benar'],
+            'jawaban_salah' => $result['jawaban_salah'],
+            'nilai' => $result['nilai'],
+            'detail_jawaban' => $result['detail_jawaban'],
+            'waktu_pengerjaan' => $result['waktu_pengerjaan'],
+            'tanggal_kuis' => Carbon::now(),
+        ]);
+    }
+
+    /**
+     * Handle success response
+     */
+    private function handleSuccessResponse(Request $request, $hasilKuis, $result)
+    {
+        if ($request->ajax()) {
+            return response()->json([
+                'success' => true,
+                'data' => [
+                    'nama' => Auth::user()->name,
+                    'nisn' => Auth::user()->nisn,
+                    'kelas' => Auth::user()->kelas,
+                    'nilai' => number_format($result['nilai'], 1),
+                    'grade' => $hasilKuis->grade,
+                    'status' => $hasilKuis->status,
+                    'jawaban_benar' => $result['jawaban_benar'],
+                    'total_soal' => $result['total_soal'],
+                    'waktu_pengerjaan' => $hasilKuis->formatted_waktu,
+                    'tanggal_kuis' => $hasilKuis->tanggal_kuis->format('d M Y, H:i'),
+                    'hasil_id' => $hasilKuis->id
+                ]
+            ]);
+        }
+
+        return redirect()->route('kuis.hasil', ['id' => $hasilKuis->id])
+                       ->with('success', 'Kuis berhasil diselesaikan!');
+    }
+
+    /**
+     * Handle error response
+     */
+    private function handleErrorResponse(Request $request, $message)
+    {
+        if ($request->ajax()) {
+            return response()->json(['success' => false, 'message' => $message], 422);
+        }
+        
+        return redirect()->back()->with('error', $message);
+    }
+
+    /**
+     * Handle validation error
+     */
+    private function handleValidationError(Request $request, $e)
+    {
+        if ($request->ajax()) {
+            return response()->json(['success' => false, 'errors' => $e->errors()], 422);
+        }
+        
+        return redirect()->back()
+                       ->withErrors($e->errors())
+                       ->withInput()
+                       ->with('error', 'Data yang dimasukkan tidak valid.');
     }
 
     /**
@@ -270,12 +318,10 @@ class KuisController extends Controller
         try {
             $hasil = HasilKuis::with('user')->findOrFail($id);
             
-            // Pastikan user hanya bisa melihat hasil kuisnya sendiri (kecuali admin)
             if (!Auth::check() || (Auth::id() !== $hasil->user_id && !Auth::user()->isAdmin())) {
                 return redirect()->route('home')->with('error', 'Anda tidak memiliki akses ke halaman ini.');
             }
 
-            // Statistik tambahan berdasarkan nama kuis
             $rataRataNilai = HasilKuis::getAverageScore($hasil->nama_kuis);
             $totalPeserta = HasilKuis::where('nama_kuis', $hasil->nama_kuis)->distinct('user_id')->count();
 
@@ -303,7 +349,7 @@ class KuisController extends Controller
     }
 
     /**
-     * Reset kuis (untuk testing - hapus jika tidak diperlukan)
+     * Reset kuis (untuk testing)
      */
     public function reset($namaKuis)
     {
@@ -317,7 +363,7 @@ class KuisController extends Controller
     }
 
     /**
-     * Evaluasi (placeholder)
+     * Evaluasi
      */
     public function showEvaluasi()
     {

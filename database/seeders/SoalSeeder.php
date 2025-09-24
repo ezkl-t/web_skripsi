@@ -16,103 +16,103 @@ class SoalSeeder extends Seeder
         // Data soal tentang Sistem Pertahanan Tubuh
         $dataSoal = [
             [
-                'pertanyaan' => 'Apa yang dimaksud dengan sistem imun pada tubuh manusia?',
+                'pertanyaan' => 'Antigen adalah partikel unik dari patogen yang dapat memicu respons imun. Antigen dapat berupa protein, glikoprotein, lipid, atau zat lain yang dihasilkan oleh patogen. Antigen berfungsi untuk .....',
                 'jawaban' => [
-                    ['pilihan' => 'A', 'teks' => 'Sistem yang mengatur metabolisme tubuh', 'benar' => false],
-                    ['pilihan' => 'B', 'teks' => 'Sistem yang melindungi tubuh dari serangan patogen dan benda asing', 'benar' => true],
-                    ['pilihan' => 'C', 'teks' => 'Sistem yang mengatur peredaran darah', 'benar' => false],
-                    ['pilihan' => 'D', 'teks' => 'Sistem yang mengatur pencernaan makanan', 'benar' => false],
-                    ['pilihan' => 'E', 'teks' => 'Sistem yang mengatur pernapasan', 'benar' => false],
+                    ['pilihan' => 'A', 'teks' => 'menghasilkan sel darah putih', 'benar' => false],
+                    ['pilihan' => 'B', 'teks' => 'memicu respons imun', 'benar' => true],
+                    ['pilihan' => 'C', 'teks' => 'menghancurkan sel kanker', 'benar' => false],
+                    ['pilihan' => 'D', 'teks' => 'menyaring partikel asing', 'benar' => false],
+                    ['pilihan' => 'E', 'teks' => 'enghasilkan histamin', 'benar' => false],
                 ]
             ],
             [
-                'pertanyaan' => 'Sel darah putih yang berperan dalam kekebalan spesifik adalah...',
+                'pertanyaan' => 'Salah satu contoh pertahanan nonspesifik adalah ....',
                 'jawaban' => [
-                    ['pilihan' => 'A', 'teks' => 'Eritrosit', 'benar' => false],
-                    ['pilihan' => 'B', 'teks' => 'Trombosit', 'benar' => false],
-                    ['pilihan' => 'C', 'teks' => 'Neutrofil', 'benar' => false],
-                    ['pilihan' => 'D', 'teks' => 'Limfosit', 'benar' => true],
-                    ['pilihan' => 'E', 'teks' => 'Monosit', 'benar' => false],
+                    ['pilihan' => 'A', 'teks' => 'antibodi', 'benar' => false],
+                    ['pilihan' => 'B', 'teks' => 'sel t pembunuh', 'benar' => false],
+                    ['pilihan' => 'C', 'teks' => 'kulit', 'benar' => true],
+                    ['pilihan' => 'D', 'teks' => 'sel b plasma', 'benar' => false],
+                    ['pilihan' => 'E', 'teks' => 'limfosit', 'benar' => false],
                 ]
             ],
             [
-                'pertanyaan' => 'Organ yang berperan sebagai tempat pematangan sel T adalah...',
+                'pertanyaan' => 'Sistem pertahanan nonspesifik disebut sebagai pertahanan pertama tubuh karena ...',
                 'jawaban' => [
-                    ['pilihan' => 'A', 'teks' => 'Limpa', 'benar' => false],
-                    ['pilihan' => 'B', 'teks' => 'Timus', 'benar' => true],
-                    ['pilihan' => 'C', 'teks' => 'Sumsum tulang', 'benar' => false],
-                    ['pilihan' => 'D', 'teks' => 'Kelenjar getah bening', 'benar' => false],
-                    ['pilihan' => 'E', 'teks' => 'Hati', 'benar' => false],
+                    ['pilihan' => 'A', 'teks' => 'melibatkan pembentukan antibodi', 'benar' => false],
+                    ['pilihan' => 'B', 'teks' => 'bekerja secara spesifik terhadap patogen tertentu', 'benar' => false],
+                    ['pilihan' => 'C', 'teks' => 'melibatkan sel t dan sel b', 'benar' => false],
+                    ['pilihan' => 'D', 'teks' => 'melindungi tubuh dari semua jenis patogen tanpa memerlukan identifikasi spesifik', 'benar' => true],
+                    ['pilihan' => 'E', 'teks' => 'hanya aktif setelah patogen masuk ke dalam tubuh', 'benar' => false],
                 ]
             ],
             [
-                'pertanyaan' => 'Antibodi yang pertama kali diproduksi saat terjadi infeksi adalah...',
+                'pertanyaan' => 'Sel T sitotoksik menghancurkan sel yang terinfeksi dengan cara ....',
                 'jawaban' => [
-                    ['pilihan' => 'A', 'teks' => 'IgA', 'benar' => false],
-                    ['pilihan' => 'B', 'teks' => 'IgG', 'benar' => false],
-                    ['pilihan' => 'C', 'teks' => 'IgM', 'benar' => true],
-                    ['pilihan' => 'D', 'teks' => 'IgE', 'benar' => false],
-                    ['pilihan' => 'E', 'teks' => 'IgD', 'benar' => false],
+                    ['pilihan' => 'A', 'teks' => 'menghasilkan antibodi yang menetralisir patogen', 'benar' => false],
+                    ['pilihan' => 'B', 'teks' => 'melepaskan protein perforin yang membentuk lubang pada membran sel terinfeksi', 'benar' => true],
+                    ['pilihan' => 'C', 'teks' => 'memakan patogen melalui proses fagositosis', 'benar' => false],
+                    ['pilihan' => 'D', 'teks' => 'menghasilkan histamin yang menyebabkan peradangan', 'benar' => false],
+                    ['pilihan' => 'E', 'teks' => 'mengikat antigen dan mengaktifkan sistem komplemen', 'benar' => false],
                 ]
             ],
             [
-                'pertanyaan' => 'Vaksinasi merupakan contoh dari kekebalan...',
+                'pertanyaan' => 'Jika seseorang terkena infeksi virus, sistem imun spesifik akan berperan dengan cara ....',
                 'jawaban' => [
-                    ['pilihan' => 'A', 'teks' => 'Aktif alami', 'benar' => false],
-                    ['pilihan' => 'B', 'teks' => 'Aktif buatan', 'benar' => true],
-                    ['pilihan' => 'C', 'teks' => 'Pasif alami', 'benar' => false],
-                    ['pilihan' => 'D', 'teks' => 'Pasif buatan', 'benar' => false],
-                    ['pilihan' => 'E', 'teks' => 'Non spesifik', 'benar' => false],
+                    ['pilihan' => 'A', 'teks' => 'kulit menghalangi masuknya virus ke dalam tubuh', 'benar' => false],
+                    ['pilihan' => 'B', 'teks' => 'sel T pembunuh menyerang sel tubuh yang terinfeksi virus', 'benar' => true],
+                    ['pilihan' => 'C', 'teks' => 'asam lambung membunuh virus yang masuk melalui makanan', 'benar' => false],
+                    ['pilihan' => 'D', 'teks' => 'rambut hidung menyaring partikel virus dari udara', 'benar' => false],
+                    ['pilihan' => 'E', 'teks' => 'lisozim dalam air mata menghancurkan dinding sel virus', 'benar' => false],
                 ]
             ],
             [
-                'pertanyaan' => 'Sel yang berperan dalam fagositosis adalah...',
+                'pertanyaan' => 'Seorang pasien mengalami peradangan pada luka di kulitnya. Mekanisme inflamasi terjadi karena .... ',
                 'jawaban' => [
-                    ['pilihan' => 'A', 'teks' => 'Sel B', 'benar' => false],
-                    ['pilihan' => 'B', 'teks' => 'Sel T helper', 'benar' => false],
-                    ['pilihan' => 'C', 'teks' => 'Makrofag', 'benar' => true],
-                    ['pilihan' => 'D', 'teks' => 'Sel plasma', 'benar' => false],
-                    ['pilihan' => 'E', 'teks' => 'Sel memori', 'benar' => false],
+                    ['pilihan' => 'A', 'teks' => 'sel B plasma menghasilkan antibodi untuk melawan patogen', 'benar' => false],
+                    ['pilihan' => 'B', 'teks' => 'sel T pembantu mengaktifkan makrofag untuk melakukan fagositosis', 'benar' => false],
+                    ['pilihan' => 'C', 'teks' => 'mastosit mengeluarkan histamin yang menyebabkan pelebaran pembuluh darah dan peningkatan permeabilitas', 'benar' => true],
+                    ['pilihan' => 'D', 'teks' => 'antibodi mengikat antigen dan mengaktifkan sistem komplemen', 'benar' => false],
+                    ['pilihan' => 'E', 'teks' => 'sel T supresor menghentikan respons imun setelah infeksi selesai', 'benar' => false],
                 ]
             ],
             [
-                'pertanyaan' => 'Perbedaan utama antara kekebalan spesifik dan non-spesifik adalah...',
+                'pertanyaan' => 'Fungsi utama antibodi adalah ....',
                 'jawaban' => [
-                    ['pilihan' => 'A', 'teks' => 'Kecepatan responnya', 'benar' => false],
-                    ['pilihan' => 'B', 'teks' => 'Kemampuan mengenali antigen secara khusus', 'benar' => true],
-                    ['pilihan' => 'C', 'teks' => 'Lokasi terjadinya', 'benar' => false],
-                    ['pilihan' => 'D', 'teks' => 'Jenis sel yang terlibat', 'benar' => false],
-                    ['pilihan' => 'E', 'teks' => 'Durasi perlindungannya', 'benar' => false],
+                    ['pilihan' => 'A', 'teks' => 'menghasilkan sel darah putih', 'benar' => false],
+                    ['pilihan' => 'B', 'teks' => 'mengikat antigen dan menetralisir patogen', 'benar' => true],
+                    ['pilihan' => 'C', 'teks' => 'menghasilkan histamin untuk memicu peradangan', 'benar' => false],
+                    ['pilihan' => 'D', 'teks' => 'menghancurkan sel kanker secara langsung', 'benar' => false],
+                    ['pilihan' => 'E', 'teks' => 'menyaring partikel asing di saluran pernapasan', 'benar' => false],
                 ]
             ],
             [
-                'pertanyaan' => 'Interferón berfungsi untuk...',
+                'pertanyaan' => 'Perbedaan utama antara kekebalan humoral dan kekebalan seluler adalah ....',
                 'jawaban' => [
-                    ['pilihan' => 'A', 'teks' => 'Melawan infeksi bakteri', 'benar' => false],
-                    ['pilihan' => 'B', 'teks' => 'Melawan infeksi virus', 'benar' => true],
-                    ['pilihan' => 'C', 'teks' => 'Melawan infeksi jamur', 'benar' => false],
-                    ['pilihan' => 'D', 'teks' => 'Mengatur metabolisme', 'benar' => false],
-                    ['pilihan' => 'E', 'teks' => 'Mengatur suhu tubuh', 'benar' => false],
+                    ['pilihan' => 'A', 'teks' => 'kekebalan humoral melibatkan sel T, sedangkan kekebalan seluler melibatkan sel B', 'benar' => false],
+                    ['pilihan' => 'B', 'teks' => 'kekebalan humoral menghasilkan antibodi, sedangkan kekebalan seluler menghancurkan sel yang terinfeksi', 'benar' => true],
+                    ['pilihan' => 'C', 'teks' => 'kekebalan humoral hanya melindungi dari bakteri, sedangkan kekebalan seluler melindungi dari virus', 'benar' => false],
+                    ['pilihan' => 'D', 'teks' => 'kekebalan humoral bersifat nonspesifik, sedangkan kekebalan seluler bersifat spesifik', 'benar' => false],
+                    ['pilihan' => 'E', 'teks' => 'kekebalan humoral melibatkan sel darah merah, sedangkan kekebalan seluler melibatkan sel darah putih', 'benar' => false],
                 ]
             ],
             [
-                'pertanyaan' => 'Reaksi alergi terjadi karena...',
+                'pertanyaan' => 'Jika seseorang divaksinasi, mekanisme kekebalan yang terjadi adalah ....',
                 'jawaban' => [
-                    ['pilihan' => 'A', 'teks' => 'Kekurangan antibodi IgG', 'benar' => false],
-                    ['pilihan' => 'B', 'teks' => 'Kelebihan produksi antibodi IgE', 'benar' => true],
-                    ['pilihan' => 'C', 'teks' => 'Kerusakan sel T', 'benar' => false],
-                    ['pilihan' => 'D', 'teks' => 'Kekurangan sel B', 'benar' => false],
-                    ['pilihan' => 'E', 'teks' => 'Kerusakan makrofag', 'benar' => false],
+                    ['pilihan' => 'A', 'teks' => 'sistem pertahanan nonspesifik langsung menghancurkan patogen', 'benar' => false],
+                    ['pilihan' => 'B', 'teks' => 'sel B pengingat mengingat antigen dan memicu respons imun lebih cepat jika terpapar patogen yang sama di masa depan', 'benar' => true],
+                    ['pilihan' => 'C', 'teks' => 'sel T supresor menghentikan respons imun setelah vaksinasi', 'benar' => false],
+                    ['pilihan' => 'D', 'teks' => 'asam lambung membunuh patogen yang masuk melalui makanan', 'benar' => false],
+                    ['pilihan' => 'E', 'teks' => 'lisozim dalam air liur menghancurkan dinding sel patogen', 'benar' => false],
                 ]
             ],
             [
-                'pertanyaan' => 'HIV menyerang sistem imun dengan cara...',
+                'pertanyaan' => 'Salah satu contoh pertahanan kimiawi pada sistem pertahanan nonspesifik adalah ....',
                 'jawaban' => [
-                    ['pilihan' => 'A', 'teks' => 'Menginfeksi sel B', 'benar' => false],
-                    ['pilihan' => 'B', 'teks' => 'Menginfeksi sel T helper (CD4+)', 'benar' => true],
-                    ['pilihan' => 'C', 'teks' => 'Menginfeksi makrofag saja', 'benar' => false],
-                    ['pilihan' => 'D', 'teks' => 'Menginfeksi eritrosit', 'benar' => false],
-                    ['pilihan' => 'E', 'teks' => 'Menginfeksi trombosit', 'benar' => false],
+                    ['pilihan' => 'A', 'teks' => 'rambut hidung', 'benar' => false],
+                    ['pilihan' => 'B', 'teks' => 'lisozim dalam air mata', 'benar' => true],
+                    ['pilihan' => 'C', 'teks' => 'sel B pembunuh', 'benar' => false],
+                    ['pilihan' => 'D', 'teks' => 'antibodi', 'benar' => false],
+                    ['pilihan' => 'E', 'teks' => 'sel B plasma', 'benar' => false],
                 ]
             ],
         ];

@@ -68,16 +68,74 @@ class SoalKuis2Dan3Seeder extends Seeder
                 ]
             ],
             [
-                'pertanyaan' => 'Proses fagositosis dilakukan oleh neutrofil dengan cara ....',
+                'pertanyaan' => 'Jika seseorang terinfeksi virus, sel T pembunuh akan merespons dengan cara ....',
                 'kuis_type' => 'kuis2',
                 'jawaban' => [
                     ['pilihan' => 'A', 'teks_jawaban' => 'menghasilkan antibodi', 'is_benar' => false],
-                    ['pilihan' => 'B', 'teks_jawaban' => 'melepaskan histamin', 'is_benar' => false],
-                    ['pilihan' => 'C', 'teks_jawaban' => 'membentuk fagosom dan menghancurkan patogen', 'is_benar' => false],
+                    ['pilihan' => 'B', 'teks_jawaban' => 'menghancurkan sel yang terinfeksi virus', 'is_benar' => true],
+                    ['pilihan' => 'C', 'teks_jawaban' => 'melepaskan histamin', 'is_benar' => false],
                     ['pilihan' => 'D', 'teks_jawaban' => 'mengaktifkan sistem komplemen', 'is_benar' => false],
-                    ['pilihan' => 'E', 'teks_jawaban' => 'menghasilkan sel memori', 'is_benar' => true],
+                    ['pilihan' => 'E', 'teks_jawaban' => 'membentuk fagosom', 'is_benar' => false],
                 ]
             ],
+            [
+                'pertanyaan' => 'Sel Natural Killer (NK) termasuk dalam kelompok ....',
+                'kuis_type' => 'kuis2',
+                'jawaban' => [
+                    ['pilihan' => 'A', 'teks_jawaban' => 'sel darah merah', 'is_benar' => false],
+                    ['pilihan' => 'B', 'teks_jawaban' => 'sel epitel', 'is_benar' => false],
+                    ['pilihan' => 'C', 'teks_jawaban' => 'limfosit', 'is_benar' => true],
+                    ['pilihan' => 'D', 'teks_jawaban' => 'sel mast', 'is_benar' => false],
+                    ['pilihan' => 'E', 'teks_jawaban' => 'sel komplemen', 'is_benar' => false],
+                ]
+            ],
+            [
+                'pertanyaan' => 'Sel eosinofil berperan dalam melindungi tubuh dari ....',
+                'kuis_type' => 'kuis2',
+                'jawaban' => [
+                    ['pilihan' => 'A', 'teks_jawaban' => 'virus', 'is_benar' => false],
+                    ['pilihan' => 'B', 'teks_jawaban' => 'bakteri', 'is_benar' => false],
+                    ['pilihan' => 'C', 'teks_jawaban' => 'parasit besar seperti cacing tambang', 'is_benar' => true],
+                    ['pilihan' => 'D', 'teks_jawaban' => 'sel kanker', 'is_benar' => false],
+                    ['pilihan' => 'E', 'teks_jawaban' => 'sel tubuh yang rusak', 'is_benar' => false],
+                ]
+            ],
+            [
+                'pertanyaan' => 'Jika terjadi reaksi alergi, sel mast akan melepaskan ....
+',
+                'kuis_type' => 'kuis2',
+                'jawaban' => [
+                    ['pilihan' => 'A', 'teks_jawaban' => 'Antibodi', 'is_benar' => false],
+                    ['pilihan' => 'B', 'teks_jawaban' => 'histamin', 'is_benar' => true],
+                    ['pilihan' => 'C', 'teks_jawaban' => 'enzim lisozim', 'is_benar' => false],
+                    ['pilihan' => 'D', 'teks_jawaban' => 'protein komplemen', 'is_benar' => false],
+                    ['pilihan' => 'E', 'teks_jawaban' => 'sel T pembunuh', 'is_benar' => false],
+                ]
+            ],
+            [
+                'pertanyaan' => 'Sistem komplemen terdiri dari sekelompok protein yang berperan dalam ....',
+                'kuis_type' => 'kuis2',
+                'jawaban' => [
+                    ['pilihan' => 'A', 'teks_jawaban' => 'menghasilkan sel darah merah', 'is_benar' => false],
+                    ['pilihan' => 'B', 'teks_jawaban' => 'menghancurkan antigen asing', 'is_benar' => true],
+                    ['pilihan' => 'C', 'teks_jawaban' => 'menghasilkan sel epitel', 'is_benar' => false],
+                    ['pilihan' => 'D', 'teks_jawaban' => 'mengaktifkan sel mast', 'is_benar' => false],
+                    ['pilihan' => 'E', 'teks_jawaban' => 'menghasilkan histamin', 'is_benar' => false],
+                ]
+            ],
+            [
+                'pertanyaan' => 'Jika sistem komplemen diaktifkan, reaksi berantai yang terjadi dapat menyebabkan ....
+',
+                'kuis_type' => 'kuis2',
+                'jawaban' => [
+                    ['pilihan' => 'A', 'teks_jawaban' => 'pembentukan sel darah merah', 'is_benar' => false],
+                    ['pilihan' => 'B', 'teks_jawaban' => 'kerusakan membran sel antigen', 'is_benar' => true],
+                    ['pilihan' => 'C', 'teks_jawaban' => 'produksi histamin', 'is_benar' => false],
+                    ['pilihan' => 'D', 'teks_jawaban' => 'pembentukan sel epitel', 'is_benar' => false],
+                    ['pilihan' => 'E', 'teks_jawaban' => 'aktivasi sel mast', 'is_benar' => false],
+                ]
+            ],
+            
         ];
 
         foreach ($soalKuis2 as $dataSoal) {
@@ -101,7 +159,7 @@ class SoalKuis2Dan3Seeder extends Seeder
     {
         $soalKuis3 = [
             [
-                'pertanyaan' => 'Kekebalan aktif adalah kekebalan yang dihasilkan oleh ....',
+                'pertanyaan' => 'Kekebalan alami adalah kekebalan yang dihasilkan oleh ....',
                 'kuis_type' => 'kuis3',
                 'jawaban' => [
                     ['pilihan' => 'A', 'teks_jawaban' => 'antibodi dari luar tubuh', 'is_benar' => false],
@@ -153,6 +211,66 @@ class SoalKuis2Dan3Seeder extends Seeder
                     ['pilihan' => 'C', 'teks_jawaban' => 'aktivasi sistem komplemen', 'is_benar' => false],
                     ['pilihan' => 'D', 'teks_jawaban' => 'infeksi virus', 'is_benar' => false],
                     ['pilihan' => 'E', 'teks_jawaban' => 'pelepasan histamin oleh mastosit', 'is_benar' => true],
+                ]
+            ],
+            [
+                'pertanyaan' => 'Autoimunitas adalah gangguan sistem pertahanan tubuh di mana antibodi menyerang ....
+',
+                'kuis_type' => 'kuis3',
+                'jawaban' => [
+                    ['pilihan' => 'A', 'teks_jawaban' => 'virus', 'is_benar' => false],
+                    ['pilihan' => 'B', 'teks_jawaban' => 'bakteri', 'is_benar' => false],
+                    ['pilihan' => 'C', 'teks_jawaban' => 'sel tubuh sendiri', 'is_benar' => true],
+                    ['pilihan' => 'D', 'teks_jawaban' => 'alergen', 'is_benar' => false],
+                    ['pilihan' => 'E', 'teks_jawaban' => 'sel kanker', 'is_benar' => false],
+                ]
+            ],
+            [
+                'pertanyaan' => 'HIV menyerang sel T pembantu karena sel tersebut memiliki ....
+',
+                'kuis_type' => 'kuis3',
+                'jawaban' => [
+                    ['pilihan' => 'A', 'teks_jawaban' => 'reseptor CD4', 'is_benar' => true],
+                    ['pilihan' => 'B', 'teks_jawaban' => 'antibodi IgE', 'is_benar' => false],
+                    ['pilihan' => 'C', 'teks_jawaban' => 'histamin', 'is_benar' => false],
+                    ['pilihan' => 'D', 'teks_jawaban' => 'sel mast', 'is_benar' => false],
+                    ['pilihan' => 'E', 'teks_jawaban' => 'protein komplemen', 'is_benar' => false],
+                ]
+            ],
+            [
+                'pertanyaan' => 'Jika seseorang terinfeksi HIV, sistem kekebalan tubuh akan melemah karena ....
+',
+                'kuis_type' => 'kuis3',
+                'jawaban' => [
+                    ['pilihan' => 'A', 'teks_jawaban' => 'sel B plasma tidak dapat menghasilkan antibodi', 'is_benar' => false],
+                    ['pilihan' => 'B', 'teks_jawaban' => 'sel mast melepaskan histamin', 'is_benar' => false],
+                    ['pilihan' => 'C', 'teks_jawaban' => 'sistem komplemen tidak aktif', 'is_benar' => false],
+                    ['pilihan' => 'D', 'teks_jawaban' => 'sel NK menyerang sel tubuh sendiri', 'is_benar' => false],
+                    ['pilihan' => 'E', 'teks_jawaban' => 'sel T pembantu dihancurkan oleh virus', 'is_benar' => true],
+                ]
+            ],
+            [
+                'pertanyaan' => 'Kekebalan pasif buatan dapat diperoleh melalui ....
+',
+                'kuis_type' => 'kuis3',
+                'jawaban' => [
+                    ['pilihan' => 'A', 'teks_jawaban' => 'vaksinasi', 'is_benar' => false],
+                    ['pilihan' => 'B', 'teks_jawaban' => 'infeksi alami', 'is_benar' => false],
+                    ['pilihan' => 'C', 'teks_jawaban' => 'plasenta ibu', 'is_benar' => false],
+                    ['pilihan' => 'D', 'teks_jawaban' => 'pemberian serum', 'is_benar' => true],
+                    ['pilihan' => 'E', 'teks_jawaban' => 'kolostrum', 'is_benar' => false],
+                ]
+            ],
+            [
+                'pertanyaan' => 'Jika seseorang terkena penyakit autoimun seperti lupus, sistem kekebalan tubuh akan ....
+',
+                'kuis_type' => 'kuis3',
+                'jawaban' => [
+                    ['pilihan' => 'A', 'teks_jawaban' => 'menyerang sel tubuh sendiri', 'is_benar' => true],
+                    ['pilihan' => 'B', 'teks_jawaban' => 'menghasilkan antibodi ige', 'is_benar' => false],
+                    ['pilihan' => 'C', 'teks_jawaban' => 'melepaskan histamin', 'is_benar' => false],
+                    ['pilihan' => 'D', 'teks_jawaban' => 'menghancurkan virus hiv', 'is_benar' => false],
+                    ['pilihan' => 'E', 'teks_jawaban' => 'mengaktifkan sistem komplemen', 'is_benar' => false],
                 ]
             ],
         ];

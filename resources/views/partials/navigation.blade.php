@@ -49,7 +49,7 @@
                     <i class="bi bi-arrow-right me-2"></i>
                     <span class="nav-item-text">Kesimpulan</span>
                 </a>
-                <a href="{{ route('kuis.index') }}" class="list-group-item list-group-item-action nav-item">
+                <a href="{{ route('kuis1.index') }}" class="list-group-item list-group-item-action nav-item">
                     <i class="bi bi-list-task me-2"></i>
                     <span class="nav-item-text">Kuis 1</span>
                 </a>
