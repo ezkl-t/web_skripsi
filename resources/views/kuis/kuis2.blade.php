@@ -1,5 +1,5 @@
 @php
-    $title = 'Kuis 2: Komponen Sistem Pertahanan Tubuh';
+    $title = 'Kuis 2: Sistem Kekebalan Tubuh';
     $quizId = 'kuis2';
 @endphp
 

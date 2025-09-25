@@ -279,7 +279,7 @@ class UserController extends Controller
 
     $daftarAktivitas = self::getDaftarAktivitas();
 
-    // Daftar aktivitas yang tersedia - PERBAIKAN: nama harus sama dengan yang disimpan
+    // Daftar aktivitas yang tersedia
     $daftarAktivitas = [
         'stimulus-1' => 'Stimulus 1',
         'identifikasi-masalah-1' => 'Identifikasi Masalah 1',
@@ -287,6 +287,7 @@ class UserController extends Controller
         'pengolahan-data-1' => 'Pengolahan Data 1',
         'verifikasi-1' => 'Verifikasi 1',
         'kesimpulan-1' => 'Kesimpulan-1',
+        
     
         // Aktivitas Set 2
         'stimulus-2' => 'Stimulus 2',
@@ -295,6 +296,7 @@ class UserController extends Controller
         'pengolahan-data-2' => 'Pengolahan Data 2',
         'verifikasi-2' => 'Verifikasi 2',
         'kesimpulan-2' => 'Kesimpulan-2',
+        
         
         // Aktivitas Set 3
         'stimulus-3' => 'Stimulus 3',
@@ -306,8 +308,11 @@ class UserController extends Controller
         
         // Kuis dan Evaluasi
         'kuis-1' => 'Kuis 1',
+        'kuis1' => 'Kuis 1', // Alternatif nama
         'kuis-2' => 'Kuis 2',
+        'kuis2' => 'Kuis 2', // Alternatif nama
         'kuis-3' => 'Kuis 3',
+        'kuis3' => 'Kuis 3', // Alternatif nama
         'evaluasi' => 'Evaluasi',
     ];
 
@@ -583,6 +588,7 @@ class UserController extends Controller
             'verifikasi-1' => 'Verifikasi 1',
             'kesimpulan-1' => 'Kesimpulan-1',
             'kuis-1' => 'Kuis 1',
+            'kuis1' => 'Kuis 1', // Alternatif nama
         
             // Aktivitas Set 2
             'stimulus-2' => 'Stimulus 2',
@@ -592,6 +598,7 @@ class UserController extends Controller
             'verifikasi-2' => 'Verifikasi 2',
             'kesimpulan-2' => 'Kesimpulan-2',
             'kuis-2' => 'Kuis 2',
+            'kuis2' => 'Kuis 2', // Alternatif nama
             
             // Aktivitas Set 3
             'stimulus-3' => 'Stimulus 3',
@@ -601,6 +608,7 @@ class UserController extends Controller
             'verifikasi-3' => 'Verifikasi 3',
             'kesimpulan-3' => 'Kesimpulan-3',
             'kuis-3' => 'Kuis 3',
+            'kuis3' => 'Kuis 3', // Alternatif nama
 
             // Evaluasi Akhir
             'evaluasi' => 'Evaluasi Akhir',

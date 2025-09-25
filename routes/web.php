@@ -59,6 +59,7 @@ Route::middleware(['student'])->group(function () {
     // ===== KUIS ROUTES =====
     Route::get('/kuis/hasil/{id}', [KuisController::class, 'hasil'])->name('kuis.hasil');
     Route::get('/kuis/riwayat', [KuisController::class, 'riwayat'])->name('kuis.riwayat');
+    Route::get('/kuis/hasil-semua', [KuisController::class, 'hasilSemuaKuis'])->name('kuis.hasil-semua');
     
     // Kuis 1
     Route::get('/kuis1', [KuisController::class, 'index'])->name('kuis1.index');
@@ -99,7 +100,7 @@ Route::middleware(['student'])->group(function () {
         Route::get('pengumpulan-data-3', [TugasController::class, 'showTugas3_3'])->name('pengumpulan-data-3');
         Route::get('pengolahan-data-3', [TugasController::class, 'showTugas3_4'])->name('pengolahan-data-3');
         Route::get('verifikasi-3', [TugasController::class, 'showTugas3_5'])->name('verifikasi-3');
-        Route::get('kesimpulan-3', [TugasController::class, 'showTugas3_5'])->name('kesimpulan-3');
+        Route::get('kesimpulan-3', [TugasController::class, 'showTugas3_6'])->name('kesimpulan-3');
     });
     
     // API untuk menyimpan progres

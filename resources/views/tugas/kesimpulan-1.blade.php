@@ -306,7 +306,7 @@
 
             <!-- Tombol Lanjut ke Kuis -->
             <div class="next-button-container">
-                <a href="{{ route('kuis.index') }}" class="btn-lanjut" id="btn-lanjut-kuis">
+                <a href="{{ route('kuis1.index') }}" class="btn-lanjut" id="btn-lanjut-kuis">
                     <span>Lanjutkan ke Kuis 1</span>
                     <i class="fas fa-arrow-right"></i>
                 </a>

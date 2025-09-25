@@ -514,6 +514,9 @@
         @endif
     </div>
 
+    <!-- Include popup sambutan -->
+    @include('kuis.welcome_popup')
+    
     <div class="page-container">
         <!-- Konten utama kuis -->
         <div class="quiz-main">

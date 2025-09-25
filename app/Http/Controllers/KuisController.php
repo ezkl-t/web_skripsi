@@ -347,6 +347,67 @@ class KuisController extends Controller
 
         return view('kuis.riwayat', compact('riwayat'));
     }
+    
+    /**
+     * Tampilkan hasil semua kuis
+     */
+    public function hasilSemuaKuis()
+    {
+        if (!Auth::check()) {
+            return redirect()->route('login')->with('error', 'Silakan login terlebih dahulu.');
+        }
+        
+        $user = Auth::user();
+        
+        // Ambil hasil kuis terbaru untuk setiap jenis kuis
+        $quizResults = [
+            'kuis1' => $user->getLatestQuizResult('kuis1'),
+            'kuis2' => $user->getLatestQuizResult('kuis2'),
+            'kuis3' => $user->getLatestQuizResult('kuis3')
+        ];
+        
+        // Hitung progress
+        $totalQuizCount = 3; // Total kuis yang tersedia
+        $completedQuizCount = 0;
+        
+        foreach ($quizResults as $result) {
+            if ($result) {
+                $completedQuizCount++;
+            }
+        }
+        
+        $progressPercentage = ($completedQuizCount / $totalQuizCount) * 100;
+        
+        // Catat progress di database
+        $this->updateKuisProgress($user->id, $completedQuizCount, $totalQuizCount);
+        
+        return view('kuis.hasil_semua_kuis', compact(
+            'quizResults', 
+            'totalQuizCount', 
+            'completedQuizCount', 
+            'progressPercentage'
+        ));
+    }
+    
+    /**
+     * Update progress kuis di database
+     */
+    private function updateKuisProgress($userId, $completedCount, $totalCount)
+    {
+        $namaAktivitas = 'kuis-progress';
+        $judulAktivitas = 'Progress Kuis';
+        $skor = $completedCount;
+        $totalSoal = $totalCount;
+        
+        // Gunakan model ProgresSiswa untuk mencatat progress
+        \App\Models\ProgresSiswa::catatProgres(
+            $userId,
+            $namaAktivitas,
+            $judulAktivitas,
+            $skor,
+            $totalSoal
+        );
+    }
 
     /**
      * Reset kuis (untuk testing)

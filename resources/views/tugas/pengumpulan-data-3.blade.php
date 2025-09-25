@@ -9,183 +9,484 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistem Pertahanan Tubuh - Tugas Siswa</title>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>Pengumpulan Data 3 - Sistem Pertahanan Tubuh</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        :root {
-            --primary: #335C67;
-            --secondary: #E09F3E;
-            --accent: #9E2A2B;
-            --light: #FFF3B0;
-            --dark: #540B0E;
+        .table th, .table td {
+            vertical-align: middle;
         }
-        
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            /* max-width: 800px; */
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #f9f9f9;
-        }
-        
-        .task-container {
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            padding: 25px;
-            margin-bottom: 30px;
-        }
-        
-        .task-title {
-            color: var(--primary);
+        .materi {
+            font-size: 1.1em;
+            color: #555;
             margin-bottom: 20px;
-            font-size: 1.8rem;
-            border-bottom: 2px solid var(--light);
-            padding-bottom: 10px;
         }
-        
-        .task-instruction {
-            color: var(--primary);
-            background-color: rgba(255, 243, 176, 0.3);
-            padding: 15px;
-            border-radius: 6px;
-            margin-bottom: 25px;
-            font-size: 1rem;
+        #result-message {
+            display: none;
+            margin-top: 20px;
         }
-        
-        .question-group {
-            margin-bottom: 25px;
+        .correct {
+            background-color: #d4edda !important;
         }
-        
-        .question-text {
-            margin-bottom: 10px;
-            display: block;
-            font-size: 1.05rem;
+        .incorrect {
+            background-color: #f8d7da !important;
         }
-        
-        .answer-input {
-            border: 2px solid #ddd;
-            border-radius: 4px;
-            padding: 8px 12px;
-            font-size: 1rem;
-            transition: all 0.3s;
-            margin: 5px 0;
-            width: 100%;
-            max-width: 400px;
+        .alert-success {
+            background-color: #d4edda;
+            border-color: #c3e6cb;
+            color: #155724;
         }
-        
-        .answer-input:focus {
-            border-color: var(--secondary);
-            outline: none;
-            box-shadow: 0 0 0 3px rgba(224, 159, 62, 0.2);
+        .alert-danger {
+            background-color: #f8d7da;
+            border-color: #f5c6cb;
+            color: #721c24;
         }
-        
-        .submit-btn {
-            background-color: var(--accent);
+        .alert-warning {
+            background-color: #fff3cd;
+            border-color: #ffeeba;
+            color: #856404;
+        }
+        .btn-next {
+            background-color: #28a745;
             color: white;
-            border: none;
-            padding: 12px 25px;
-            font-size: 1rem;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            margin-top: 15px;
+            margin-top: 10px;
         }
-        
-        .submit-btn:hover {
-            background-color: var(--dark);
+        .btn-next:hover {
+            background-color: #218838;
         }
-        
-        .inline-input {
-            display: inline-block;
-            width: auto;
-            min-width: 150px;
-            margin: 0 5px;
-        }
-        
-        @media (max-width: 600px) {
-            .inline-input {
-                display: block;
-                width: 100%;
-                margin: 10px 0;
-            }
+        .question-number {
+            font-weight: bold;
+            width: 30px;
         }
     </style>
 </head>
 <body>
-    <div class="task-container">
-        <h1 class="task-title">Pengumpulan Data</h1>
+    <div class="container mt-5">
+        <h2 class="card-title mb-4" style="color: #9E2A2B">Pengumpulan Data 3</h2>
+        <p class="materi">Setelah kamu menonton video dan membaca materi sebelumnya, sekarang kerjakan tugas berikut! Cocokkan pernyataan dengan jawaban yang tepat dengan memilih pilihan yang sesuai.</p>
         
-        <div class="task-instruction">
-            Isilah kolom yang kosong pada teks berikut ini berdasarkan informasi yang telah kamu dapat dari menonton video dan melaksanakan kegiatan lainnya.
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th width="5%">No.</th>
+                    <th>Pernyataan</th>
+                    <th width="30%">Pilihan Jawaban</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="question-number">1.</td>
+                    <td>Imunitas yang terbentuk setelah terinfeksi cacar air</td>
+                    <td>
+                        <select class="form-control" id="list-0">
+                            <option value="0" selected>Pilih Jawaban</option>
+                            <option value="a">a. Alergi</option>
+                            <option value="b">b. HIV</option>
+                            <option value="c">c. Imunitas pasif alami</option>
+                            <option value="d">d. Rheumatoid arthritis</option>
+                            <option value="e">e. Imunitas aktif buatan</option>
+                            <option value="f">f. Antibodi</option>
+                            <option value="g">g. Diabetes melitus tipe 1</option>
+                            <option value="h">h. Penyakit autoimun</option>
+                            <option value="i">i. Imunitas aktif alami</option>
+                            <option value="j">j. Imunitas pasif buatan</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="question-number">2.</td>
+                    <td>Antibodi yang diperoleh bayi melalui ASI</td>
+                    <td>
+                        <select class="form-control" id="list-1">
+                            <option value="0" selected>Pilih Jawaban</option>
+                            <option value="a">a. Alergi</option>
+                            <option value="b">b. HIV</option>
+                            <option value="c">c. Imunitas pasif alami</option>
+                            <option value="d">d. Rheumatoid arthritis</option>
+                            <option value="e">e. Imunitas aktif buatan</option>
+                            <option value="f">f. Antibodi</option>
+                            <option value="g">g. Diabetes melitus tipe 1</option>
+                            <option value="h">h. Penyakit autoimun</option>
+                            <option value="i">i. Imunitas aktif alami</option>
+                            <option value="j">j. Imunitas pasif buatan</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="question-number">3.</td>
+                    <td>Perlindungan yang diperoleh melalui vaksin COVID-19</td>
+                    <td>
+                        <select class="form-control" id="list-2">
+                            <option value="0" selected>Pilih Jawaban</option>
+                            <option value="a">a. Alergi</option>
+                            <option value="b">b. HIV</option>
+                            <option value="c">c. Imunitas pasif alami</option>
+                            <option value="d">d. Rheumatoid arthritis</option>
+                            <option value="e">e. Imunitas aktif buatan</option>
+                            <option value="f">f. Antibodi</option>
+                            <option value="g">g. Diabetes melitus tipe 1</option>
+                            <option value="h">h. Penyakit autoimun</option>
+                            <option value="i">i. Imunitas aktif alami</option>
+                            <option value="j">j. Imunitas pasif buatan</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="question-number">4.</td>
+                    <td>Kondisi sistem imun menyerang sel-sel tubuh sendiri</td>
+                    <td>
+                        <select class="form-control" id="list-3">
+                            <option value="0" selected>Pilih Jawaban</option>
+                            <option value="a">a. Alergi</option>
+                            <option value="b">b. HIV</option>
+                            <option value="c">c. Imunitas pasif alami</option>
+                            <option value="d">d. Rheumatoid arthritis</option>
+                            <option value="e">e. Imunitas aktif buatan</option>
+                            <option value="f">f. Antibodi</option>
+                            <option value="g">g. Diabetes melitus tipe 1</option>
+                            <option value="h">h. Penyakit autoimun</option>
+                            <option value="i">i. Imunitas aktif alami</option>
+                            <option value="j">j. Imunitas pasif buatan</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="question-number">5.</td>
+                    <td>Respon berlebihan terhadap debu atau serbuk sari</td>
+                    <td>
+                        <select class="form-control" id="list-4">
+                            <option value="0" selected>Pilih Jawaban</option>
+                            <option value="a">a. Alergi</option>
+                            <option value="b">b. HIV</option>
+                            <option value="c">c. Imunitas pasif alami</option>
+                            <option value="d">d. Rheumatoid arthritis</option>
+                            <option value="e">e. Imunitas aktif buatan</option>
+                            <option value="f">f. Antibodi</option>
+                            <option value="g">g. Diabetes melitus tipe 1</option>
+                            <option value="h">h. Penyakit autoimun</option>
+                            <option value="i">i. Imunitas aktif alami</option>
+                            <option value="j">j. Imunitas pasif buatan</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="question-number">6.</td>
+                    <td>Virus yang menyerang limfosit T</td>
+                    <td>
+                        <select class="form-control" id="list-5">
+                            <option value="0" selected>Pilih Jawaban</option>
+                            <option value="a">a. Alergi</option>
+                            <option value="b">b. HIV</option>
+                            <option value="c">c. Imunitas pasif alami</option>
+                            <option value="d">d. Rheumatoid arthritis</option>
+                            <option value="e">e. Imunitas aktif buatan</option>
+                            <option value="f">f. Antibodi</option>
+                            <option value="g">g. Diabetes melitus tipe 1</option>
+                            <option value="h">h. Penyakit autoimun</option>
+                            <option value="i">i. Imunitas aktif alami</option>
+                            <option value="j">j. Imunitas pasif buatan</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="question-number">7.</td>
+                    <td>Penyakit autoimun yang menyerang persendian</td>
+                    <td>
+                        <select class="form-control" id="list-6">
+                            <option value="0" selected>Pilih Jawaban</option>
+                            <option value="a">a. Alergi</option>
+                            <option value="b">b. HIV</option>
+                            <option value="c">c. Imunitas pasif alami</option>
+                            <option value="d">d. Rheumatoid arthritis</option>
+                            <option value="e">e. Imunitas aktif buatan</option>
+                            <option value="f">f. Antibodi</option>
+                            <option value="g">g. Diabetes melitus tipe 1</option>
+                            <option value="h">h. Penyakit autoimun</option>
+                            <option value="i">i. Imunitas aktif alami</option>
+                            <option value="j">j. Imunitas pasif buatan</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="question-number">8.</td>
+                    <td>Pemberian plasma darah dari orang sehat</td>
+                    <td>
+                        <select class="form-control" id="list-7">
+                            <option value="0" selected>Pilih Jawaban</option>
+                            <option value="a">a. Alergi</option>
+                            <option value="b">b. HIV</option>
+                            <option value="c">c. Imunitas pasif alami</option>
+                            <option value="d">d. Rheumatoid arthritis</option>
+                            <option value="e">e. Imunitas aktif buatan</option>
+                            <option value="f">f. Antibodi</option>
+                            <option value="g">g. Diabetes melitus tipe 1</option>
+                            <option value="h">h. Penyakit autoimun</option>
+                            <option value="i">i. Imunitas aktif alami</option>
+                            <option value="j">j. Imunitas pasif buatan</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="question-number">9.</td>
+                    <td>Kolostrum mengandung banyak zat ini</td>
+                    <td>
+                        <select class="form-control" id="list-8">
+                            <option value="0" selected>Pilih Jawaban</option>
+                            <option value="a">a. Alergi</option>
+                            <option value="b">b. HIV</option>
+                            <option value="c">c. Imunitas pasif alami</option>
+                            <option value="d">d. Rheumatoid arthritis</option>
+                            <option value="e">e. Imunitas aktif buatan</option>
+                            <option value="f">f. Antibodi</option>
+                            <option value="g">g. Diabetes melitus tipe 1</option>
+                            <option value="h">h. Penyakit autoimun</option>
+                            <option value="i">i. Imunitas aktif alami</option>
+                            <option value="j">j. Imunitas pasif buatan</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="question-number">10.</td>
+                    <td>Penyakit autoimun yang merusak sel penghasil insulin</td>
+                    <td>
+                        <select class="form-control" id="list-9">
+                            <option value="0" selected>Pilih Jawaban</option>
+                            <option value="a">a. Alergi</option>
+                            <option value="b">b. HIV</option>
+                            <option value="c">c. Imunitas pasif alami</option>
+                            <option value="d">d. Rheumatoid arthritis</option>
+                            <option value="e">e. Imunitas aktif buatan</option>
+                            <option value="f">f. Antibodi</option>
+                            <option value="g">g. Diabetes melitus tipe 1</option>
+                            <option value="h">h. Penyakit autoimun</option>
+                            <option value="i">i. Imunitas aktif alami</option>
+                            <option value="j">j. Imunitas pasif buatan</option>
+                        </select>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <button id="submitBtn" class="btn" style="background-color: #9E2A2B; color: #ffffff" onclick="checkAnswers()">
+            <i class="fas fa-check-circle"></i> Cek Jawaban
+        </button>
+        
+        <!-- Tombol Selanjutnya (akan muncul jika semua jawaban benar) -->
+        <a id="nextBtn" href="{{ url('/tugas/pengolahan-data-3') }}" class="btn btn-next" style="display: none;">
+            <i class="fas fa-arrow-right"></i> Lanjut ke Pengolahan Data 3
+        </a>
+        
+        <!-- Area untuk menampilkan hasil -->
+        <div id="result-message" class="alert mt-4">
+            <h5 id="result-title"></h5>
+            <div id="result-details"></div>
         </div>
-        
-        <div class="question-group">
-            <label class="question-text">Kekebalan aktif merupakan kekebalan yang dihasilkan oleh </label>
-            <input type="text" class="answer-input inline-input" id="isian-1" name="isian-1"> 
-            itu sendiri.
-            Kekebalan ini dapat diperoleh secara alami dan secara 
-            <input type="text" class="answer-input inline-input" id="isian-2" name="isian-2">.
-            Kekebalan aktif alami diperoleh setelah seseorang mengalami sakit akibat infeksi suatu kuman penyakit.  Setelah sembuh dari sakit, orang tersebut akan menjadi
-            <input type="text" class="answer-input inline-input" id="isian-3" name="isian-3">.
-            terhadap penyakit tersebut. Sedangkan kekebalan pasif merupakan kekebalan yang diperoleh setelah menerima antibodi dari <input type="text" class="answer-input inline-input" id="isian-4" name="isian-4">.
-            Kekebalan pasif alami dapat ditemukan pada bayi setelah menerima antibodi dari ibunya melalui plasenta saat berada di dalam <input type="text" class="answer-input inline-input" id="isian-5" name="isian-5">.
-        </div>
-        
-        <button type="submit" class="submit-btn">Cek Jawaban</button>
     </div>
 
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Add input validation if needed
-            const inputs = document.querySelectorAll('.answer-input');
+        // Kunci jawaban yang benar (sesuai dengan instruksi)
+        const answerKey = [
+            'i',  // 1. Imunitas aktif alami
+            'c',  // 2. Imunitas pasif alami
+            'e',  // 3. Imunitas aktif buatan
+            'h',  // 4. Penyakit autoimun
+            'a',  // 5. Alergi
+            'b',  // 6. HIV
+            'd',  // 7. Rheumatoid arthritis
+            'j',  // 8. Imunitas pasif buatan
+            'f',  // 9. Antibodi
+            'g'   // 10. Diabetes melitus tipe 1
+        ];
+        
+        // Teks jawaban yang benar untuk ditampilkan
+        const answerTexts = {
+            'a': 'Alergi',
+            'b': 'HIV',
+            'c': 'Imunitas pasif alami',
+            'd': 'Rheumatoid arthritis',
+            'e': 'Imunitas aktif buatan',
+            'f': 'Antibodi',
+            'g': 'Diabetes melitus tipe 1',
+            'h': 'Penyakit autoimun',
+            'i': 'Imunitas aktif alami',
+            'j': 'Imunitas pasif buatan'
+        };
+        
+        function checkAnswers() {
+            let correctCount = 0;
+            let incorrectCount = 0;
+            let unansweredCount = 0;
+            let explanations = [];
+            let detailJawaban = {};
             
-            inputs.forEach(input => {
-                input.addEventListener('focus', function() {
-                    this.style.borderColor = '#E09F3E';
-                });
+            // Reset warna baris dan sembunyikan tombol selanjutnya
+            $('tbody tr').removeClass('correct incorrect');
+            $('#nextBtn').hide();
+            
+            // Periksa setiap jawaban
+            for (let i = 0; i < answerKey.length; i++) {
+                const selectedValue = $('#list-' + i).val();
+                const row = $('#list-' + i).closest('tr');
+                const questionText = row.find('td:nth-child(2)').text().trim();
                 
-                input.addEventListener('blur', function() {
-                    this.style.borderColor = this.value ? '#9E2A2B' : '#ddd';
-                });
+                detailJawaban['soal-' + (i+1)] = {
+                    pertanyaan: questionText,
+                    jawaban_user: selectedValue,
+                    jawaban_benar: answerKey[i],
+                    status: ''
+                };
+                
+                if (selectedValue === answerKey[i]) {
+                    correctCount++;
+                    row.addClass('correct');
+                    explanations.push(`<li>Soal ${i+1}: <span class="text-success"><i class="fas fa-check"></i> Benar</span></li>`);
+                    detailJawaban['soal-' + (i+1)].status = 'benar';
+                } else if (selectedValue === '0') {
+                    unansweredCount++;
+                    explanations.push(`<li>Soal ${i+1}: <span class="text-warning"><i class="fas fa-exclamation-triangle"></i> Belum dijawab</span></li>`);
+                    detailJawaban['soal-' + (i+1)].status = 'belum_dijawab';
+                } else {
+                    incorrectCount++;
+                    row.addClass('incorrect');
+                    const correctAnswerText = answerTexts[answerKey[i]];
+                    explanations.push(`<li>Soal ${i+1}: <span class="text-danger"><i class="fas fa-times"></i> Salah</span> - Jawaban benar: ${correctAnswerText}</li>`);
+                    detailJawaban['soal-' + (i+1)].status = 'salah';
+                }
+            }
+            
+            // Tampilkan hasil
+            const resultMessage = document.getElementById('result-message');
+            const resultTitle = document.getElementById('result-title');
+            const resultDetails = document.getElementById('result-details');
+            
+            resultMessage.style.display = 'block';
+            
+            if (correctCount === answerKey.length) {
+                resultMessage.className = 'alert alert-success';
+                resultTitle.innerHTML = '<i class="fas fa-trophy"></i> Selamat! Semua Jawaban Benar!';
+                resultDetails.innerHTML = `
+                    <p>Kamu telah menjawab semua soal dengan benar.</p>
+                    <p>Progres kamu sedang disimpan...</p>
+                `;
+                
+                // Tampilkan tombol Selanjutnya
+                $('#nextBtn').show();
+                
+                // Simpan progres
+                simpanProgres(correctCount, answerKey.length, detailJawaban);
+                
+            } else if (unansweredCount > 0) {
+                resultMessage.className = 'alert alert-warning';
+                resultTitle.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Belum Lengkap';
+                resultDetails.innerHTML = `
+                    <p><strong>Jawaban benar:</strong> ${correctCount}</p>
+                    <p><strong>Jawaban salah:</strong> ${incorrectCount}</p>
+                    <p><strong>Belum dijawab:</strong> ${unansweredCount}</p>
+                    <p class="mb-0"><em>Silakan lengkapi semua jawaban terlebih dahulu!</em></p>
+                `;
+                
+                // Tetap simpan progres meskipun belum lengkap
+                simpanProgres(correctCount, answerKey.length, detailJawaban);
+            } else {
+                resultMessage.className = 'alert alert-danger';
+                resultTitle.innerHTML = '<i class="fas fa-times-circle"></i> Masih ada yang keliru';
+                resultDetails.innerHTML = `
+                    <p><strong>Jawaban benar:</strong> ${correctCount} dari ${answerKey.length}</p>
+                    <p><strong>Jawaban salah:</strong> ${incorrectCount}</p>
+                    <h6 class="mt-3">Detail Jawaban:</h6>
+                    <ul>${explanations.join('')}</ul>
+                    <p class="mb-0"><em>Perhatikan kembali jawaban yang salah dan coba lagi!</em></p>
+                `;
+                
+                // Tetap simpan progres meskipun belum sempurna
+                simpanProgres(correctCount, answerKey.length, detailJawaban);
+            }
+            
+            // Scroll ke hasil
+            resultMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+        
+        // Fungsi untuk menyimpan progres
+        function simpanProgres(skor, totalSoal, detailJawaban) {
+            console.log('Memulai simpan progres Pengumpulan Data 3...');
+            console.log('Data yang akan dikirim:', {
+                skor: skor,
+                totalSoal: totalSoal,
+                detailJawaban: detailJawaban
             });
             
-            // Form submission handling
-            const submitBtn = document.querySelector('.submit-btn');
-            submitBtn.addEventListener('click', function() {
-                let allFilled = true;
-                
-                inputs.forEach(input => {
-                    if (!input.value.trim()) {
-                        allFilled = false;
-                        input.style.borderColor = '#540B0E';
-                    }
-                });
-                
+            // Data yang akan dikirim
+            const data = {
+                nama_aktivitas: 'pengumpulan-data-3',
+                judul_aktivitas: 'Pengumpulan Data 3',
+                skor: skor,
+                total_soal: totalSoal,
+                detail_jawaban: detailJawaban
+            };
+            
+            // Kirim data via AJAX
+            $.ajax({
+                url: '/api/progres/simpan',
+                method: 'POST',
+                data: JSON.stringify(data),
+                contentType: 'application/json',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function(response) {
+                    console.log('Progres berhasil disimpan:', response);
                     
+                    // Update pesan hasil jika semua benar
+                    const resultDetails = document.getElementById('result-details');
+                    if (skor === totalSoal) {
+                        resultDetails.innerHTML = `
+                            <p>Kamu telah berhasil menyelesaikan Pengumpulan Data 3 dengan sempurna!</p>
+                            <p><strong>Progres berhasil disimpan!</strong></p>
+                            <p>Klik tombol "Lanjut ke Pengolahan Data 3" untuk melanjutkan.</p>
+                        `;
+                        
+                        // Tampilkan notifikasi sukses
+                        if (typeof Swal !== 'undefined') {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Selamat!',
+                                text: 'Kamu telah menyelesaikan Pengumpulan Data 3',
+                                showConfirmButton: false,
+                                timer: 3000
+                            });
+                        }
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error menyimpan progres:', error);
+                    console.error('Response:', xhr.responseText);
+                    
+                    // Tampilkan pesan error
+                    const resultDetails = document.getElementById('result-details');
+                    if (resultDetails.innerHTML.includes('Progres berhasil disimpan')) {
+                        resultDetails.innerHTML += '<br><small class="text-danger">Progres gagal disimpan, tetapi jawaban kamu tetap tercatat.</small>';
+                    }
+                }
+            });
+        }
+        
+        // Reset warna saat user mengubah pilihan
+        $(document).ready(function() {
+            $('select').on('change', function() {
+                $(this).closest('tr').removeClass('correct incorrect');
             });
         });
     </script>
 </body>
 </html>
 @endsection
-
-{{-- <style>
-    textarea {
-        width: 1000px;
-        height: 150px;
-    }
-    </style>
-    <h2 class="card-title text-primary mb-4">Pengumpulan Data 3</h2>
-    <h3 class="card-title text-primary mb-4">Instruksi</h3>
-    <p class="materi">Isilah kolom yang kosong pada teks berikut ini berdasarkan informasi yang telah kamu dapat dari menonton video dan membaca materi sebelumnya.</p>
-    
-    <label for="isian-1">Kekebalan aktif merupakan kekebalan yang dihasilkan oleh </label>
-    <input type="text" id="isian-1" name="isian-1"> itu sendiri.<br>
-    <label for="isian-1">Kekebalan ini dapat diperoleh secara alami dan secara </label>
-    <input type="text" id="isian-1" name="isian-1">. Kekebalan aktif alami diperoleh setelah seseorang mengalami sakit akibat infeksi suatu kuman penyakit. Setelah sembuh dari sakit, orang tersebut akan menjadi 
-    <input type="text" id="isian-1" name="isian-1">  terhadap penyakit tersebut.
-    Sedangkan kekebalan pasif merupakan kekebalan yang diperoleh setelah menerima antibodi dari 
-    <input type="text" id="isian-1" name="isian-1"> . Kekebalan pasif alami dapat ditemukan pada bayi setelah menerima antibodi dari ibunya melalui plasenta saat  berada di dalam
-    <br><input type="submit" value="Submit"> --}}
