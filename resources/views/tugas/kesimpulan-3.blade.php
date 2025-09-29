@@ -250,7 +250,7 @@
 
 <div class="kesimpulan-container">
     <div class="card-kesimpulan">
-        <h2 class="title-kesimpulan">Kesimpulan Materi 1</h2>
+        <h2 class="title-kesimpulan">Kesimpulan Materi 3</h2>
         
         <div class="instruksi">
             <i class="fas fa-lightbulb"></i>Kamu sudah mempelajari materi tentang Imunitas Tubuh dan Kelainannya. Sekarang buatlah kesimpulan terkait beberapa poin penting dalam materi berikut ini.
@@ -308,7 +308,7 @@
             <!-- Tombol Lanjut ke Kuis -->
             <div class="next-button-container">
                 <a href="{{ route('kuis3.index') }}" class="btn-lanjut" id="btn-lanjut-kuis">
-                    <span>Lanjutkan ke Kuis 1</span>
+                    <span>Lanjutkan ke Kuis 3</span>
                     <i class="fas fa-arrow-right"></i>
                 </a>
             </div>
@@ -382,8 +382,8 @@
 
         // Data yang akan dikirim
         const data = {
-            nama_aktivitas: 'kesimpulan-1',
-            judul_aktivitas: 'Kesimpulan 1 - Sistem Pertahanan Tubuh',
+            nama_aktivitas: 'kesimpulan-3',
+            judul_aktivitas: 'Kesimpulan 3 - Imunitas Tubuh dan Kelainannya',
             skor: 1, // Kesimpulan dianggap selesai jika sudah dikirim
             total_soal: 1,
             detail_jawaban: {

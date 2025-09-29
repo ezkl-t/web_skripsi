@@ -5,400 +5,485 @@
 
 @section('content')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>Tugas Sistem Pertahanan Tubuh</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        .drag-drop-container {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 20px;
-        }
-        .drag-drop-list {
-            width: 45%;
-            border: 1px solid #ccc;
-            padding: 10px;
-            min-height: 200px;
-            border-radius: 8px;
-            background-color: #f8f9fa;
-        }
-        .drag-item {
-            padding: 8px;
-            margin: 5px;
-            background-color: #e9ecef;
-            border: 1px solid #ddd;
-            cursor: move;
-            border-radius: 4px;
-            transition: all 0.3s ease;
-        }
-        .drag-item:hover {
-            background-color: #dee2e6;
-            transform: translateY(-1px);
-        }
-        .drop-target {
-            min-height: 50px;
-            border: 2px dashed #ccc;
-            padding: 10px;
-            border-radius: 4px;
-            background-color: #fff;
-            transition: all 0.3s ease;
-        }
-        .drop-target.correct {
-            border-color: #28a745;
-            background-color: #d4edda;
-        }
-        .drop-target.incorrect {
-            border-color: #dc3545;
-            background-color: #f8d7da;
-        }
-        .drag-item.correct {
-            background-color: #d4edda;
-            border-color: #28a745;
-            color: #155724;
-        }
-        .drag-item.incorrect {
-            background-color: #f8d7da;
-            border-color: #dc3545;
-            color: #721c24;
-        }
-        .btn-cek {
-            background-color: #540B0E;
-            color: white;
-            padding: 12px 30px;
-            border: none;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            margin-top: 20px;
-        }
-        .btn-cek:hover {
-            background-color: #9E2A2B;
-            transform: translateY(-1px);
-        }
-        .btn-selanjutnya {
-            display: inline-block;
-            background-color: #540B0E;
-            color: white;
-            padding: 12px 30px;
-            text-decoration: none;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-            margin-top: 20px;
-        }
-        .btn-selanjutnya:hover {
-            background-color: #9E2A2B;
-            text-decoration: none;
-            color: white;
-            transform: translateY(-1px);
-        }
-        .hasil-pengecekan {
-            background-color: #f8f9fa;
-            padding: 15px;
-            border-radius: 8px;
-            margin: 20px 0;
-            text-align: center;
-            font-weight: bold;
-            display: none;
-        }
-        .hasil-sukses {
-            background-color: #d4edda;
-            border: 1px solid #c3e6cb;
-            color: #155724;
-        }
-        .hasil-peringatan {
-            background-color: #fff3cd;
-            border: 1px solid #ffeeba;
-            color: #856404;
-        }
-        .hasil-gagal {
-            background-color: #f8d7da;
-            border: 1px solid #f5c6cb;
-            color: #721c24;
-        }
-    </style>
-</head>
-<body>
-    <div class="container mt-5">
-        <h2 class="card-title mb-4" style="color: #9E2A2B">Verifikasi 2</h2>
-        
-        <h4 class="card-title text-primary mb-4">Instruksi</h4>
-        <p class="materi">
-            Setelah kamu mengamati video tadi dan mengerjakan tugas sebelumnya, selanjutnya kerjakan tugas berikut dengan cermat. 
-            Klasifikasikan beberapa kategori sistem pertahanan tubuh terhadap penyakit berdasarkan komponen apa yang terlibat 
-            dan fungsinya dalam menghentikan patogen!
-        </p>
-        <ol class="materi">
-            <li class="materi">Klasifikasikan komponen pertahanan tubuh berdasarkan cara kerjanya.</li>
-            <li class="materi">Klik dan tahan salah satu komponen dan letakkan pada kolom tabel yang tepat.</li>    
+<h2 class="card-title mb-4" style="color: #9E2A2B">Verifikasi 2</h2>
+
+<div class="container mt-5">
+    <h4 class="card-title mb-4" style="color: #540B0E">Petunjuk Pengerjaan</h4>
+    <div class="alert alert-info">
+        <ol class="mb-0">
+            <li>Isilah kotak kosong pada setiap pernyataan di bawah ini dengan cara menarik opsi jawaban dan meletakkannya pada tempat yang tepat!</li>
+            <li>Perhatikan opsi jawaban yang berisi berbagai macam istilah sistem pertahanan tubuh, kemudian letakkan sesuai dengan konteks kalimat yang tepat.</li>
         </ol>
-
-        <!-- Container untuk Drag and Drop -->
-        <div class="drag-drop-container">
-            <!-- Daftar Komponen -->
-            <div class="drag-drop-list" id="komponen-list">
-                <div class="drag-item" data-id="makrofag">Cenderung tinggal di organ-organ tertentu dan tidak sepenuhnya menghancurkan patogen.</div>
-                <div class="drag-item" data-id="eosinofil">Melawan parasit besar seperti cacing tambang dan membantu mengatur serta memunculkan respon imun terhadap alergi.</div>
-                <div class="drag-item" data-id="mastosit">Memproduksi protein inflamasi dan melebarkan pembuluh darah.</div>
-                <div class="drag-item" data-id="limfosit-t">Mengenali sel tubuh yang berubah menjadi kanker dan mencegah pertumbuhannya.</div>
-                <div class="drag-item" data-id="sistem-komplemen">Sebagian besar diproduksi oleh sel-sel hati dan akan aktif ketika ada patogen dan tidak aktif jika tidak ada patogen.</div>
-            </div>
-
-            <!-- Daftar Fungsi -->
-            <div class="drag-drop-list" id="fungsi-list">
-                <div class="drag-item" data-id="makrofag">Makrofag</div>
-                <div class="drag-item" data-id="eosinofil">Eosinofil</div>
-                <div class="drag-item" data-id="mastosit">Mastosit</div>
-                <div class="drag-item" data-id="limfosit-t">Limfosit T</div>
-                <div class="drag-item" data-id="sistem-komplemen">Sistem Komplemen</div>
-            </div>
-        </div>
-
-        <!-- Tabel untuk Drop Target -->
-        <table class="table mt-4">
-            <thead>
-                <tr>
-                    <th>Fungsi</th>
-                    <th>Komponen</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td id="fungsi-target-0" class="drop-target" data-correct="makrofag"></td>
-                    <td id="komponen-target-0" class="drop-target" data-correct="makrofag"></td>
-                </tr>
-                <tr>
-                    <td id="fungsi-target-1" class="drop-target" data-correct="eosinofil"></td>
-                    <td id="komponen-target-1" class="drop-target" data-correct="eosinofil"></td>
-                </tr>
-                <tr>
-                    <td id="fungsi-target-2" class="drop-target" data-correct="mastosit"></td>
-                    <td id="komponen-target-2" class="drop-target" data-correct="mastosit"></td>
-                </tr>
-                <tr>
-                    <td id="fungsi-target-3" class="drop-target" data-correct="limfosit-t"></td>
-                    <td id="komponen-target-3" class="drop-target" data-correct="limfosit-t"></td>
-                </tr>
-                <tr>
-                    <td id="fungsi-target-4" class="drop-target" data-correct="sistem-komplemen"></td>
-                    <td id="komponen-target-4" class="drop-target" data-correct="sistem-komplemen"></td>
-                </tr>
-            </tbody>
-        </table>
-
-        <!-- Hasil Pengecekan -->
-        <div id="hasilPengecekan" class="hasil-pengecekan">
-            <p>Hasil Pengecekan:</p>
-            <p>Jumlah Jawaban Benar: <span id="jumlahBenar">0</span></p>
-            <p>Jumlah Jawaban Salah: <span id="jumlahSalah">0</span></p>
-        </div>
-
-        <!-- Tombol Cek Jawaban -->
-        <div class="text-center">
-            <button class="btn-cek" onclick="cekJawaban()">
-                Cek Jawaban
-            </button>
-        </div>
-
-        <!-- Tombol Selanjutnya -->
-        <div id="tombolSelanjutnya" style="display: none; text-align: center; margin-top: 20px;">
-            <button class="btn-selanjutnya" id="btnSelanjutnya" onclick="lanjutKeKesimpulan2()">
-                Selanjutnya
-            </button>
-        </div>
     </div>
 
-    <!-- Library SortableJS -->
-    <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        // Setup CSRF token
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
+    <div class="row">
+        <!-- Kolom untuk soal-soal -->
+        <div class="col-md-8">
+            <!-- Soal-soal drag and drop -->
+            <h5 class="mb-3" style="color: #540B0E">Isilah kotak kosong dengan jawaban yang tepat!</h5>
+            
+            <div class="soal-container">
+                <!-- Soal 1 -->
+                <div class="soal-item mb-4">
+                    <div class="soal-text">
+                        <span class="soal-number">1.</span>
+                        Ketika terjadi infeksi bakteri pada luka, respon pertama yang terjadi adalah <span class="drop-target soal-1" data-jawaban="sekresi-sitokin"></span>.
+                    </div>
+                </div>
 
-        // Inisialisasi Sortable untuk komponen dan fungsi
-        const komponenList = document.getElementById('komponen-list');
-        const fungsiList = document.getElementById('fungsi-list');
+                <!-- Soal 2 -->
+                <div class="soal-item mb-4">
+                    <div class="soal-text">
+                        <span class="soal-number">2.</span>
+                        Perbedaan utama antara neutrofil dan makrofag dalam merespon infeksi adalah <span class="drop-target soal-2" data-jawaban="neutrofil-menghancurkan-patogen"></span>.
+                    </div>
+                </div>
 
-        new Sortable(komponenList, {
+                <!-- Soal 3 -->
+                <div class="soal-item mb-4">
+                    <div class="soal-text">
+                        <span class="soal-number">3.</span>
+                        Respon imun terhadap infeksi kedua dari patogen yang sama lebih efektif disebabkan oleh <span class="drop-target soal-3" data-jawaban="sel-memori"></span>.
+                    </div>
+                </div>
+
+                <!-- Soal 4 -->
+                <div class="soal-item mb-4">
+                    <div class="soal-text">
+                        <span class="soal-number">4.</span>
+                        Pernyataan yang benar tentang perbedaan limfosit B dan T adalah <span class="drop-target soal-4" data-jawaban="imunitas-humoral-seluler"></span>.
+                    </div>
+                </div>
+
+                <!-- Soal 5 -->
+                <div class="soal-item mb-4">
+                    <div class="soal-text">
+                        <span class="soal-number">5.</span>
+                        Proses kemotaksis pada neutrofil terjadi karena <span class="drop-target soal-5" data-jawaban="rangsangan-kimia"></span>.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tombol cek jawaban -->
+            <div class="text-center mt-4">
+                <button class="btn btn-success btn-lg" onclick="checkAnswers()">
+                    <i class="fas fa-check-circle"></i> Cek Jawaban
+                </button>
+            </div>
+
+            <!-- Area untuk menampilkan hasil -->
+            <div id="result-message" class="alert mt-4" style="display: none;">
+                <h5 id="result-title"></h5>
+                <div id="result-details"></div>
+            </div>
+
+            <!-- Tombol Selanjutnya -->
+            <div id="tombolSelanjutnya" style="display: none; text-align: center; margin-top: 20px;">
+                <a href="{{ route('kesimpulan-2') }}" class="btn-selanjutnya">
+                    <i class="fas fa-arrow-right"></i> Selanjutnya
+                </a>
+            </div>
+        </div>
+
+        <!-- Kolom untuk pilihan jawaban (samping kanan) -->
+        <div class="col-md-4">
+            <div class="card sticky-top" style="top: 20px; background-color: #f8f9fa;">
+                <div class="card-body">
+                    <h5 class="card-title" style="color: #540B0E">Opsi Jawaban:</h5>
+                    <div id="jawaban-list" class="d-flex flex-column gap-2">
+                        <div class="drag-item" data-id="sekresi-sitokin">Sekresi sitokin oleh sel T helper</div>
+                        <div class="drag-item" data-id="neutrofil-menghancurkan-patogen">Neutrofil menghancurkan patogen sepenuhnya, makrofag menyajikan antigen</div>
+                        <div class="drag-item" data-id="sel-memori">Karena sel memori langsung mengenali dan merespon antigen  </div>
+                        <div class="drag-item" data-id="imunitas-humoral-seluler">Limfosit B memberikan imunitas humoral, limfosit T memberikan imunitas seluler</div>
+                        <div class="drag-item" data-id="rangsangan-kimia">Rangsangan kimia dari histamin dan zat patogen</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .drag-item {
+        display: block;
+        padding: 12px 16px;
+        margin: 5px 0;
+        background-color: #e9ecef;
+        border: 2px solid #dee2e6;
+        border-radius: 6px;
+        cursor: move;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        font-size: 14px;
+        text-align: center;
+        line-height: 1.4;
+    }
+
+    .drag-item:hover {
+        background-color: #dee2e6;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    }
+
+    .drag-item.dragging {
+        opacity: 0.5;
+    }
+
+    .soal-item {
+        padding: 15px;
+        border: 1px solid #e0e0e0;
+        border-radius: 8px;
+        background-color: #fafafa;
+        margin-bottom: 15px;
+    }
+
+    .soal-number {
+        font-weight: bold;
+        color: #9E2A2B;
+        margin-right: 10px;
+        font-size: 16px;
+    }
+
+    .soal-text {
+        font-size: 16px;
+        line-height: 1.6;
+        color: #333;
+    }
+
+    .drop-target {
+        display: inline-block;
+        min-width: 100px;
+        min-height: 40px;
+        border: 2px dashed #6c757d;
+        border-radius: 6px;
+        padding: 8px 12px;
+        background-color: white;
+        margin: 0 5px;
+        vertical-align: middle;
+        transition: all 0.3s ease;
+        text-align: center;
+    }
+
+    .drop-target.drag-over {
+        background-color: #e9ecef;
+        border-color: #9E2A2B;
+        border-style: solid;
+    }
+
+    .drop-target .drag-item {
+        margin: 0;
+        background-color: white;
+        display: block;
+        min-width: auto;
+    }
+
+    .drop-target:empty::before {
+        content: "⬅ Tarik jawaban";
+        color: #6c757d;
+        font-style: italic;
+        font-size: 12px;
+    }
+
+    .correct-item {
+        background-color: #d4edda !important;
+        border-color: #28a745 !important;
+        color: #155724;
+    }
+
+    .incorrect-item {
+        background-color: #f8d7da !important;
+        border-color: #dc3545 !important;
+        color: #721c24;
+    }
+
+    .card {
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        border-radius: 8px;
+    }
+
+    .alert-success {
+        background-color: #d4edda;
+        border-color: #c3e6cb;
+        color: #155724;
+    }
+
+    .alert-danger {
+        background-color: #f8d7da;
+        border-color: #f5c6cb;
+        color: #721c24;
+    }
+
+    .alert-warning {
+        background-color: #fff3cd;
+        border-color: #ffeeba;
+        color: #856404;
+    }
+
+    .btn-selanjutnya {
+        display: inline-block;
+        background-color: #28a745;
+        color: white;
+        padding: 12px 30px;
+        text-decoration: none;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: bold;
+        transition: all 0.3s ease;
+        border: none;
+        cursor: pointer;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .btn-selanjutnya:hover {
+        background-color: #218838;
+        text-decoration: none;
+        color: white;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    }
+
+    .sticky-top {
+        position: sticky;
+        z-index: 100;
+    }
+
+    .btn-success {
+        background-color: #9E2A2B;
+        border-color: #9E2A2B;
+        padding: 10px 30px;
+        font-size: 16px;
+    }
+
+    .btn-success:hover {
+        background-color: #540B0E;
+        border-color: #540B0E;
+    }
+</style>
+
+<!-- Library SortableJS -->
+<script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
+<script>
+    // Inisialisasi Sortable untuk daftar jawaban
+    const jawabanList = document.getElementById('jawaban-list');
+    new Sortable(jawabanList, {
+        group: 'shared',
+        animation: 150,
+        sort: false
+    });
+
+    // Inisialisasi Sortable untuk setiap drop target
+    document.querySelectorAll('.drop-target').forEach((target, index) => {
+        new Sortable(target, {
             group: 'shared',
             animation: 150,
-            onEnd: function (evt) {
-                updateDropTarget(evt);
+            onAdd: function(evt) {
+                evt.to.classList.remove('drag-over');
+                // Hanya boleh ada satu jawaban per target
+                if (evt.to.children.length > 1) {
+                    // Pindahkan item lama kembali ke daftar jawaban
+                    const oldItem = evt.to.children[0];
+                    jawabanList.appendChild(oldItem);
+                }
             }
         });
 
-        new Sortable(fungsiList, {
-            group: 'shared',
-            animation: 150,
-            onEnd: function (evt) {
-                updateDropTarget(evt);
-            }
+        // Tambahkan event listener untuk efek visual
+        target.addEventListener('dragover', function(e) {
+            e.preventDefault();
+            this.classList.add('drag-over');
         });
 
-        // Inisialisasi Sortable untuk drop target
+        target.addEventListener('dragleave', function(e) {
+            this.classList.remove('drag-over');
+        });
+
+        target.addEventListener('drop', function(e) {
+            this.classList.remove('drag-over');
+        });
+    });
+
+    // Kunci jawaban yang benar
+    const answerKey = {
+        'soal-1': 'sekresi-sitokin',
+        'soal-2': 'neutrofil-menghancurkan-patogen',
+        'soal-3': 'sel-memori',
+        'soal-4': 'imunitas-humoral-seluler',
+        'soal-5': 'rangsangan-kimia'
+    };
+
+    // Fungsi untuk menampilkan tombol selanjutnya
+    function showNextButton() {
+        document.getElementById('tombolSelanjutnya').style.display = 'block';
+    }
+
+    // Fungsi untuk memeriksa jawaban
+    function checkAnswers() {
+        // Reset warna item
+        document.querySelectorAll('.drag-item').forEach(item => {
+            item.classList.remove('correct-item', 'incorrect-item');
+        });
+
+        let correctCount = 0;
+        let incorrectCount = 0;
+        let unansweredCount = 0;
+        let detailJawaban = {};
+
+        // Periksa setiap soal
         document.querySelectorAll('.drop-target').forEach(target => {
-            new Sortable(target, {
-                group: 'shared',
-                animation: 150,
-                onEnd: function (evt) {
-                    updateDropTarget(evt);
-                }
-            });
-        });
-
-        // Fungsi untuk memperbarui drop target
-        function updateDropTarget(evt) {
-            const item = evt.item;
-            const target = evt.to;
-            if (target.classList.contains('drop-target')) {
-                const id = target.id;
-                const dataId = item.getAttribute('data-id');
-                console.log(`Item ${dataId} ditempatkan di ${id}`);
-            }
-        }
-
-        // Fungsi untuk memeriksa jawaban
-        function cekJawaban() {
-            let jumlahBenar = 0;
-            let jumlahSalah = 0;
+            const soalId = target.classList[1]; // soal-1, soal-2, etc.
+            const jawabanBenar = answerKey[soalId];
+            const jawabanUser = target.querySelector('.drag-item');
             
-            // Reset semua status
-            document.querySelectorAll('.drop-target').forEach(target => {
-                target.classList.remove('correct', 'incorrect');
-            });
-            
-            document.querySelectorAll('.drag-item').forEach(item => {
-                item.classList.remove('correct', 'incorrect');
-            });
-            
-            // Periksa setiap drop target
-            document.querySelectorAll('.drop-target').forEach(target => {
-                const items = target.querySelectorAll('.drag-item');
-                const correctAnswer = target.getAttribute('data-correct');
-                
-                if (items.length > 0) {
-                    const userAnswer = items[0].getAttribute('data-id');
-                    
-                    if (userAnswer === correctAnswer) {
-                        target.classList.add('correct');
-                        items[0].classList.add('correct');
-                        jumlahBenar++;
-                    } else {
-                        target.classList.add('incorrect');
-                        items[0].classList.add('incorrect');
-                        jumlahSalah++;
-                    }
-                } else {
-                    jumlahSalah++; // Kosong dianggap salah
-                }
-            });
-            
-            // Tampilkan hasil pengecekan
-            document.getElementById('hasilPengecekan').style.display = 'block';
-            document.getElementById('jumlahBenar').textContent = jumlahBenar;
-            document.getElementById('jumlahSalah').textContent = jumlahSalah;
-            
-            // Update class hasil berdasarkan jumlah benar
-            const hasilElement = document.getElementById('hasilPengecekan');
-            hasilElement.classList.remove('hasil-sukses', 'hasil-peringatan', 'hasil-gagal');
-            
-            if (jumlahBenar === 10 && jumlahSalah === 0) {
-                hasilElement.classList.add('hasil-sukses');
-                document.getElementById('tombolSelanjutnya').style.display = 'block';
-            } else if (jumlahBenar > 0) {
-                hasilElement.classList.add('hasil-peringatan');
-                document.getElementById('tombolSelanjutnya').style.display = 'none';
-            } else {
-                hasilElement.classList.add('hasil-gagal');
-                document.getElementById('tombolSelanjutnya').style.display = 'none';
-            }
-            
-            // Buat detail jawaban untuk disimpan
-            const detailJawaban = {};
-            document.querySelectorAll('.drop-target').forEach((target, index) => {
-                const items = target.querySelectorAll('.drag-item');
-                const correctAnswer = target.getAttribute('data-correct');
-                const userAnswer = items.length > 0 ? items[0].getAttribute('data-id') : '';
-                
-                detailJawaban[index] = {
-                    user_answer: userAnswer,
-                    correct_answer: correctAnswer,
-                    is_correct: userAnswer === correctAnswer
-                };
-            });
-            
-            // Simpan progres
-            simpanProgres(jumlahBenar, 10, detailJawaban);
-        }
-
-        // Fungsi untuk melanjutkan ke halaman kesimpulan-2
-        function lanjutKeKesimpulan2() {
-            // Redirect ke halaman kesimpulan-2
-            window.location.href = "{{ route('kesimpulan-2') }}";
-        }
-
-        // Fungsi untuk menyimpan progres
-        function simpanProgres(skor, totalSoal, detailJawaban) {
-            console.log('Memulai simpan progres...');
-            console.log('Data yang akan dikirim:', {
-                skor: skor,
-                totalSoal: totalSoal,
-                detailJawaban: detailJawaban
-            });
-
-            // Data yang akan dikirim
-            const data = {
-                nama_aktivitas: 'verifikasi-2',
-                judul_aktivitas: 'Verifikasi 2 - Klasifikasi Komponen Sistem Pertahanan Tubuh',
-                skor: skor,
-                total_soal: totalSoal,
-                detail_jawaban: detailJawaban
+            detailJawaban[soalId] = {
+                jawaban_user: jawabanUser ? jawabanUser.getAttribute('data-id') : null,
+                jawaban_benar: jawabanBenar,
+                status: ''
             };
 
-            // Kirim data via AJAX
-            $.ajax({
-                url: '/api/progres/simpan',
-                method: 'POST',
-                data: JSON.stringify(data),
-                contentType: 'application/json',
-                success: function(response) {
-                    console.log('Progres berhasil disimpan:', response);
-                    
-                    if (skor === totalSoal) {
-                        // Tampilkan notifikasi sukses
-                        if (typeof Swal !== 'undefined') {
-                            Swal.fire({
-                                icon: 'success',
-                                title: 'Selamat!',
-                                text: 'Anda telah menyelesaikan aktivitas ini dengan sempurna!',
-                                showConfirmButton: false,
-                                timer: 3000
-                            });
-                        }
-                    }
-                },
-                error: function(xhr, status, error) {
-                    console.error('Error menyimpan progres:', error);
-                    console.error('Response:', xhr.responseText);
-                    
-                    // Tampilkan pesan error yang user-friendly
-                    alert('Progres gagal disimpan. Silakan coba lagi atau lanjutkan ke aktivitas berikutnya.');
+            if (jawabanUser) {
+                const userAnswer = jawabanUser.getAttribute('data-id');
+                
+                if (userAnswer === jawabanBenar) {
+                    jawabanUser.classList.add('correct-item');
+                    correctCount++;
+                    detailJawaban[soalId].status = 'benar';
+                } else {
+                    jawabanUser.classList.add('incorrect-item');
+                    incorrectCount++;
+                    detailJawaban[soalId].status = 'salah';
                 }
-            });
+            } else {
+                unansweredCount++;
+                detailJawaban[soalId].status = 'belum_dijawab';
+            }
+        });
+
+        // Total soal
+        const totalSoal = Object.keys(answerKey).length;
+
+        // Tampilkan hasil
+        const resultMessage = document.getElementById('result-message');
+        const resultTitle = document.getElementById('result-title');
+        const resultDetails = document.getElementById('result-details');
+
+        resultMessage.style.display = 'block';
+        
+        if (correctCount === totalSoal && incorrectCount === 0) {
+            resultMessage.className = 'alert alert-success';
+            resultTitle.innerHTML = '<i class="fas fa-trophy"></i> Selamat! Jawaban Anda benar semua!';
+            resultDetails.innerHTML = 'Kerja Bagus! Anda telah berhasil mengisi semua soal dengan tepat.';
+            
+            // Tampilkan tombol selanjutnya
+            showNextButton();
+            
+            // Simpan progres ke database
+            simpanProgres(correctCount, totalSoal, detailJawaban);
+            
+        } else if (unansweredCount > 0) {
+            resultMessage.className = 'alert alert-warning';
+            resultTitle.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Belum Lengkap';
+            resultDetails.innerHTML = `
+                <p><strong>Jawaban benar:</strong> ${correctCount} dari ${totalSoal}</p>
+                <p><strong>Jawaban salah:</strong> ${incorrectCount}</p>
+                <p><strong>Belum dijawab:</strong> ${unansweredCount}</p>
+                <p class="mb-0"><em>Silakan lengkapi semua jawaban terlebih dahulu!</em></p>
+            `;
+            
+            // Sembunyikan tombol selanjutnya
+            document.getElementById('tombolSelanjutnya').style.display = 'none';
+        } else {
+            resultMessage.className = 'alert alert-danger';
+            resultTitle.innerHTML = '<i class="fas fa-times-circle"></i> Masih ada yang keliru';
+            resultDetails.innerHTML = `
+                <p><strong>Jawaban benar:</strong> ${correctCount} dari ${totalSoal}</p>
+                <p><strong>Jawaban salah:</strong> ${incorrectCount}</p>
+                <p class="mb-0"><em>Periksa kembali jawaban yang berwarna merah dan coba lagi!</em></p>
+            `;
+            
+            // Sembunyikan tombol selanjutnya
+            document.getElementById('tombolSelanjutnya').style.display = 'none';
+            
+            // Tetap simpan progres meskipun belum selesai
+            simpanProgres(correctCount, totalSoal, detailJawaban);
         }
-    </script>
-</body>
+
+        // Scroll ke hasil
+        resultMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    // Fungsi untuk menyimpan progres ke database
+    function simpanProgres(skor, totalSoal, detailJawaban) {
+        console.log('Memulai simpan progres Verifikasi 2...');
+        console.log('Data yang akan dikirim:', {
+            skor: skor,
+            totalSoal: totalSoal,
+            detailJawaban: detailJawaban
+        });
+
+        // Data yang akan dikirim
+        const data = {
+            nama_aktivitas: 'verifikasi-2',
+            judul_aktivitas: 'Verifikasi 2 - Sistem Pertahanan Tubuh',
+            skor: skor,
+            total_soal: totalSoal,
+            detail_jawaban: detailJawaban
+        };
+
+        // Kirim data via AJAX menggunakan jQuery
+        $.ajax({
+            url: '/api/progres/simpan',
+            method: 'POST',
+            data: JSON.stringify(data),
+            contentType: 'application/json',
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function(response) {
+                console.log('Progres berhasil disimpan:', response);
+                
+                // Update pesan hasil jika sempurna
+                if (skor === totalSoal) {
+                    // Tampilkan notifikasi sukses
+                    if (typeof Swal !== 'undefined') {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Selamat!',
+                            text: 'Anda telah menyelesaikan Verifikasi 2 dengan sempurna!',
+                            showConfirmButton: false,
+                            timer: 3000
+                        });
+                    }
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error('Error menyimpan progres:', error);
+                console.error('Response:', xhr.responseText);
+                
+                // Tampilkan pesan error yang user-friendly
+                const resultDetails = document.getElementById('result-details');
+                if (resultDetails) {
+                    resultDetails.innerHTML += '<br><small class="text-warning">Progres gagal disimpan, tetapi jawaban Anda tetap tercatat.</small>';
+                }
+            }
+        });
+    }
+
+    // Fungsi untuk mengembalikan jawaban ke daftar (opsional)
+    function resetJawaban() {
+        document.querySelectorAll('.drop-target').forEach(target => {
+            const items = target.querySelectorAll('.drag-item');
+            items.forEach(item => {
+                jawabanList.appendChild(item);
+            });
+        });
+        
+        document.querySelectorAll('.drag-item').forEach(item => {
+            item.classList.remove('correct-item', 'incorrect-item');
+        });
+        
+        document.getElementById('result-message').style.display = 'none';
+        document.getElementById('tombolSelanjutnya').style.display = 'none';
+    }
+</script>
 
 @endsection

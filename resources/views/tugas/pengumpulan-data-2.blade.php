@@ -51,78 +51,98 @@
 <body>
     <div class="container mt-5">
         <h2 class="card-title mb-4" style="color: #9E2A2B">Pengumpulan Data</h2>
-        <p class="materi">Setelah kamu mengamati video tadi dan mengerjakan tugas sebelumnya, selanjutnya kerjakan tugas berikut dengan cermat. Klasifikasikan beberapa kategori sistem pertahanan tubuh terhadap penyakit berdasarkan komponen apa yang terlibat!</p>
+        <p class="materi">Setelah kamu mengamati video tadi dan mengerjakan tugas sebelumnya, selanjutnya kerjakan tugas berikut dengan cermat. Klasifikasikan beberapa fungsi sistem pertahanan tubuh terhadap penyakit di tabel bagian sebelah kiri  berdasarkan komponen apa yang terlibat!</p>
         
         <table class="table table-bordered">
             <thead>
                 <tr>
-                    <th>Kategori</th>
+                    <th>Fungsi</th>
                     <th>Komponen</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td>Mengenali dan menghancurkan sel yang terinfeksi virus atau sel kanker</td>
+                    <td>Menghasilkan antibodi yang beredar di plasma darah</td>
                     <td>
                         <select class="form-control" id="list-0">
                             <option value="0" selected>Pilih Jawaban</option>
-                            <option value="sel-t">Sel T</option>
-                            <option value="mastosit">Mastosit</option>
-                            <option value="lisozim">Lisozim</option>
-                            <option value="bakteri-tidak-berbahaya">Bakteri tidak berbahaya</option>
-                            <option value="membran-mukosa">Membran mukosa</option>
+                            <option value="neutrofil">Neutrofil</option>
+                            <option value="makrofag">Makrofag</option>
+                            <option value="limfosit-b">Limfosit B</option>
+                            <option value="sel-t-pembantu">Sel T pembantu</option>
+                            <option value="sel-t-sitotoksik">Sel T sitotoksik/pembunuh</option>
+                            <option value="sel-memori">Sel memori</option>
                         </select>
                     </td>
                 </tr>
                 <tr>
-                    <td>Melepaskan histamin dan zat kimia lain yang memicu peradangan</td>
+                    <td>Menghancurkan sel tubuh yang terinfeksi virus</td>
                     <td>
                         <select class="form-control" id="list-1">
                             <option value="0" selected>Pilih Jawaban</option>
-                            <option value="sel-t">Sel T</option>
-                            <option value="mastosit">Mastosit</option>
-                            <option value="lisozim">Lisozim</option>
-                            <option value="bakteri-tidak-berbahaya">Bakteri tidak berbahaya</option>
-                            <option value="membran-mukosa">Membran mukosa</option>
+                            <option value="neutrofil">Neutrofil</option>
+                            <option value="makrofag">Makrofag</option>
+                            <option value="limfosit-b">Limfosit B</option>
+                            <option value="sel-t-pembantu">Sel T pembantu</option>
+                            <option value="sel-t-sitotoksik">Sel T sitotoksik/pembunuh</option>
+                            <option value="sel-memori">Sel memori</option>
                         </select>
                     </td>
                 </tr>
                 <tr>
-                    <td>Enzim yang dapat merusak dinding sel bakteri</td>
+                    <td>Sel fagosit dengan masa hidup singkat, membentuk nanah</td>
                     <td>
                         <select class="form-control" id="list-2">
                             <option value="0" selected>Pilih Jawaban</option>
-                            <option value="sel-t">Sel T</option>
-                            <option value="mastosit">Mastosit</option>
-                            <option value="lisozim">Lisozim</option>
-                            <option value="bakteri-tidak-berbahaya">Bakteri tidak berbahaya</option>
-                            <option value="membran-mukosa">Membran mukosa</option>
+                            <option value="neutrofil">Neutrofil</option>
+                            <option value="makrofag">Makrofag</option>
+                            <option value="limfosit-b">Limfosit B</option>
+                            <option value="sel-t-pembantu">Sel T pembantu</option>
+                            <option value="sel-t-sitotoksik">Sel T sitotoksik/pembunuh</option>
+                            <option value="sel-memori">Sel memori</option>
                         </select>
                     </td>
                 </tr>
                 <tr>
-                    <td>Mikrobiota normal yang menghambat pertumbuhan patogen</td>
+                    <td>Sel penyaji antigen (APC) yang memecah patogen</td>
                     <td>
                         <select class="form-control" id="list-3">
                             <option value="0" selected>Pilih Jawaban</option>
-                            <option value="sel-t">Sel T</option>
-                            <option value="mastosit">Mastosit</option>
-                            <option value="lisozim">Lisozim</option>
-                            <option value="bakteri-tidak-berbahaya">Bakteri tidak berbahaya</option>
-                            <option value="membran-mukosa">Membran mukosa</option>
+                            <option value="neutrofil">Neutrofil</option>
+                            <option value="makrofag">Makrofag</option>
+                            <option value="limfosit-b">Limfosit B</option>
+                            <option value="sel-t-pembantu">Sel T pembantu</option>
+                            <option value="sel-t-sitotoksik">Sel T sitotoksik/pembunuh</option>
+                            <option value="sel-memori">Sel memori</option>
+                        </select>
                         </select>
                     </td>
                 </tr>
                 <tr>
-                    <td>Lapisan yang menghasilkan lendir untuk menjebak patogen</td>
+                    <td>Mensekresi sitokin untuk mengaktifkan sel B dan makrofag</td>
                     <td>
                         <select class="form-control" id="list-4">
                             <option value="0" selected>Pilih Jawaban</option>
-                            <option value="sel-t">Sel T</option>
-                            <option value="mastosit">Mastosit</option>
-                            <option value="lisozim">Lisozim</option>
-                            <option value="bakteri-tidak-berbahaya">Bakteri tidak berbahaya</option>
-                            <option value="membran-mukosa">Membran mukosa</option>
+                            <option value="neutrofil">Neutrofil</option>
+                            <option value="makrofag">Makrofag</option>
+                            <option value="limfosit-b">Limfosit B</option>
+                            <option value="sel-t-pembantu">Sel T pembantu</option>
+                            <option value="sel-t-sitotoksik">Sel T sitotoksik/pembunuh</option>
+                            <option value="sel-memori">Sel memori</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Menyimpan "ingatan" tentang antigen untuk respon cepat</td>
+                    <td>
+                        <select class="form-control" id="list-5">
+                            <option value="0" selected>Pilih Jawaban</option>
+                            <option value="neutrofil">Neutrofil</option>
+                            <option value="makrofag">Makrofag</option>
+                            <option value="limfosit-b">Limfosit B</option>
+                            <option value="sel-t-pembantu">Sel T pembantu</option>
+                            <option value="sel-t-sitotoksik">Sel T sitotoksik/pembunuh</option>
+                            <option value="sel-memori">Sel memori</option>
                         </select>
                     </td>
                 </tr>
@@ -150,11 +170,12 @@
     <script>
         // Kunci jawaban yang benar
         const answerKey = [
-            'sel-t',                    // Question 0: Mengenali dan menghancurkan sel yang terinfeksi
-            'mastosit',                 // Question 1: Melepaskan histamin
-            'lisozim',                  // Question 2: Enzim yang merusak dinding sel bakteri
-            'bakteri-tidak-berbahaya',  // Question 3: Mikrobiota normal
-            'membran-mukosa'            // Question 4: Lapisan yang menghasilkan lendir
+            'neutrofil',
+            'makrofag',
+            'limfosit-b',
+            'sel-t-pembantu',
+            'sel-t-sitotoksik',
+            'sel-memori'          
         ];
         
         function checkAnswers() {

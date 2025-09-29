@@ -22,7 +22,7 @@ class SoalSeeder extends Seeder
                     ['pilihan' => 'B', 'teks' => 'memicu respons imun', 'benar' => true],
                     ['pilihan' => 'C', 'teks' => 'menghancurkan sel kanker', 'benar' => false],
                     ['pilihan' => 'D', 'teks' => 'menyaring partikel asing', 'benar' => false],
-                    ['pilihan' => 'E', 'teks' => 'enghasilkan histamin', 'benar' => false],
+                    ['pilihan' => 'E', 'teks' => 'menghasilkan histamin', 'benar' => false],
                 ]
             ],
             [

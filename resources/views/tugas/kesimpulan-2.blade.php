@@ -250,7 +250,7 @@
 
 <div class="kesimpulan-container">
     <div class="card-kesimpulan">
-        <h2 class="title-kesimpulan">Kesimpulan Materi 1</h2>
+        <h2 class="title-kesimpulan">Kesimpulan Materi 2</h2>
         
         <div class="instruksi">
             <i class="fas fa-lightbulb"></i>Kamu sudah mempelajari materi tentang Komponen Sistem Pertahanan Tubuh. Sekarang buatlah kesimpulan dari pembelajaranmu untuk mengukur pemahamanmu terhadap materi yang telah dipelajari!
@@ -307,7 +307,7 @@
             <!-- Tombol Lanjut ke Kuis -->
             <div class="next-button-container">
                 <a href="{{ route('kuis2.index') }}" class="btn-lanjut" id="btn-lanjut-kuis">
-                    <span>Lanjutkan ke Kuis 1</span>
+                    <span>Lanjutkan ke Kuis 2</span>
                     <i class="fas fa-arrow-right"></i>
                 </a>
             </div>
@@ -381,8 +381,8 @@
 
         // Data yang akan dikirim
         const data = {
-            nama_aktivitas: 'kesimpulan-1',
-            judul_aktivitas: 'Kesimpulan 1 - Sistem Pertahanan Tubuh',
+            nama_aktivitas: 'kesimpulan-2',
+            judul_aktivitas: 'Kesimpulan 2 - Komponen Sistem Pertahanan Tubuh',
             skor: 1, // Kesimpulan dianggap selesai jika sudah dikirim
             total_soal: 1,
             detail_jawaban: {
