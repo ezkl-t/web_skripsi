@@ -71,6 +71,13 @@ class KuisController extends Controller
     {
         return $this->showKuisPage('kuis3', 'kuis.kuis3');
     }
+    
+    public function showEvaluasi(Request $request)
+    {
+        return $this->showKuisPage('evaluasi', 'kuis.evaluasi');
+    }
+
+
 
     /**
      * Proses submit kuis (universal untuk semua kuis)
@@ -135,6 +142,7 @@ class KuisController extends Controller
                 $routeName = $currentRoute->getName();
                 if (str_contains($routeName, 'kuis2')) return 'kuis2';
                 if (str_contains($routeName, 'kuis3')) return 'kuis3';
+                if (str_contains($routeName, 'evaluasi')) return 'evaluasi';
             }
         }
         
@@ -226,6 +234,7 @@ class KuisController extends Controller
         'kuis1' => route('kuis1.submit'),
         'kuis2' => route('kuis2.submit'),
         'kuis3' => route('kuis3.submit'),
+        'evaluasi' => route('evaluasi.submit'),
         default => route('kuis.submit')
     };
 }
@@ -239,6 +248,7 @@ class KuisController extends Controller
             'kuis1' => 'Kuis 1',
             'kuis2' => 'Kuis 2', 
             'kuis3' => 'Kuis 3',
+            'evaluasi' => 'Evaluasi',
             default => ucfirst($kuisType)
         };
 
@@ -363,7 +373,8 @@ class KuisController extends Controller
         $quizResults = [
             'kuis1' => $user->getLatestQuizResult('kuis1'),
             'kuis2' => $user->getLatestQuizResult('kuis2'),
-            'kuis3' => $user->getLatestQuizResult('kuis3')
+            'kuis3' => $user->getLatestQuizResult('kuis3'),
+            'evaluasi' => $user->getLatestQuizResult('evaluasi'),
         ];
         
         // Hitung progress
@@ -426,8 +437,5 @@ class KuisController extends Controller
     /**
      * Evaluasi
      */
-    public function showEvaluasi()
-    {
-        return view('kuis.evaluasi');
-    }
+    
 }
