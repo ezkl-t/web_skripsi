@@ -199,14 +199,19 @@
 </video>
 
 <!-- Alternatif 1: Menggunakan asset() -->
-         <source src="{{ asset('vid/vid-3-jenis-kekebalan-dan-gangguan.webm') }}" type="video/webm">
-        
+<video width="560" controls>
+        <source src="{{ asset('vid/vid-3-jenis-kekebalan-dan-gangguan.webm') }}" type="video/webm">
+</video>        
+
+<video width="560" controls>
         <!-- Alternatif 2: Menggunakan URL langsung -->
         <source src="/vid/vid-3-jenis-kekebalan-dan-gangguan.mp4" type="video/mp4">
-        
+</video>
+
+<video width="560" controls>
         <!-- Alternatif 3: Menggunakan storage link jika video di storage -->
         <source src="{{ Storage::url('vid/vid-3-jenis-kekebalan-dan-gangguan.mp4') }}" type="video/mp4">
-
+</video>
 
 </div>
 
