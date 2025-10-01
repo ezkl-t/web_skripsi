@@ -198,58 +198,7 @@
     Terjadi masalah dalam menampilkan video
 </video>
 
-<!-- Alternatif 1: Menggunakan asset() -->
-<video width="560" controls>
-        <source src="{{ asset('vid/vid-3-jenis-kekebalan-dan-gangguan.webm') }}" type="video/webm">
-</video>        
 
-<video width="560" controls>
-        <!-- Alternatif 2: Menggunakan URL langsung -->
-        <source src="/vid/vid-3-jenis-kekebalan-dan-gangguan.mp4" type="video/mp4">
-</video>
-
-<video width="560" controls>
-        <!-- Alternatif 3: Menggunakan storage link jika video di storage -->
-        <source src="{{ Storage::url('vid/vid-3-jenis-kekebalan-dan-gangguan.mp4') }}" type="video/mp4">
-</video>
-
-</div>
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const video = document.querySelector('video');
-    const videoSource = "{{ asset('vid/vid-3-jenis-kekebalan-dan-gangguan.mp4') }}";
-    
-    console.log('Video Source:', videoSource);
-    
-    video.addEventListener('error', function(e) {
-        console.error('Video Error:', video.error);
-        console.log('Network State:', video.networkState);
-        console.log('Ready State:', video.readyState);
-        
-        switch(video.error.code) {
-            case video.error.MEDIA_ERR_ABORTED:
-                console.error('Video loading aborted');
-                break;
-            case video.error.MEDIA_ERR_NETWORK:
-                console.error('Network error');
-                break;
-            case video.error.MEDIA_ERR_DECODE:
-                console.error('Video decoding error');
-                break;
-            case video.error.MEDIA_ERR_SRC_NOT_SUPPORTED:
-                console.error('Video format not supported');
-                break;
-            default:
-                console.error('Unknown video error');
-        }
-    });
-    
-    video.addEventListener('loadeddata', function() {
-        console.log('Video loaded successfully');
-    });
-});
-</script>
 
 <div style="background-color: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); margin: 30px 0;">
     <h4 style="color: #540B0E; margin-bottom: 15px;">Aktivitas:</h4>
