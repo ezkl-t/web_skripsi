@@ -129,7 +129,7 @@
               <li class="nav-item">
                 <a href="{{ route('progres-siswa') }}" class="nav-link active">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Progres Pengerjaan Siswa</p>
+                  <p>Progres Latihan Siswa</p>
                 </a>
               </li>
               <li class="nav-item">

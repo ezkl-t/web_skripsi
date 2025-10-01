@@ -52,11 +52,12 @@
     <div class="sidebar">
 
       <!-- Sidebar Menu -->
+      <!-- Sidebar Menu -->
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <li class="nav-item menu-open">
             <a href="#" class="nav-link active">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <i class="nav-icon fas fa-database"></i>
               <p>
                 Halaman Data Siswa
                 <i class="right fas fa-angle-left"></i>
@@ -66,7 +67,7 @@
               <li class="nav-item">
                 <a href="{{ route('dashboard-admin') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Daftar Nama Siswa</p>
+                  <p>Data Siswa</p>
                 </a>
               </li>
               <li class="nav-item">
@@ -75,7 +76,33 @@
                   <p>Nilai Siswa</p>
                 </a>
               </li>
+              <li class="nav-item">
+                <a href="{{ route('progres-siswa') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Progres Latihan Siswa</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('pengaturan-kkm') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Pengaturan KKM</p>
+                </a>
+              </li>
             </ul>
+          </li>
+          <li class="nav-item">
+                @auth
+                    <div class="list-group list-group-flush">
+                        <a href="#" class="list-group-item list-group-item-action nav-item" 
+                          onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            <i class="bi bi-box-arrow-left me-2"></i>
+                            <span class="nav-item-text">Logout</span>
+                        </a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                            @csrf
+                        </form>
+                    </div>
+                @endauth
           </li>
         </ul>
       </nav>
