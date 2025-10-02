@@ -13,6 +13,8 @@
     <title>Tugas Siswa - Pengumpulan Data 2</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         .table th, .table td {
             vertical-align: middle;
@@ -45,6 +47,28 @@
             background-color: #fff3cd;
             border-color: #ffeeba;
             color: #856404;
+        }
+        .btn-selanjutnya {
+            display: inline-block;
+            background-color: #28a745;
+            color: white;
+            padding: 12px 30px;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-top: 15px;
+        }
+        .btn-selanjutnya:hover {
+            background-color: #218838;
+            text-decoration: none;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
         }
     </style>
 </head>
@@ -152,6 +176,13 @@
         <button id="submitBtn" class="btn" style="background-color: #9E2A2B; color: #ffffff" onclick="checkAnswers()">
             <i class="fas fa-check-circle"></i> Cek Jawaban
         </button>
+
+        <!-- Tombol Selanjutnya -->
+        <div id="tombolSelanjutnya" style="display: none; text-align: center; margin-top: 20px;">
+            <a href="{{ route('pengolahan-data-2') }}" class="btn-selanjutnya">
+                <i class="fas fa-arrow-right"></i> Selanjutnya
+            </a>
+        </div>
         
         <!-- Area untuk menampilkan hasil -->
         <div id="result-message" class="alert mt-4">
@@ -170,12 +201,12 @@
     <script>
         // Kunci jawaban yang benar
         const answerKey = [
-            'neutrofil',
-            'makrofag',
-            'limfosit-b',
+            'neutrofil',           
+            'makrofag',     
+            'limfosit-b',                         
             'sel-t-pembantu',
             'sel-t-sitotoksik',
-            'sel-memori'          
+            'sel-memori'
         ];
         
         function checkAnswers() {
@@ -185,8 +216,9 @@
             let explanations = [];
             let detailJawaban = {};
             
-            // Reset warna baris
+            // Reset warna baris dan sembunyikan tombol selanjutnya
             $('tbody tr').removeClass('correct incorrect');
+            $('#tombolSelanjutnya').hide();
             
             // Periksa setiap jawaban
             for (let i = 0; i < answerKey.length; i++) {
@@ -230,9 +262,12 @@
                 resultMessage.className = 'alert alert-success';
                 resultTitle.innerHTML = '<i class="fas fa-trophy"></i> Jawaban benar!';
                 resultDetails.innerHTML = `
-                    <p></p>
-                    <p>Progres kamu sedang disimpan...</p>
+                    <p>Kamu telah berhasil menyelesaikan Pengumpulan Data 2 dengan sempurna!</p>
+                    <p><strong>Progres berhasil disimpan!</strong></p>
                 `;
+                
+                // Tampilkan tombol Selanjutnya
+                $('#tombolSelanjutnya').show();
                 
                 // Simpan progres
                 simpanProgres(correctCount, answerKey.length, detailJawaban);
@@ -295,20 +330,14 @@
                 success: function(response) {
                     console.log('Progres berhasil disimpan:', response);
                     
-                    // Update pesan hasil
-                    const resultDetails = document.getElementById('result-details');
+                    // Update pesan hasil jika sempurna
                     if (skor === totalSoal) {
-                        resultDetails.innerHTML = `
-                            <p>Kamu telah berhasil menyelesaikan Pengumpulan Data 2 dengan sempurna!</p>
-                            <p><strong>Progres berhasil disimpan!</strong></p>
-                        `;
-                        
                         // Tampilkan notifikasi sukses
                         if (typeof Swal !== 'undefined') {
                             Swal.fire({
                                 icon: 'success',
-                                title: 'Jawaban Benar!',
-                                text: '',
+                                title: 'Selamat!',
+                                text: 'Kamu telah menyelesaikan Pengumpulan Data 2',
                                 showConfirmButton: false,
                                 timer: 3000
                             });

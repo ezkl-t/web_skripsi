@@ -10,6 +10,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <style>
+        .sketchfab-embed-wrapper {
+            display: flex;
+            justify-content: center;
+            margin: 25px 0;
+        }
+
+        .sketchfab-embed-wrapper iframe {
+            width: 50%;
+            max-width: 800px;
+            height: 250px;
+            border: none;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
         .stimulus-container {
             background-color: white;
             border-radius: 8px;
@@ -219,7 +233,7 @@
             </div>
         </div>
 
-        <img src="../img/leukosit.jpg" class="gambar-materi" alt="Leukosit (Sel Darah Putih)">
+        {{-- <img src="../img/leukosit.jpg" class="gambar-materi" alt="Leukosit (Sel Darah Putih)"> --}}
         <div class="sketchfab-embed-wrapper"> <iframe title="White Blood Cells" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share src="https://sketchfab.com/models/4b0561323abb4a71af3b61e8b4951ca3/embed"> </iframe> </div>
         <div class="image-caption">Gambar 2.1 Leukosit (Sel Darah Putih)</div>
 

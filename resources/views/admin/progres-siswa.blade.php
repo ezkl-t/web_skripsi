@@ -290,7 +290,7 @@
                                             'pengolahan-data-1',
                                             'verifikasi-1',
                                             'kesimpulan-1',
-                                            'kuis-1'
+                                            
                                           ];
                                         @endphp
                                         
@@ -342,7 +342,7 @@
                                             'pengolahan-data-2',
                                             'verifikasi-2',
                                             'kesimpulan-2',
-                                            'kuis-2'
+                                            
                                           ];
                                         @endphp
                                         
@@ -394,7 +394,7 @@
                                             'pengolahan-data-3',
                                             'verifikasi-3',
                                             'kesimpulan-3',
-                                            'kuis-3'
+                                            
                                           ];
                                         @endphp
                                         

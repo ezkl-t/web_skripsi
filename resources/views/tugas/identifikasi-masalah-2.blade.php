@@ -59,18 +59,25 @@
         }
 
         .gambar-materi {
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-            justify-content: center;
-            width: 50%;
-            margin-bottom: 20px;
-            max-width: 500px;
-            height: auto;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            margin: 20px auto;
-        }
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 20px auto;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    width: fit-content;
+    max-width: 500px;
+}
+
+.gambar-materi img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+}
         .image-caption {
             text-align: center;
             font-style: italic;
@@ -180,7 +187,7 @@
         
         <!-- Placeholder untuk gambar neutrofil -->
         <div class="gambar-materi">
-            <img src="../img/neutrofil.png" width="30%">
+            <img src="../img/neutrofil.png" width="40%">
             <div class="image-caption">Gambar 2.2 Neutrofil</div>
         </div>
 
@@ -190,7 +197,7 @@
         
         <!-- Placeholder untuk gambar makrofag -->
         <div class="gambar-materi">
-            <img src="../img/makrofag_vektor.png" width="30%">
+            <img src="../img/makrofag_vektor.png" width="40%">
             <div class="image-caption">Gambar 2.2 Makrofag</div>
         </div>
     </div>
@@ -202,7 +209,7 @@
         
         <!-- Placeholder untuk gambar limfosit -->
         <div class="gambar-materi">
-            <img src="../img/limfosit.png" width="30%">
+            <img src="../img/limfosit.png" width="40%">
             <div class="image-caption">Gambar 2.3 Limfosit</div>
         </div>
 

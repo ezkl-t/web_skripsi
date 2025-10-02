@@ -10,6 +10,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <style>
+
+        .image-caption {
+            text-align: center;
+            font-style: italic;
+            color: #666;
+            margin-top: 10px;
+            font-size: 0.95rem;
+        }
+
+        .sketchfab-embed-wrapper {
+            display: flex;
+            justify-content: center;
+            margin: 25px 0;
+        }
+
+        .sketchfab-embed-wrapper iframe {
+            width: 40%;
+            max-width: 800px;
+            height: 200px;
+            border: none;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
         .stimulus-container {
             background-color: white;
             border-radius: 8px;
@@ -23,8 +46,8 @@
             display: block;
             margin-left: auto;
             margin-right: auto;
-            width: 30%;
-            max-width: 400px;
+            width: 60%;
+            max-width: 500px;
             height: auto;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
@@ -178,16 +201,16 @@
     <div class="stimulus-container">
         <h1 class="stimulus-title">Stimulus</h1>
         
-        {{-- <div class="reading-time">
-            <i class="fas fa-clock"></i> Estimasi waktu baca: 3-5 menit
-        </div> --}}
+        
 
         <div class="intro-questions">
             Apakah kamu tahu bahwa tubuh kita dilengkapi berbagai sistem pertahanan yang melindungi diri dari serangan penyakit? Bagaimana tubuh kita bisa melindungi diri dari patogen penyebab penyakit? Apa saja yang ada pada sistem pertahanan tubuh kita?
         </div>
 
-        <img src="../img/MEKANISME-SISTEM-PERTAHANAN-TUBUH.png" class="gambar-materi" alt="Mekanisme Sistem Pertahanan Tubuh">
+        <img src="../img/MEKANISME-SISTEM-PERTAHANAN-TUBUH.png" class="gambar-materi" alt="Mekanisme Sistem Pertahanan Tubuh"">
+        <div class="image-caption">Gambar 1.1 Jenis Sistem Pertahanan Tubuh</div>
         <div class="sketchfab-embed-wrapper"> <iframe title="Lymphocyte White Blood Cell" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share src="https://sketchfab.com/models/81ea244439d542cda524761e64917f49/embed"> </iframe> </div>
+        <div class="image-caption">Sel darah putih sebagai salah satu komponen sistem pertahanan tubuh</div>
 
         <div class="function-list">
             <div class="function-title">Fungsi sistem pertahanan tubuh sebagai berikut:</div>
