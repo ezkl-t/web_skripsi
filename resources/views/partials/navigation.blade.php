@@ -3,7 +3,7 @@
         <button class="accordion-button collapsed nav-item" type="button" data-bs-toggle="collapse" 
                 data-bs-target="#basicConceptsA">
             <i class="bi bi-diagram-3 me-2"></i>
-            <span class="nav-item-text">A. Mekanisme Sistem Pertahanan Tubuh</span>
+            <span class="nav-item-text">A. Sistem Pertahanan Eksternal dan Internal</span>
         </button>
     </h2>
     <div id="basicConceptsA" class="accordion-collapse collapse" data-bs-parent="#mainNavigation">
@@ -122,7 +122,7 @@
         <button class="accordion-button collapsed nav-item" type="button" data-bs-toggle="collapse" 
                 data-bs-target="#basicConceptsC">
             <i class="bi bi-diagram-3 me-2"></i>
-            <span class="nav-item-text">C. Jenis-Jenis Kekebalan dan Gangguan pada Sistem Pertahanan Tubuh</span>
+            <span class="nav-item-text">C. Imunitas Tubuh dan Kelainannya</span>
         </button>
     </h2>
     <div id="basicConceptsC" class="accordion-collapse collapse" data-bs-parent="#mainNavigation">

@@ -198,6 +198,17 @@
 
         #homeButton .nav-item-text {
             margin-left: 10px;
+        }
+        .btn-info {
+            background-color: #17a2b8;
+            border-color: #17a2b8;
+            color: white;
+        }
+
+        .btn-info:hover {
+            background-color: #138496;
+            border-color: #117a8b;
+            color: white;
         }       
     </style>
 </head>
