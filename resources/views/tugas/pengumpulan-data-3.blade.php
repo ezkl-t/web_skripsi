@@ -10,7 +10,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>Pengumpulan Data 3 - Sistem Pertahanan Tubuh</title>
+    <title>Pengumpulan Data</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
@@ -65,8 +65,15 @@
 </head>
 <body>
     <div class="container mt-5">
-        <h2 class="card-title mb-4" style="color: #9E2A2B">Pengumpulan Data 3</h2>
+        <h2 class="card-title mb-4" style="color: #9E2A2B">Pengumpulan Data</h2>
         <p class="materi">Setelah kamu menonton video dan membaca materi sebelumnya, sekarang kerjakan tugas berikut! Cocokkan pernyataan dengan jawaban yang tepat dengan memilih pilihan yang sesuai.</p>
+
+        <p class="materi">Silakan akses bahan baca untuk membantu mengerjakan tugas ini</p>
+        <div class="text-center mt-4">
+            <button type="button" class="btn btn-info btn-lg" onclick="openPdfModal()">
+                <i class="fas fa-book me-2"></i>Buka Bahan Bacaan
+            </button>
+        </div>
         
         <table class="table table-bordered">
             <thead>
@@ -489,4 +496,5 @@
     </script>
 </body>
 </html>
+@include('pdf-modal')
 @endsection

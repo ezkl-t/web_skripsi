@@ -219,25 +219,25 @@
             <th>Keterangan</th>
         </tr>
         <tr>
-            <td>1. Apa saja komponen yang termasuk pertahanan non spesifik dan spesifik tubuh?</td>
+            <td>1. Komponen yang termasuk pertahanan non spesifik dan spesifik tubuh.</td>
             <td><input type="radio" id="radio1_termasuk" name="radio1" value="termasuk" onchange="checkAnswer(1, 'termasuk')"></td>
             <td><input type="radio" id="radio1_tidak_termasuk" name="radio1" value="tidak_termasuk" onchange="checkAnswer(1, 'tidak_termasuk')"></td>
             <td id="keterangan1"></td>
         </tr>
         <tr>
-            <td>2. Bagaimana pertahanan nonspesifik dan spesifik bekerja melindungi tubuh dari penyakit?</td>
+            <td>2. Cara kerja pertahanan nonspesifik dan spesifik bekerja melindungi tubuh dari penyakit.</td>
             <td><input type="radio" id="radio2_termasuk" name="radio2" value="termasuk" onchange="checkAnswer(2, 'termasuk')"></td>
             <td><input type="radio" id="radio2_tidak_termasuk" name="radio2" value="tidak_termasuk" onchange="checkAnswer(2, 'tidak_termasuk')"></td>
             <td id="keterangan2"></td>
         </tr>
         <tr>
-            <td>3. Mengapa terjadi kemerahan dan bengkak saat luka?</td>
+            <td>3. Penyebab terjadi kemerahan dan bengkak saat luka.</td>
             <td><input type="radio" id="radio3_termasuk" name="radio3" value="termasuk" onchange="checkAnswer(3, 'termasuk')"></td>
             <td><input type="radio" id="radio3_tidak_termasuk" name="radio3" value="tidak_termasuk" onchange="checkAnswer(3, 'tidak_termasuk')"></td>
             <td id="keterangan3"></td>
         </tr>
         <tr>
-            <td>4. Apakah terdapat perbedaan antara imunitas humoral dan seluler dalam kecepatan menghentikan patogen?</td>
+            <td>4. Perbedaan antara imunitas humoral dan seluler dalam kecepatan menghentikan patogen.</td>
             <td><input type="radio" id="radio4_termasuk" name="radio4" value="termasuk" onchange="checkAnswer(4, 'termasuk')"></td>
             <td><input type="radio" id="radio4_tidak_termasuk" name="radio4" value="tidak_termasuk" onchange="checkAnswer(4, 'tidak_termasuk')"></td>
             <td id="keterangan4"></td>

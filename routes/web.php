@@ -162,3 +162,28 @@ Route::get('/check-users', function() {
     $users = \App\Models\User::all(['id', 'name', 'nisn', 'level', 'kelas']);
     return response()->json($users);
 });
+
+Route::get('/pdf/{filename}', function ($filename) {
+    $filePath = public_path('pdfs/' . $filename);
+    
+    if (!file_exists($filePath)) {
+        abort(404, 'File PDF tidak ditemukan');
+    }
+
+    return response()->file($filePath);
+})->name('pdf.view');
+
+// Route untuk daftar materi PDF
+Route::get('/api/materi-pdf', function () {
+    $materi = [
+        [
+            'id' => 'sistem-pertahanan-tubuh',
+            'nama' => 'Sistem Pertahanan Tubuh',
+            'filename' => 'Biologi-BS-KLS-XI-SISTEM PERTAHANAN TUBUH-HAL. 127-166.pdf',
+            'deskripsi' => 'Materi lengkap tentang sistem imun dan pertahanan tubuh'
+        ],
+        // Tambahkan materi lain di sini
+    ];
+    
+    return response()->json($materi);
+});

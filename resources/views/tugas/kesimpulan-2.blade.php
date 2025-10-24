@@ -250,7 +250,7 @@
 
 <div class="kesimpulan-container">
     <div class="card-kesimpulan">
-        <h2 class="title-kesimpulan">Kesimpulan Materi 2</h2>
+        <h2 class="title-kesimpulan">Kesimpulan Materi Komponen Sistem Pertahanan Tubuh</h2>
         
         <div class="instruksi">
             <i class="fas fa-lightbulb"></i>Kamu sudah mempelajari materi tentang Komponen Sistem Pertahanan Tubuh. Sekarang buatlah kesimpulan dari pembelajaranmu untuk mengukur pemahamanmu terhadap materi yang telah dipelajari!

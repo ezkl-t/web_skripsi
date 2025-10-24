@@ -136,7 +136,7 @@
 </head>
 <body>
 
-<h2 class="card-title" style="color: #9E2A2B" mb-4">Identifikasi Masalah 3 - Jenis Kekebalan dan Gangguan Sistem Pertahanan Tubuh</h2>
+<h2 class="card-title" style="color: #9E2A2B" mb-4">Identifikasi Masalah</h2>
 
 <!-- Materi Pembelajaran dari Dokumen -->
 <div class="materi" style="background-color: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); margin-bottom: 30px;">
@@ -212,31 +212,31 @@
             <th>Keterangan</th>
         </tr>
         <tr>
-            <td>1. Bagaimana kekebalan aktif dan kekebalan pasif dibentuk oleh tubuh?</td>
+            <td>1. Pembentukan kekebalan aktif dan kekebalan pasif oleh tubuh</td>
             <td><input type="radio" id="radio1_termasuk" name="radio1" value="termasuk" onchange="checkAnswer(1, 'termasuk')"></td>
             <td><input type="radio" id="radio1_tidak_termasuk" name="radio1" value="tidak_termasuk" onchange="checkAnswer(1, 'tidak_termasuk')"></td>
             <td id="keterangan1"></td>
         </tr>
         <tr>
-            <td>2. Apa solusi untuk mencegah autoimun?</td>
+            <td>2. Solusi untuk mencegah autoimun.</td>
             <td><input type="radio" id="radio2_termasuk" name="radio2" value="termasuk" onchange="checkAnswer(2, 'termasuk')"></td>
             <td><input type="radio" id="radio2_tidak_termasuk" name="radio2" value="tidak_termasuk" onchange="checkAnswer(2, 'tidak_termasuk')"></td>
             <td id="keterangan2"></td>
         </tr>
         <tr>
-            <td>3. Mengapa alergi dapat terjadi?</td>
+            <td>3. Penyebab alergi dapat terjadi.</td>
             <td><input type="radio" id="radio3_termasuk" name="radio3" value="termasuk" onchange="checkAnswer(3, 'termasuk')"></td>
             <td><input type="radio" id="radio3_tidak_termasuk" name="radio3" value="tidak_termasuk" onchange="checkAnswer(3, 'tidak_termasuk')"></td>
             <td id="keterangan3"></td>
         </tr>
         <tr>
-            <td>4. Mengapa tubuh rentan sakit jika terinfeksi HIV/AIDS?</td>
+            <td>4. Yang menyebabkan tubuh rentan sakit jika terinfeksi HIV/AIDS.</td>
             <td><input type="radio" id="radio4_termasuk" name="radio4" value="termasuk" onchange="checkAnswer(4, 'termasuk')"></td>
             <td><input type="radio" id="radio4_tidak_termasuk" name="radio4" value="tidak_termasuk" onchange="checkAnswer(4, 'tidak_termasuk')"></td>
             <td id="keterangan4"></td>
         </tr>
         <tr>
-            <td>5. Seberapa lama efek kekebalan pasif bertahan?</td>
+            <td>5. Lama efek kekebalan pasif bertahan.</td>
             <td><input type="radio" id="radio5_termasuk" name="radio5" value="termasuk" onchange="checkAnswer(5, 'termasuk')"></td>
             <td><input type="radio" id="radio5_tidak_termasuk" name="radio5" value="tidak_termasuk" onchange="checkAnswer(5, 'tidak_termasuk')"></td>
             <td id="keterangan5"></td>

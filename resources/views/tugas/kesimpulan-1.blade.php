@@ -251,7 +251,7 @@
 
 <div class="kesimpulan-container">
     <div class="card-kesimpulan">
-        <h2 class="title-kesimpulan">Kesimpulan Materi 1</h2>
+        <h2 class="title-kesimpulan">Kesimpulan Materi Sistem Pertahanan Eksternal dan Internal</h2>
         
         <div class="instruksi">
             <i class="fas fa-lightbulb"></i>Kamu sudah mempelajari materi tentang Sistem Pertahanan Eksternal dan Internal. Sekarang buatlah kesimpulan dari pembelajaranmu untuk mengukur pemahamanmu terhadap materi yang telah dipelajari!

@@ -13,12 +13,18 @@
         <ol class="mb-0">
             <li>Isilah kolom kosong pada Tabel Klasifikasi Pertahanan Tubuh di bawah ini dengan cara menarik opsi jawaban dan meletakannya pada kolom yang tepat!</li>
             <li>Perhatikan opsi jawaban yang berisi berbagai macam sistem pertahanan pada tubuh, kemudian letakkan sesuai dengan kolom klasifikasi sistem pertahanan tubuh yang tepat.</li>
+            <li>Silakan akses bahan baca untuk membantu mengerjakan tugas ini</li>
         </ol>
     </div>
 
     <!-- Container untuk pilihan komponen -->
     <div class="card mb-4" style="background-color: #f8f9fa;">
         <div class="card-body">
+            <div class="text-center mt-4">
+                <button type="button" class="btn btn-info btn-lg" onclick="openPdfModal()">
+                    <i class="fas fa-book me-2"></i>Buka Bahan Bacaan
+                </button>
+            </div>
             <h5 class="card-title" style="color: #540B0E">Opsi Jawaban:</h5>
             <div id="komponen-list" class="d-flex flex-wrap gap-2">
                 <div class="drag-item" data-id="jaringan-epitel">Jaringan epitel pada saluran pernafasan, pencernaan</div>
@@ -447,5 +453,7 @@
         });
     }
 </script>
+
+@include('pdf-modal')
 
 @endsection

@@ -5,7 +5,7 @@
 
 @section('content')
 
-<h2 class="card-title mb-4" style="color: #9E2A2B">Verifikasi 2</h2>
+<h2 class="card-title mb-4" style="color: #9E2A2B">Verifikasi</h2>
 
 <div class="container mt-5">
     <h4 class="card-title mb-4" style="color: #540B0E">Petunjuk Pengerjaan</h4>

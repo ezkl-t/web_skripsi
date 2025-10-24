@@ -76,6 +76,12 @@
     <div class="container mt-5">
         <h2 class="card-title mb-4" style="color: #9E2A2B">Pengumpulan Data</h2>
         <p class="materi">Setelah kamu mengamati video tadi dan mengerjakan tugas sebelumnya, selanjutnya kerjakan tugas berikut dengan cermat. Klasifikasikan beberapa fungsi sistem pertahanan tubuh terhadap penyakit di tabel bagian sebelah kiri  berdasarkan komponen apa yang terlibat!</p>
+        <p class="materi">Silakan akses bahan baca untuk membantu mengerjakan tugas ini</p>
+        <div class="text-center mt-4">
+            <button type="button" class="btn btn-info btn-lg" onclick="openPdfModal()">
+                <i class="fas fa-book me-2"></i>Buka Bahan Bacaan
+            </button>
+        </div>
         
         <table class="table table-bordered">
             <thead>
@@ -364,4 +370,6 @@
     </script>
 </body>
 </html>
+
+@include('pdf-modal')
 @endsection

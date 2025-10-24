@@ -250,7 +250,7 @@
 
 <div class="kesimpulan-container">
     <div class="card-kesimpulan">
-        <h2 class="title-kesimpulan">Kesimpulan Materi 3</h2>
+        <h2 class="title-kesimpulan">Kesimpulan Materi Imunitas Tubuh dan Kelainannya</h2>
         
         <div class="instruksi">
             <i class="fas fa-lightbulb"></i>Kamu sudah mempelajari materi tentang Imunitas Tubuh dan Kelainannya. Sekarang buatlah kesimpulan terkait beberapa poin penting dalam materi berikut ini.

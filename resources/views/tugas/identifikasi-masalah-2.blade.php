@@ -241,31 +241,31 @@
             <th>Keterangan</th>
         </tr>
         <tr>
-            <td>1. Bagaimana tubuh merespon infeksi patogen?</td>
+            <td>1. Respon tubuh merespon infeksi patogen.</td>
             <td><input type="radio" id="radio1_termasuk" name="radio1" value="termasuk" onchange="checkAnswer(1, 'termasuk')"></td>
             <td><input type="radio" id="radio1_tidak_termasuk" name="radio1" value="tidak_termasuk" onchange="checkAnswer(1, 'tidak_termasuk')"></td>
             <td id="keterangan1"></td>
         </tr>
         <tr>
-            <td>2. Apa perbedaan antara fagosit dan limfosit dalam sistem pertahanan tubuh terhadap infeksi patogen?</td>
+            <td>2. {}erbedaan antara fagosit dan limfosit dalam sistem pertahanan tubuh terhadap infeksi patogen.</td>
             <td><input type="radio" id="radio2_termasuk" name="radio2" value="termasuk" onchange="checkAnswer(2, 'termasuk')"></td>
             <td><input type="radio" id="radio2_tidak_termasuk" name="radio2" value="tidak_termasuk" onchange="checkAnswer(2, 'tidak_termasuk')"></td>
             <td id="keterangan2"></td>
         </tr>
         <tr>
-            <td>3. Bagaimana limfosit B dan limfosit T berperan dalam respon imun tubuh terhadap infeksi?</td>
+            <td>3. Peran limfosit B dan limfosit T dalam respon imun tubuh terhadap infeksi.</td>
             <td><input type="radio" id="radio3_termasuk" name="radio3" value="termasuk" onchange="checkAnswer(3, 'termasuk')"></td>
             <td><input type="radio" id="radio3_tidak_termasuk" name="radio3" value="tidak_termasuk" onchange="checkAnswer(3, 'tidak_termasuk')"></td>
             <td id="keterangan3"></td>
         </tr>
         <tr>
-            <td>4. Bagaimana cara mempercepat kerja mekanisme sistem pertahanan tubuh?</td>
+            <td>4. Cara mempercepat kerja mekanisme sistem pertahanan tubuh.</td>
             <td><input type="radio" id="radio4_termasuk" name="radio4" value="termasuk" onchange="checkAnswer(4, 'termasuk')"></td>
             <td><input type="radio" id="radio4_tidak_termasuk" name="radio4" value="tidak_termasuk" onchange="checkAnswer(4, 'tidak_termasuk')"></td>
             <td id="keterangan4"></td>
         </tr>
         <tr>
-            <td>5. Apa yang menyebabkan kekurangan sel darah putih?</td>
+            <td>5. Penyebab kekurangan sel darah putih.</td>
             <td><input type="radio" id="radio5_termasuk" name="radio5" value="termasuk" onchange="checkAnswer(5, 'termasuk')"></td>
             <td><input type="radio" id="radio5_tidak_termasuk" name="radio5" value="tidak_termasuk" onchange="checkAnswer(5, 'tidak_termasuk')"></td>
             <td id="keterangan5"></td>
